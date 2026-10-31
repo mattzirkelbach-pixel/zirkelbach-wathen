@@ -425,3 +425,25 @@ footer p + p { margin-top: 6px; }
 .fold-p { padding: 0 18px 12px; color: var(--ink-2); font-size: 0.95rem; max-width: 70ch; }
 .fold .unplaced { padding: 0 18px 18px; }
 .uactions { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+
+.tree-frame .dcard rect.dbox { fill: var(--card); stroke: var(--c-z); stroke-width: 1.2; }
+.tree-frame .dcard.is-open-branch rect.dbox { stroke-dasharray: 4 3; }
+.tree-frame .dcard text { font-family: var(--font-ui); fill: var(--ink); font-size: 12.5px; }
+.tree-frame .dcard text.sub { fill: var(--ink-2); font-size: 10.5px; }
+.tree-frame .dcard:hover rect.dbox, .tree-frame .dcard:focus rect.dbox { fill: var(--t-z); }
+.tree-frame .dcard:focus { outline: none; }
+.tree-frame .dcard.is-dim { opacity: 0.22; }
+.tree-frame .dtog { fill: var(--paper-2); stroke: var(--c-z); }
+.tree-frame .dtog-t { font-size: 11px !important; font-weight: 700; fill: var(--c-z) !important; }
+.tree-frame .daddcard { cursor: pointer; }
+.tree-frame .daddcard rect { fill: transparent; stroke: var(--ink-3); stroke-dasharray: 4 4; }
+.tree-frame .daddcard text { font-family: var(--font-ui); fill: var(--ink-2); font-size: 12px; }
+.tree-frame .daddcard:hover rect, .tree-frame .daddcard:focus rect { fill: var(--paper); stroke: var(--c-d); stroke-dasharray: none; }
+.tree-frame .daddcard:focus { outline: none; }
+
+.tree-frame .prow.is-dim, .tree-frame .daddcard.is-dim { opacity: 0.18; }
+.tree-frame .node.is-dim rect.box { opacity: 0.25; }
+.tree-frame .prow, .tree-frame .node, .tree-frame .link { transition: opacity .25s; }
+#tree-svg > g { transition: transform .35s cubic-bezier(.4,0,.2,1); }
+.tree-frame.is-dragging #tree-svg > g { transition: none; }
+@media (prefers-reduced-motion: reduce) { #tree-svg > g, .tree-frame .prow { transition: none; } }

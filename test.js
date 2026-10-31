@@ -39,9 +39,9 @@ setTimeout(() => {
     assert(document.querySelectorAll('#findings .finding').length === 16, 'findings: ' + document.querySelectorAll('#findings .finding').length);
     assert(document.querySelectorAll('#disagree-body tr').length === 14, 'disagreements');
     assert(document.querySelectorAll('#leads li').length === 13, 'leads');
-    assert(document.querySelectorAll('#sources-list li').length === 63, 'sources: ' + document.querySelectorAll('#sources-list li').length);
+    assert(document.querySelectorAll('#sources-list li').length === 65, 'sources: ' + document.querySelectorAll('#sources-list li').length);
     assert(document.querySelectorAll('#descendants li').length >= 19, 'descendant nodes: ' + document.querySelectorAll('#descendants li').length);
-    assert(document.querySelectorAll('#unplaced li').length === 6, 'unplaced');
+    assert(document.querySelectorAll('#unplaced li').length === 5, 'unplaced');
     assert(document.querySelectorAll('#changelog li').length >= 1, 'changelog');
     assert(document.querySelectorAll('#c-about option').length > 40, 'about options: ' + document.querySelectorAll('#c-about option').length);
     // menu opens and closes
@@ -109,7 +109,7 @@ setTimeout(() => {
         setTimeout(() => {
           assert(/John Wathen/.test(document.getElementById('panel-name').textContent), 'deep link opened john1: ' + document.getElementById('panel-name').textContent);
           // every tree row id resolves to a person, every person in a couple exists
-          document.querySelectorAll('#tree .prow:not(.plain)').forEach((r) => assert(PEOPLE_.some((p) => p.id === r.getAttribute('data-id')), 'row person exists ' + r.getAttribute('data-id')));
+          document.querySelectorAll('#tree .prow:not(.plain):not(.dcard)').forEach((r) => assert(PEOPLE_.some((p) => p.id === r.getAttribute('data-id')), 'row person exists ' + r.getAttribute('data-id')));
           // all parents/spouse references resolve
           const ids = new Set(PEOPLE_.map((p) => p.id));
           PEOPLE_.forEach((p) => {

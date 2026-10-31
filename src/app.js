@@ -71,7 +71,7 @@
   }
 
   /* ---------------- tree ---------------- */
-  var UNIT = 190, BW = 172, RH = 30, PAD = 7, W = 1520, HGT = 840;
+  var UNIT = 190, BW = 172, RH = 30, PAD = 7, W = 1520, HGT = 1160;
   var ROW_Y = { 7: 14, 6: 78, 5: 142, 4: 206, 3: 296, 2: 418, 1: 540, 0: 662, kids: 782 };
   var COL = { ar: 0, lp: 1, ws: 2, sm: 3, ge: 4, jm: 5, jh: 6, dm: 7, ta: 4, aw: 5, bh: 6, ba: 4, j2: 4, j1: 4 };
   var tree = { g: null, view: { x: 0, y: 0, k: 1 }, frame: null, svg: null, nodes: {}, filter: 'all' };
@@ -153,14 +153,7 @@
       tree.nodes[c.id] = node;
     });
 
-    var dc = C.dc;
-    var kidsW = 340;
-    var kids = s('g', { 'class': 'kids', transform: 'translate(' + (dc.x - kidsW / 2) + ' ' + ROW_Y.kids + ')' });
-    links.appendChild(s('path', { 'class': 'link', d: 'M' + dc.x + ' ' + (dc.y + dc.h) + ' L' + dc.x + ' ' + ROW_Y.kids }));
-    kids.appendChild(s('rect', { x: 0, y: 0, width: kidsW, height: 46, rx: 6 }));
-    kids.appendChild(s('text', { 'class': 't1', x: kidsW / 2, y: 18, 'text-anchor': 'middle', text: "Donald and Cleo's children" }));
-    kids.appendChild(s('text', { x: kidsW / 2, y: 35, 'text-anchor': 'middle', text: CHILDREN_ROW }));
-    nodes.appendChild(kids);
+    tree.descLinks = links; tree.descNodes = nodes; renderDescTree();
 
     var labelX = C.dm.x + BW / 2 + 4;
     [['dc', 'Donald and Cleo'], ['jb', 'their parents']].forEach(function (pair) {
@@ -173,7 +166,7 @@
 
     setupPanZoom();
     $('#tree-fit').addEventListener('click', fitTree);
-    $('#tree-home').addEventListener('click', function () { if (narrow()) focusCouple('dc', 1, 70); else focusCouple('dc', 1.1); });
+    $('#tree-home').addEventListener('click', function () { focusCouple('dc', narrow() ? 1 : 1.1); });
     $('#tree-in').addEventListener('click', function () { zoomAt(1.25, tree.frame.clientWidth / 2, tree.frame.clientHeight / 2); });
     $('#tree-out').addEventListener('click', function () { zoomAt(0.8, tree.frame.clientWidth / 2, tree.frame.clientHeight / 2); });
     $$('.tree-tools .chip').forEach(function (chip) {
@@ -181,16 +174,142 @@
         $$('.tree-tools .chip').forEach(function (c) { c.classList.remove('is-on'); });
         chip.classList.add('is-on');
         tree.filter = chip.getAttribute('data-line');
-        $$('.prow', tree.svg).forEach(function (row) {
-          var id = row.getAttribute('data-id');
-          var line = id ? P[id].line : (row.className.baseVal.match(/line-(\w+)/) || [])[1];
-          row.classList.toggle('is-dim', tree.filter !== 'all' && line !== tree.filter);
-        });
+        applyLineFilter(true);
       });
     });
-    if (narrow()) focusCouple('dc', 1, 70); else fitTree();
+    fitTree();
   }
 
+
+  /* ---------- descendants inside the tree: expandable, with add points ---------- */
+  var DW = 150, DH = 44, DGAP = 14, DROW = 96, DTOP = 790;
+  var descOpen = {};
+  function descKey(path) { return path.join('/'); }
+  function descWidth(n, path) {
+    var kids = n.children || [];
+    var open = descOpen[descKey(path)];
+    if (!open || !kids.length) return DW;
+    var w = kids.reduce(function (a, c, i) { return a + descWidth(c, path.concat(i)) + DGAP; }, 0) + DW; /* + the add card */
+    return Math.max(DW, w);
+  }
+  function renderDescTree() {
+    var g = tree.descG; if (g) g.parentNode.removeChild(g);
+    var lg = tree.descLG; if (lg) lg.parentNode.removeChild(lg);
+    g = tree.descG = s('g', { 'class': 'desc-g' }); lg = tree.descLG = s('g', { 'class': 'desc-links' });
+    tree.descLinks.appendChild(lg); tree.descNodes.appendChild(g);
+    var dc = C.dc, kids = DESCENDANTS.children;
+    descOpen[''] = true;
+    var total = kids.reduce(function (a, c, i) { return a + descWidth(c, [i]) + DGAP; }, 0) + DW;
+    var x = dc.x - total / 2, busY = DTOP - 22;
+    lg.appendChild(s('path', { 'class': 'link', d: 'M' + dc.x + ' ' + (dc.y + dc.h) + ' L' + dc.x + ' ' + busY }));
+    var centers = [];
+    kids.forEach(function (c, i) { var w = descWidth(c, [i]); centers.push(placeDesc(c, [i], x + w / 2, DTOP, g, lg)); x += w + DGAP; });
+    var addC = x + DW / 2; addCard(g, addC, DTOP, "Donald and Cleo's children", 'Add a child');
+    centers.push(addC);
+    lg.appendChild(s('path', { 'class': 'link', d: 'M' + Math.min.apply(null, centers) + ' ' + busY + ' L' + Math.max.apply(null, centers) + ' ' + busY + centers.map(function (cx) { return ' M' + cx + ' ' + busY + ' L' + cx + ' ' + DTOP; }).join('') }));
+    if (tree.filter && tree.filter !== 'all') applyLineFilter(false);
+  }
+  function placeDesc(n, path, cx, y, g, lg) {
+    var key = descKey(path), kids = n.children || [], open = !!descOpen[key];
+    var card = s('g', { 'class': 'dcard prow line-zirkelbach' + (n.open ? ' is-open-branch' : ''), transform: 'translate(' + (cx - DW / 2) + ' ' + y + ')', tabindex: '0', role: 'button',
+      'aria-label': n.name + (n.dates ? ', ' + n.dates : '') + (kids.length ? (open ? ', expanded' : ', has ' + kids.length + ' below') : '') });
+    card.appendChild(s('rect', { 'class': 'dbox', x: 0, y: 0, width: DW, height: DH, rx: 6 }));
+    card.appendChild(s('rect', { 'class': 'bar', x: 6, y: 7, width: 3, height: DH - 14, rx: 1 }));
+    var nm = n.name.replace(/ “[^”]+”/, '').replace(/^(\S+) .* (\S+)$/, function (m, a, b) { return m.length > (kids.length ? 17 : 22) ? a + ' ' + b : m; });
+    var lim = kids.length ? 17 : 22, slim = kids.length ? 20 : 25;
+    card.appendChild(s('text', { x: 15, y: 18, text: nm.length > lim ? nm.slice(0, lim - 1) + '…' : nm }));
+    var sub = n.dates || (n.spouse ? 'm. ' + n.spouse.split(',')[0] : (n.open ? 'no public record yet' : ''));
+    card.appendChild(s('text', { 'class': 'sub', x: 15, y: 33, text: sub.length > slim ? sub.slice(0, slim - 1) + '…' : sub }));
+    if (kids.length) {
+      card.appendChild(s('circle', { 'class': 'dtog', cx: DW - 14, cy: DH / 2, r: 9 }));
+      card.appendChild(s('text', { 'class': 'dtog-t', x: DW - 14, y: DH / 2 + 4, 'text-anchor': 'middle', text: open ? '−' : String(kids.length) }));
+    }
+    function act() {
+      if (tree.dragged) return;
+      if (kids.length) { descOpen[key] = !open; renderDescTree(); }
+      else openDescPanel(n);
+    }
+    card.addEventListener('click', act);
+    card.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); } });
+    card.addEventListener('dblclick', function () { openDescPanel(n); });
+    g.appendChild(card);
+    if (open && kids.length) {
+      var ny = y + DROW, busY = ny - 22, x = cx - descWidth(n, path) / 2, centers = [];
+      kids.forEach(function (c, i) { var w = descWidth(c, path.concat(i)); centers.push(placeDesc(c, path.concat(i), x + w / 2, ny, g, lg)); x += w + DGAP; });
+      var addC = x + DW / 2; addCard(g, addC, ny, n.name, 'Add someone'); centers.push(addC);
+      lg.appendChild(s('path', { 'class': 'link', d: 'M' + cx + ' ' + (y + DH) + ' L' + cx + ' ' + busY + ' M' + Math.min.apply(null, centers) + ' ' + busY + ' L' + Math.max.apply(null, centers) + ' ' + busY + centers.map(function (c2) { return ' M' + c2 + ' ' + busY + ' L' + c2 + ' ' + ny; }).join('') }));
+    }
+    return cx;
+  }
+  function addCard(g, cx, y, parentName, label) {
+    var a = s('g', { 'class': 'daddcard', transform: 'translate(' + (cx - DW / 2) + ' ' + y + ')', tabindex: '0', role: 'button', 'aria-label': label + ' under ' + parentName });
+    a.appendChild(s('rect', { x: 0, y: 0, width: DW, height: DH, rx: 6 }));
+    a.appendChild(s('text', { x: DW / 2, y: 27, 'text-anchor': 'middle', text: '+ ' + label }));
+    var go = function () { if (!tree.dragged) openForm({ aboutLabel: parentName, preset: label === 'Add a child' ? "Adding to Donald and Cleo's children: " : 'Adding under ' + parentName + ': ' }); };
+    a.addEventListener('click', go);
+    a.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    g.appendChild(a);
+  }
+  function openDescPanel(n) {
+    /* a lightweight panel for descendants, reusing the person drawer */
+    panel.current = 'desc';
+    ['line-zirkelbach', 'line-daily', 'line-wathen', 'line-vogt', 'line-all'].forEach(function (c) { panel.el.classList.remove(c); });
+    panel.el.classList.add('line-zirkelbach');
+    $('#panel-line').textContent = "Donald and Cleo's family";
+    $('#panel-name').textContent = n.name;
+    $('#panel-dates').textContent = n.dates || '';
+    var body = panel.body; body.innerHTML = '';
+    var facts = h('dl', { class: 'facts' });
+    if (n.spouse) { facts.appendChild(h('dt', { text: 'Married' })); facts.appendChild(h('dd', { text: n.spouse })); }
+    if (n.children && n.children.length) { facts.appendChild(h('dt', { text: 'Children' })); facts.appendChild(h('dd', { text: n.children.map(function (c) { return c.name; }).join(', ') })); }
+    if (facts.childNodes.length) body.appendChild(facts);
+    body.appendChild(h('section', {}, h('h3', { text: 'What the records say' }),
+      h('p', { class: 'kinlist' }, n.note || (n.open ? 'No public record yet. Living relatives appear by name only.' : 'Named in a relative\'s obituary. Living relatives appear by name only.'), ' ', srcLinks(n.s, ''))));
+    body.appendChild(h('div', { class: 'panel-actions' },
+      h('button', { class: 'btn suggest', type: 'button', text: 'Add or correct', onclick: function () { closePanel(); openForm({ aboutLabel: n.name }); } })));
+    if (!panel.open) {
+      panel.lastFocus = document.activeElement; panel.el.hidden = false; $('#backdrop').hidden = false;
+      requestAnimationFrame(function () { panel.el.classList.add('is-open'); $('#backdrop').classList.add('is-open'); });
+      panel.open = true;
+    }
+    $('#panel-close').focus();
+  }
+
+
+  function lineOfRow(row) {
+    if (row.classList.contains('dcard') || row.classList.contains('daddcard')) return 'zirkelbach';
+    var id = row.getAttribute('data-id');
+    if (id && P[id]) return P[id].line;
+    var m = (row.getAttribute('class') || '').match(/line-(\w+)/); return m ? m[1] : 'all';
+  }
+  function applyLineFilter(zoom) {
+    var f = tree.filter || 'all', box = null;
+    $$('.prow, .daddcard', tree.svg).forEach(function (row) {
+      var on = f === 'all' || lineOfRow(row) === f;
+      row.classList.toggle('is-dim', !on);
+      if (on && f !== 'all') {
+        var g = row.closest('.node') || row; if (!g.getBBox) return; var b = g.getBBox(), tr = (g.getAttribute('transform') || '').match(/translate\(([-\d.]+)[ ,]([-\d.]+)\)/);
+        var x = (tr ? +tr[1] : 0) + b.x, y = (tr ? +tr[2] : 0) + b.y;
+        if (row.closest('.node') !== g) { /* standalone row */ }
+        box = box ? [Math.min(box[0], x), Math.min(box[1], y), Math.max(box[2], x + b.width), Math.max(box[3], y + b.height)] : [x, y, x + b.width, y + b.height];
+      }
+    });
+    $$('.node', tree.svg).forEach(function (n) { n.classList.toggle('is-dim', f !== 'all' && !n.querySelector('.prow:not(.is-dim)')); });
+    $$('.link', tree.svg).forEach(function (l) { l.classList.toggle('is-dim', f !== 'all'); });
+    if (!zoom) return;
+    if (f === 'all' || !box) fitTree(); else fitBox(box);
+  }
+  function fitBox(b) {
+    var base = frameScale();
+    var fw = tree.frame.clientWidth / base, fh = tree.frame.clientHeight / base;
+    var offX = (fw - W) / 2, offY = (fh - HGT) / 2;
+    var bw = Math.max(200, b[2] - b[0]), bh = Math.max(150, b[3] - b[1]);
+    var k = Math.min(8, Math.max(0.3, Math.min(fw / bw, fh / bh) * 0.9));
+    tree.view.k = k;
+    tree.view.x = fw / 2 - offX - (b[0] + b[2]) / 2 * k;
+    tree.view.y = fh / 2 - offY - (b[1] + b[3]) / 2 * k;
+    applyView();
+  }
   function applyView() {
     var v = tree.view;
     tree.g.setAttribute('transform', 'translate(' + v.x.toFixed(1) + ' ' + v.y.toFixed(1) + ') scale(' + v.k.toFixed(3) + ')');
