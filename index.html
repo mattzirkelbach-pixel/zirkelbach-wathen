@@ -1,0 +1,1938 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zirkelbach–Wathen Family</title>
+<meta name="description" content="Four families, one marriage: the Zirkelbachs, Dailys, Wathens and Vogts of Evansville, Indiana, their origins, and what the records say.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Zirkelbach–Wathen Family">
+<meta property="og:description" content="Four families, one marriage: the Zirkelbachs, Dailys, Wathens and Vogts of Evansville, Indiana, their origins, and what the records say.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: one left-aligned reading column (68ch) for the story, people, research and sources;
+   the tree and the journeys run full-bleed inside their own pan or scroll frames;
+   a right-hand drawer (a bottom sheet on phones) holds each person's detail. */
+:root {
+  --paper: #f3f4ef;
+  --paper-2: #e8eae2;
+  --card: #fbfbf8;
+  --ink: #1b2026;
+  --ink-2: #4a535d;
+  --ink-3: #78828c;
+  --rule: #d2d6cb;
+  --focus: #2b5fb3;
+  --c-z: #7b2e3a;
+  --c-d: #2b6a4e;
+  --c-w: #96600f;
+  --c-v: #355a8a;
+  --t-z: #eedbdf;
+  --t-d: #d9e8df;
+  --t-w: #f1e3c7;
+  --t-v: #d9e3f0;
+  --shadow: 0 18px 50px rgba(27, 32, 38, 0.18);
+  --font-display: "Libre Caslon Text", Georgia, "Times New Roman", serif;
+  --font-ui: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #14181d; --paper-2: #1b2127; --card: #1a2026;
+    --ink: #e7e8e3; --ink-2: #b3b9c0; --ink-3: #8b939b; --rule: #2d353e; --focus: #8ab4f8;
+    --c-z: #d98f9c; --c-d: #7cc69f; --c-w: #e0b05b; --c-v: #90b2e2;
+    --t-z: #3a2229; --t-d: #1e3429; --t-w: #3a2d14; --t-v: #1f2d42;
+    --shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #14181d; --paper-2: #1b2127; --card: #1a2026;
+  --ink: #e7e8e3; --ink-2: #b3b9c0; --ink-3: #8b939b; --rule: #2d353e; --focus: #8ab4f8;
+  --c-z: #d98f9c; --c-d: #7cc69f; --c-w: #e0b05b; --c-v: #90b2e2;
+  --t-z: #3a2229; --t-d: #1e3429; --t-w: #3a2d14; --t-v: #1f2d42;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 17px;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  background: var(--paper); z-index: 40;
+}
+img, svg { max-width: 100%; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--ink-2); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+button { font: inherit; color: inherit; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height: 1.15; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); }
+h3 { font-size: 1.22rem; }
+p { margin: 0; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--card); padding: 6px 10px; z-index: 50; }
+.skip:focus { left: var(--gutter-l); }
+
+/* line colours */
+.line-zirkelbach { --lc: var(--c-z); --lt: var(--t-z); }
+.line-daily { --lc: var(--c-d); --lt: var(--t-d); }
+.line-wathen { --lc: var(--c-w); --lt: var(--t-w); }
+.line-vogt { --lc: var(--c-v); --lt: var(--t-v); }
+.line-all { --lc: var(--ink-2); --lt: var(--paper-2); }
+
+/* top bar */
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+@supports not (background: color-mix(in srgb, red 50%, blue)) { .topbar { background: var(--paper); } }
+.topbar-in { display: flex; align-items: center; gap: 18px; min-height: 54px; }
+.brand { font-family: var(--font-display); font-size: 1.05rem; text-decoration: none; white-space: nowrap; display: flex; align-items: center; gap: 10px; }
+.brand-mark { display: inline-grid; grid-template-columns: 1fr 1fr; gap: 2px; width: 16px; height: 16px; }
+.brand-mark i { display: block; border-radius: 1px; }
+.brand-mark i:nth-child(1) { background: var(--c-z); } .brand-mark i:nth-child(2) { background: var(--c-d); }
+.brand-mark i:nth-child(3) { background: var(--c-w); } .brand-mark i:nth-child(4) { background: var(--c-v); }
+.nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; margin-left: auto; -webkit-overflow-scrolling: touch; }
+.nav::-webkit-scrollbar { display: none; }
+.nav a { text-decoration: none; padding: 8px 10px; border-radius: 6px; color: var(--ink-2); white-space: nowrap; font-size: 0.95rem; }
+.nav a:hover { background: var(--paper-2); color: var(--ink); }
+.nav a.is-current { color: var(--ink); background: var(--paper-2); }
+
+/* page frame */
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+.prose { max-width: 68ch; }
+.prose p + p { margin-top: 0.9em; }
+section { padding-block: clamp(44px, 7vw, 84px); scroll-margin-top: 62px; }
+section + section { border-top: 1px solid var(--rule); }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; margin-bottom: 22px; }
+.sec-head p { color: var(--ink-2); max-width: 60ch; }
+.serif { font-family: var(--font-display); }
+.muted { color: var(--ink-2); }
+.small { font-size: 0.92rem; }
+.nowrap { white-space: nowrap; }
+
+/* hero */
+.hero { padding-block: clamp(36px, 6vw, 72px) clamp(40px, 6vw, 72px); }
+.hero h1 { font-size: clamp(2.3rem, 6vw, 4.1rem); max-width: 14ch; letter-spacing: -0.01em; }
+.hero .lede { font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--ink-2); max-width: 46ch; margin-top: 18px; }
+.braid { margin: 34px 0 0; max-width: 560px; }
+.braid svg { display: block; width: 100%; height: auto; }
+.braid text { font-family: var(--font-ui); fill: var(--ink); }
+.braid .lbl-fam { font-weight: 700; font-size: 11px; }
+.braid .lbl-org { fill: var(--ink-2); font-size: 8.6px; }
+.braid .lbl-end { font-family: var(--font-display); font-size: 11px; }
+.braid .lbl-end2 { font-size: 8.6px; fill: var(--ink-2); }
+.braid path.ribbon { fill: none; stroke-width: 6; stroke-linecap: round; }
+.braid path.r-z { stroke: var(--c-z); } .braid path.r-d { stroke: var(--c-d); } .braid path.r-w { stroke: var(--c-w); } .braid path.r-v { stroke: var(--c-v); }
+.braid circle.knot { fill: var(--ink); }
+.braid .tail { stroke: var(--ink-3); stroke-width: 1.5; fill: none; stroke-dasharray: 3 4; }
+@media (prefers-reduced-motion: no-preference) {
+  .braid path.ribbon { stroke-dasharray: 420; stroke-dashoffset: 420; animation: draw 1.6s cubic-bezier(.4,0,.2,1) forwards; }
+  .braid path.r-d { animation-delay: .15s; } .braid path.r-w { animation-delay: .3s; } .braid path.r-v { animation-delay: .45s; }
+  .braid .knot, .braid .lbl-end, .braid .lbl-end2, .braid .tail, .braid .lbl-kids { opacity: 0; animation: appear .6s ease 1.5s forwards; }
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes appear { to { opacity: 1; } }
+.families { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px 28px; margin-top: 40px; }
+.fam { border-top: 3px solid var(--lc); padding-top: 12px; }
+.fam h3 { font-size: 1.15rem; margin-bottom: 6px; }
+.fam p { color: var(--ink-2); font-size: 0.97rem; }
+.police { margin-top: 36px; max-width: 68ch; padding: 16px 18px; border-left: 3px solid var(--ink-3); background: var(--paper-2); }
+.police p + p { margin-top: 8px; }
+
+/* tree */
+.tree-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+.tree-tools .hint { color: var(--ink-2); font-size: 0.92rem; margin-left: auto; }
+.btn { border: 1px solid var(--rule); background: var(--card); border-radius: 8px; padding: 7px 12px; cursor: pointer; line-height: 1.2; font-size: 0.95rem; }
+.btn:hover { border-color: var(--ink-3); }
+.btn.icon { width: 38px; padding: 7px 0; text-align: center; font-size: 1.1rem; }
+.chip { border: 1px solid var(--rule); background: transparent; border-radius: 999px; padding: 5px 12px; cursor: pointer; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 7px; }
+.chip::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--lc, var(--ink-3)); }
+.chip.is-on { background: var(--lt, var(--paper-2)); border-color: var(--lc, var(--ink-3)); }
+.chip.all::before { background: var(--ink-3); }
+.tree-frame {
+  position: relative; height: min(74vh, 800px); min-height: 420px;
+  border: 1px solid var(--rule); border-radius: 12px; overflow: hidden;
+  background:
+    linear-gradient(var(--rule) 1px, transparent 1px) 0 0 / 88px 88px,
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px) 0 0 / 88px 88px,
+    var(--paper-2);
+  touch-action: pan-y;
+  cursor: grab;
+}
+.tree-frame.is-dragging { cursor: grabbing; }
+.tree-frame svg { width: 100%; height: 100%; display: block; }
+.tree-frame .node rect.box { fill: var(--card); stroke: var(--lc); stroke-width: 1.2; }
+.tree-frame .node rect.bar { fill: var(--lc); }
+.tree-frame .node.is-active rect.box { stroke-width: 3; }
+.tree-frame .node.is-dim { opacity: 0.22; }
+.tree-frame .prow { cursor: pointer; }
+.tree-frame .prow.plain { cursor: default; }
+.tree-frame .prow.plain:hover rect.hit { fill: transparent; }
+.tree-frame .prow rect.hit { fill: transparent; }
+.tree-frame .prow:hover rect.hit, .tree-frame .prow:focus rect.hit { fill: var(--lt); }
+.tree-frame .prow text { font-family: var(--font-ui); fill: var(--ink); font-size: 13px; }
+.tree-frame .prow text.sub { fill: var(--ink-2); font-size: 10.5px; }
+.tree-frame .prow:focus { outline: none; }
+.tree-frame .prow:focus rect.hit { stroke: var(--focus); stroke-width: 2; }
+.tree-frame .link { fill: none; stroke: var(--ink-3); stroke-width: 1.4; }
+.tree-frame .link.is-dim { opacity: 0.2; }
+.tree-frame .rowlabel { font-family: var(--font-display); fill: var(--ink-3); font-size: 12px; font-style: italic; }
+.tree-frame .kids rect { fill: var(--paper-2); stroke: var(--rule); }
+.tree-frame .kids text { font-family: var(--font-ui); fill: var(--ink-2); font-size: 12px; }
+.tree-frame .kids text.t1 { fill: var(--ink); font-size: 12.5px; }
+.tree-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; color: var(--ink-2); font-size: 0.92rem; }
+.tree-legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; background: var(--lc); margin-right: 7px; vertical-align: -1px; }
+
+/* people */
+.people-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 18px; }
+.search { flex: 1 1 240px; display: flex; align-items: center; gap: 8px; border: 1px solid var(--rule); background: var(--card); border-radius: 10px; padding: 8px 12px; }
+.search input { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; color: inherit; outline: none; }
+.search input::placeholder { color: var(--ink-3); }
+.people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.pcard { text-align: left; background: var(--card); border: 1px solid var(--rule); border-left: 4px solid var(--lc); border-radius: 8px; padding: 12px 14px; cursor: pointer; display: grid; gap: 3px; }
+.pcard:hover { border-color: var(--lc); }
+.pcard .n { font-family: var(--font-display); font-size: 1.05rem; }
+.pcard .d { color: var(--ink-2); font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+.pcard .r { color: var(--ink-2); font-size: 0.9rem; }
+.pcard .tag { font-size: 0.78rem; color: var(--lc); }
+.people-empty { color: var(--ink-2); padding: 20px 0; }
+.people-group { font-family: var(--font-display); font-size: 1.1rem; color: var(--ink-2); margin: 22px 0 10px; }
+.people-group:first-child { margin-top: 0; }
+
+/* timeline */
+.tl { list-style: none; margin: 0; padding: 0; position: relative; max-width: 72ch; }
+.tl::before { content: ""; position: absolute; left: 92px; top: 0; bottom: 0; width: 1px; background: var(--rule); }
+.tl li { display: grid; grid-template-columns: 76px 1fr; gap: 0 24px; padding: 9px 0; align-items: start; }
+.tl .y { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: 0.95rem; padding-top: 2px; white-space: nowrap; }
+.tl .b { position: relative; padding-left: 14px; }
+.tl .b::before { content: ""; position: absolute; left: -16px; top: 10px; width: 9px; height: 9px; border-radius: 50%; background: var(--lc); outline: 3px solid var(--paper); }
+.tl .b .src { color: var(--ink-3); font-size: 0.85rem; }
+.tl .new { display: inline-block; margin-left: 8px; font-size: 0.78rem; color: var(--ink-2); border: 1px solid var(--rule); border-radius: 999px; padding: 0 7px; vertical-align: 1px; }
+.tl li.is-hidden { display: none; }
+@media (max-width: 560px) {
+  .tl::before { left: 66px; }
+  .tl li { grid-template-columns: 56px 1fr; gap: 0 18px; }
+  .tl .y { font-size: 0.85rem; white-space: normal; }
+}
+
+/* journeys */
+.scroll-x { overflow-x: auto; border: 1px solid var(--rule); border-radius: 12px; background: var(--card); -webkit-overflow-scrolling: touch; }
+.scroll-x svg { display: block; min-width: 960px; }
+.jmap text { font-family: var(--font-ui); fill: var(--ink); font-size: 12px; }
+.jmap text.sub { fill: var(--ink-2); font-size: 10.5px; }
+.jmap text.col { font-family: var(--font-display); font-style: italic; fill: var(--ink-3); font-size: 12px; }
+.jmap .place rect { fill: var(--paper-2); stroke: var(--lc); stroke-width: 1.2; }
+.jmap .place.is-dim, .jmap .route.is-dim { opacity: 0.18; }
+.jmap .route path { fill: none; stroke: var(--lc); stroke-width: 2.6; stroke-linecap: round; }
+.jmap .route text { font-size: 10.5px; fill: var(--lc); font-weight: 700; paint-order: stroke; stroke: var(--card); stroke-width: 4px; stroke-linejoin: round; }
+.jmap .route { cursor: pointer; }
+.jmap .route path.hit { stroke: transparent; stroke-width: 18; }
+.routes { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px 22px; max-width: 980px; }
+.routes li { padding: 6px 0 6px 14px; border-left: 3px solid var(--lc); font-size: 0.95rem; }
+.routes li b { font-weight: 700; }
+.routes li span { color: var(--ink-2); }
+
+/* lawmen */
+.law { width: 100%; max-width: 900px; border-collapse: collapse; font-size: 0.97rem; }
+.law th { text-align: left; font-weight: 400; color: var(--ink-2); font-family: var(--font-display); font-style: italic; padding: 6px 12px 10px 0; border-bottom: 1px solid var(--rule); }
+.law td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.law td:first-child { white-space: nowrap; border-left: 3px solid var(--lc); padding-left: 12px; }
+.law .src { color: var(--ink-3); font-size: 0.85rem; }
+@media (max-width: 640px) {
+  .law, .law tbody, .law tr, .law td { display: block; }
+  .law thead { display: none; }
+  .law tr { border-bottom: 1px solid var(--rule); padding: 8px 0; }
+  .law td { border: 0; padding: 2px 0 2px 12px; }
+  .law td:first-child { white-space: normal; font-weight: 700; }
+}
+
+/* research */
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 6px 0 24px; color: var(--ink-2); font-size: 0.92rem; }
+.pill { display: inline-block; font-size: 0.78rem; padding: 1px 9px; border-radius: 999px; border: 1px solid; line-height: 1.5; white-space: nowrap; }
+.pill-record { color: var(--c-d); border-color: var(--c-d); }
+.pill-published { color: var(--c-v); border-color: var(--c-v); }
+.pill-unverified { color: var(--ink-2); border-color: var(--ink-3); }
+.pill-conflict { color: var(--c-z); border-color: var(--c-z); }
+.pill-family { color: var(--c-w); border-color: var(--c-w); }
+.findings { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px 26px; }
+.finding { border-top: 3px solid var(--lc); padding-top: 12px; display: grid; gap: 8px; align-content: start; }
+.finding h3 { font-size: 1.15rem; }
+.finding p { color: var(--ink-2); font-size: 0.97rem; }
+.finding .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--ink-3); font-size: 0.85rem; }
+.sub-head { margin: 48px 0 16px; }
+.sub-head p { color: var(--ink-2); max-width: 62ch; margin-top: 6px; }
+.disagree { width: 100%; border-collapse: collapse; font-size: 0.95rem; max-width: 980px; }
+.disagree th { text-align: left; font-weight: 400; color: var(--ink-2); font-family: var(--font-display); font-style: italic; padding: 6px 12px 10px 0; border-bottom: 1px solid var(--rule); }
+.disagree td { padding: 10px 14px 10px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.disagree td:first-child { font-weight: 700; }
+.disagree .src { color: var(--ink-3); font-size: 0.85rem; }
+@media (max-width: 700px) {
+  .disagree, .disagree tbody, .disagree tr, .disagree td { display: block; }
+  .disagree thead { display: none; }
+  .disagree tr { border-bottom: 1px solid var(--rule); padding: 10px 0; }
+  .disagree td { border: 0; padding: 2px 0; }
+  .disagree td[data-l]::before { content: attr(data-l) " "; color: var(--ink-3); font-style: italic; }
+}
+.leads { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 980px; }
+.leads li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 6px 28px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.leads .q { font-family: var(--font-display); font-size: 1.08rem; }
+.leads .how { color: var(--ink-2); font-size: 0.95rem; }
+.leads .links { grid-column: 2; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.9rem; }
+@media (max-width: 700px) { .leads li { grid-template-columns: 1fr; } .leads .links { grid-column: 1; } }
+
+/* sources */
+.sources { margin: 0; padding-left: 0; list-style: none; counter-reset: src; max-width: 80ch; display: grid; gap: 8px; }
+.sources li { counter-increment: src; display: grid; grid-template-columns: 36px 1fr; gap: 10px; font-size: 0.95rem; scroll-margin-top: 90px; }
+.sources li::before { content: counter(src); color: var(--ink-3); font-variant-numeric: tabular-nums; text-align: right; }
+.sources li a { word-break: break-word; }
+.sources .pill { margin-left: 6px; vertical-align: 1px; }
+.method { max-width: 68ch; margin-top: 36px; color: var(--ink-2); font-size: 0.95rem; }
+.method p + p { margin-top: 10px; }
+
+/* footer */
+footer { border-top: 1px solid var(--rule); padding-block: 30px 40px; color: var(--ink-2); font-size: 0.92rem; }
+footer p + p { margin-top: 6px; }
+
+/* drawer */
+#backdrop { position: fixed; inset: 0; background: rgba(10, 14, 18, 0.45); z-index: 45; opacity: 0; transition: opacity .25s; }
+#backdrop.is-open { opacity: 1; }
+.panel {
+  position: fixed; z-index: 46; top: 0; right: 0; bottom: 0; width: min(520px, 100%);
+  background: var(--card); box-shadow: var(--shadow); display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform .3s cubic-bezier(.4,0,.2,1);
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+.panel.is-open { transform: none; }
+@media (max-width: 640px) {
+  .panel { top: auto; left: 0; width: 100%; height: 88vh; height: 88dvh; border-radius: 16px 16px 0 0; transform: translateY(100%); padding-top: 0; padding-right: 0; }
+  .panel::before { content: ""; display: block; width: 44px; height: 5px; border-radius: 3px; background: var(--rule); margin: 10px auto 0; }
+}
+@media (prefers-reduced-motion: reduce) { .panel, #backdrop { transition: none; } }
+.panel-head { display: flex; align-items: flex-start; gap: 12px; padding: 18px 20px 12px; border-bottom: 1px solid var(--rule); border-top: 4px solid var(--lc); }
+.panel-head .who { flex: 1; min-width: 0; }
+.panel-head .line-tag { color: var(--lc); font-size: 0.85rem; }
+.panel-head h2 { font-size: 1.5rem; margin-top: 2px; }
+.panel-head .dates { color: var(--ink-2); font-variant-numeric: tabular-nums; margin-top: 2px; }
+.close { border: 1px solid var(--rule); background: transparent; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.1rem; flex: none; }
+.panel-body { overflow-y: auto; padding: 16px 20px 32px; display: grid; gap: 20px; align-content: start; }
+.panel-body h3 { font-size: 1.05rem; margin-bottom: 8px; color: var(--ink-2); font-style: italic; }
+.facts { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; font-size: 0.95rem; }
+.facts dt { color: var(--ink-3); } .facts dd { margin: 0; }
+.account p { font-family: var(--font-display); font-size: 1.02rem; line-height: 1.6; }
+.account p + p { margin-top: 10px; }
+.found { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.found li { padding: 10px 12px; border: 1px solid var(--rule); border-radius: 8px; font-size: 0.95rem; display: grid; gap: 6px; }
+.found li .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--ink-3); font-size: 0.82rem; }
+.kin { display: flex; flex-wrap: wrap; gap: 6px; }
+.kin button { border: 1px solid var(--rule); background: var(--paper); border-radius: 999px; padding: 4px 11px; cursor: pointer; font-size: 0.9rem; }
+.kin button:hover { border-color: var(--lc); }
+.kinlist { font-size: 0.95rem; color: var(--ink-2); }
+.kinlist p + p { margin-top: 6px; }
+.panel-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--paper); padding: 8px 14px; border-radius: 8px; font-size: 0.92rem; z-index: 60; }
+
+@media print {
+  .topbar, .tree-tools, .people-tools, #backdrop, .panel, .toast { display: none !important; }
+  .tree-frame { height: auto; }
+  body { font-size: 12px; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#story">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#story"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Zirkelbach–Wathen</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#story">Story</a><a href="#tree">Tree</a><a href="#people">People</a><a href="#timeline">Timeline</a><a href="#journeys">Journeys</a><a href="#lawmen">Lawmen</a><a href="#research">Research</a><a href="#sources">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="story" class="hero">
+    <div class="wrap">
+      <h1>Four families, one marriage.</h1>
+      <p class="lede">The Zirkelbachs, Dailys, Wathens and Vogts came together in Evansville, Indiana, when Donald Zirkelbach married Cleo Wathen in 1930. This is who they were, where they came from, and what the records say.</p>
+
+      <figure class="braid" aria-label="Four family lines converging on the 1930 marriage of Donald Zirkelbach and Cleo Wathen">
+        <svg viewBox="0 0 400 236" role="img">
+          <text class="lbl-fam" x="0" y="38">Zirkelbach</text>
+          <text class="lbl-org" x="0" y="50">Bavarian Rhön, about 1840</text>
+          <text class="lbl-fam" x="0" y="93">Daily</text>
+          <text class="lbl-org" x="0" y="105">Queen's County, Ireland, 1816–19</text>
+          <text class="lbl-fam" x="0" y="148">Wathen</text>
+          <text class="lbl-org" x="0" y="160">Maryland 1670, Kentucky by 1816</text>
+          <text class="lbl-fam" x="0" y="203">Vogt</text>
+          <text class="lbl-org" x="0" y="215">Hesse-Darmstadt, 1852</text>
+          <path class="ribbon r-z" d="M120 42 C 195 42, 225 121, 285 121"/>
+          <path class="ribbon r-d" d="M146 97 C 205 97, 230 121, 285 121"/>
+          <path class="ribbon r-w" d="M144 152 C 205 152, 230 121, 285 121"/>
+          <path class="ribbon r-v" d="M106 207 C 195 207, 225 121, 285 121"/>
+          <circle class="knot" cx="285" cy="121" r="5"/>
+          <text class="lbl-end" x="295" y="117">Donald and Cleo</text>
+          <text class="lbl-end2" x="295" y="129">married 5 April 1930</text>
+          <text class="lbl-end2" x="295" y="140">Evansville, Indiana</text>
+          <path class="tail" d="M285 128 L285 170"/>
+          <text class="lbl-end2 lbl-kids" x="292" y="174">six children</text>
+        </svg>
+      </figure>
+
+      <div class="families" id="families"></div>
+
+      <div class="police">
+        <p>Police work runs through the family. Bena's father, Charles Vogt, was a township constable and justice of the peace. Pete Zirkelbach joined the Evansville police in the 1920s, and his son Donald followed in 1934. After them came Donald's son John and his grandson Adam.</p>
+        <p class="small">Living relatives are listed by name only. Everything about them stops at the name.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tree">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>The tree</h2>
+        <p>Donald and Cleo at the bottom, their four grandparent couples across the middle, the immigrants above. Tap any name.</p>
+      </div>
+      <div class="tree-tools" role="group" aria-label="Tree controls">
+        <button class="chip all is-on" data-line="all" type="button">All four lines</button>
+        <button class="chip line-zirkelbach" data-line="zirkelbach" type="button">Zirkelbach</button>
+        <button class="chip line-daily" data-line="daily" type="button">Daily</button>
+        <button class="chip line-wathen" data-line="wathen" type="button">Wathen</button>
+        <button class="chip line-vogt" data-line="vogt" type="button">Vogt</button>
+        <button class="btn" id="tree-fit" type="button">Fit</button>
+        <button class="btn" id="tree-home" type="button">Donald and Cleo</button>
+        <button class="btn icon" id="tree-in" type="button" aria-label="Zoom in">+</button>
+        <button class="btn icon" id="tree-out" type="button" aria-label="Zoom out">−</button>
+        <span class="hint">Drag to move, pinch or Ctrl-scroll to zoom.</span>
+      </div>
+      <div class="tree-frame" id="tree-frame">
+        <svg id="tree-svg" aria-label="Family tree" role="group"></svg>
+      </div>
+      <div class="tree-legend">
+        <span class="line-zirkelbach">Zirkelbach and Lintzenich</span>
+        <span class="line-daily">Daily and Stout</span>
+        <span class="line-wathen">Wathen, Waller and Harris</span>
+        <span class="line-vogt">Vogt and Pfingston</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="people">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>People</h2>
+        <p>Every ancestor with a page, plus the relatives the records brought back. Open one for the family's account and what the research found.</p>
+      </div>
+      <div class="people-tools">
+        <label class="search"><span aria-hidden="true">⌕</span><input id="people-search" type="search" placeholder="Search a name, a place, a year" autocomplete="off"></label>
+        <button class="chip all is-on" data-pline="all" type="button">All</button>
+        <button class="chip line-zirkelbach" data-pline="zirkelbach" type="button">Zirkelbach</button>
+        <button class="chip line-daily" data-pline="daily" type="button">Daily</button>
+        <button class="chip line-wathen" data-pline="wathen" type="button">Wathen</button>
+        <button class="chip line-vogt" data-pline="vogt" type="button">Vogt</button>
+      </div>
+      <div id="people-list"></div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Timeline</h2>
+        <p>From a Bristol indenture in 1670 to the family tree of 2026. Entries marked new came from the records research.</p>
+      </div>
+      <div class="people-tools">
+        <button class="chip all is-on" data-tline="all" type="button">All</button>
+        <button class="chip line-zirkelbach" data-tline="zirkelbach" type="button">Zirkelbach</button>
+        <button class="chip line-daily" data-tline="daily" type="button">Daily</button>
+        <button class="chip line-wathen" data-tline="wathen" type="button">Wathen</button>
+        <button class="chip line-vogt" data-tline="vogt" type="button">Vogt</button>
+      </div>
+      <ol class="tl" id="tl"></ol>
+    </div>
+  </section>
+
+  <section id="journeys">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Journeys</h2>
+        <p>How each line reached Vanderburgh County. Tap a route to follow one family; the diagram scrolls sideways on a phone.</p>
+      </div>
+      <div class="scroll-x"><svg id="jmap" class="jmap" viewBox="0 0 960 590" width="960" height="590" aria-label="Migration routes of the four families"></svg></div>
+      <ol class="routes" id="routes"></ol>
+    </div>
+  </section>
+
+  <section id="lawmen">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Lawmen in the family</h2>
+        <p>The Evansville Police Department's own history calls the Zirkelbachs the only family with more than three generations on the force.</p>
+      </div>
+      <table class="law">
+        <thead><tr><th>Who</th><th>How related</th><th>Service</th></tr></thead>
+        <tbody id="law-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>What the records added</h2>
+        <p>On 31 October 2026 the family tree was checked against county histories, cemetery registers, the police department's own history and two compiled genealogies. Each finding carries its sources and a mark for how much weight it can bear.</p>
+      </div>
+      <div class="legend">
+        <span><span class="pill pill-record">Record</span> an original record, or a transcription of one</span>
+        <span><span class="pill pill-published">Published</span> a county history or compiled genealogy</span>
+        <span><span class="pill pill-unverified">Not yet verified</span> a search-result title, a surname site, or tradition</span>
+        <span><span class="pill pill-conflict">Sources disagree</span> the account and a record part ways</span>
+      </div>
+      <div class="findings" id="findings"></div>
+
+      <div class="sub-head">
+        <h3 class="serif" style="font-size:1.45rem">Where the account and the records disagree</h3>
+        <p>None of these is settled here. Each names the record that would settle it.</p>
+      </div>
+      <table class="disagree">
+        <thead><tr><th>Who</th><th>The family account</th><th>What the record says</th><th>Sources</th></tr></thead>
+        <tbody id="disagree-body"></tbody>
+      </table>
+
+      <div class="sub-head">
+        <h3 class="serif" style="font-size:1.45rem">Open questions, and the record that would answer each</h3>
+        <p>Several databases refuse automated searches and had to be left to a person with a browser. These are the next steps, in rough order of payoff.</p>
+      </div>
+      <ol class="leads" id="leads"></ol>
+    </div>
+  </section>
+
+  <section id="sources">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Sources</h2>
+        <p>Numbered as cited throughout. Most are free to read online.</p>
+      </div>
+      <ol class="sources" id="sources-list"></ol>
+      <div class="method">
+        <p>The family account on each person's page is the family tree compiled by Clayton on 30 October 2026 from the family folder: Cleo's 1988 account of her father's life, the family charts, the law-enforcement list, the 2009 Zirkelbach and 2006 Vogt registers, and a 1999 Wathen family history. The research notes were added on 31 October 2026 and are kept separate from it, so that a reader can always tell which is which.</p>
+        <p>Anything marked not yet verified still needs an original record. Find a Grave, the Indiana and Illinois newspaper archives, the Illinois marriage index and the EVPL Browning database all turned away automated searches; the open questions list links to them for a reader to run by hand.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>The Zirkelbach–Wathen family of Evansville, Indiana. Family tree by Clayton, October 2026; records research and this site, 31 October 2026.</p>
+    <p>Living relatives are listed by name only. To add a correction or a record, send it to whoever keeps the family folder.</p>
+  </div>
+</footer>
+
+<div id="backdrop" hidden></div>
+<aside id="panel" class="panel" hidden role="dialog" aria-modal="true" aria-labelledby="panel-name">
+  <div class="panel-head" id="panel-head">
+    <div class="who">
+      <div class="line-tag" id="panel-line"></div>
+      <h2 id="panel-name"></h2>
+      <div class="dates" id="panel-dates"></div>
+    </div>
+    <button class="close" id="panel-close" type="button" aria-label="Close">×</button>
+  </div>
+  <div class="panel-body" id="panel-body"></div>
+</aside>
+
+<script>
+/* ------------------------------------------------------------------
+   Zirkelbach–Wathen family data
+   Family account: the family tree compiled by Clayton (30 Oct 2026),
+   drawn from the family folder (Cleo Wathen Zirkelbach's 1988 account,
+   family charts, the law-enforcement list, the 2009 Zirkelbach and
+   2006 Vogt registers, a 1999 Wathen family history).
+   Records research: 31 Oct 2026, against published county histories,
+   cemetery registers, the Evansville Police Department's own history
+   and compiled genealogies. Every finding carries source numbers that
+   point at the Sources list, and a confidence mark:
+     record     - original record, or a transcription of one
+     published  - a published county history or compiled genealogy
+     unverified - a family-tree site, a search-result title, or tradition
+     conflict   - sources disagree with the family account or each other
+   Living relatives are listed by name only.
+------------------------------------------------------------------- */
+
+const LINES = {
+  zirkelbach: { key: "z", name: "Zirkelbach", blurb: "German Catholic farmers. Andrew Zirkelbach came from the Bavarian Rhön as a boy, about 1837–40, with his parents, brother and sisters, and farmed 160 acres near St. James church on the Vanderburgh–Gibson county line. His wife, Katherine Lintzenich, came from the Prussian Rhineland, and her family farmed just down the road." },
+  daily:      { key: "d", name: "Daily", blurb: "Irish Catholic farmers in Illinois. William Daily came from Queen's County about 1816–19 with almost nothing and built up about 1,000 acres near Ridgway. His granddaughter Carrie married Pete Zirkelbach." },
+  wathen:     { key: "w", name: "Wathen", blurb: "An old Catholic family from Maryland by way of Kentucky. They moved from Uniontown, Kentucky, to Knight Township about 1884. Their line runs back to a man who landed in Maryland under indenture in 1670." },
+  vogt:       { key: "v", name: "Vogt", blurb: "German farmers from Bavaria and Hesse-Darmstadt who came to Vanderburgh County in 1852 and settled in Knight Township, near the farm the Wathens later bought." }
+};
+
+const PEOPLE = [
+  /* ---------------- Donald and Cleo ---------------- */
+  { id: "donald", line: "zirkelbach", gen: 0, name: "Donald Henry Zirkelbach", label: "Donald H. Zirkelbach", dates: "1911–1997",
+    born: "10 August 1911, Evansville", died: "16 November 1997, Evansville", buried: "Oak Hill Mausoleum, Evansville",
+    role: "Evansville police, 1934–55; lieutenant from 1948",
+    family: [
+      "Pete and Carrie's only son, with five sisters. He served on the Evansville police from 1934 to 1955, joining the year his father died. He attended the police radio school in April 1935 and in 1948 was made one of two new special-duty lieutenants.",
+      "He married Cleo Wathen on 5 April 1930. After leaving the police he worked for Wright Motors until 1978."
+    ],
+    found: [
+      { k: "record", t: "The Evansville Police Department's own history dates his appointment to 14 June 1934, names him among the twelve officers who took the April 1935 radio school under chief radio operator Ray McConnell (the graduates were licensed as third-class radio operators), and for 1948 records that two new special-duty lieutenant posts were created in the chief's office to look into complaints made directly to the chief, and that Herman Hayes and Don Zirkelbach were the two men promoted.", s: [5] },
+      { k: "record", t: "The radio he trained on was new: one-way receivers were tested in twelve cars in May 1931, a 50-watt transmitter went in at headquarters in 1934, two-way sets were field-tested in eleven cars on 8 January 1935 under the experimental call letters W9XEH, and on 21 May 1935 the department was linked to the state police network through the Jasper post.", s: [5] },
+      { k: "record", t: "The same history says the Zirkelbachs are the only family in the department's history with more than three generations on the force.", s: [5] },
+      { k: "published", t: "Wright Motors was Bob Wright Motors, Inc., a Pontiac and Cadillac dealer at 109 S.E. Third Street in the 1940s; a Willard Library photograph shows its used-car lot at Sixth and Walnut in the early 1950s.", s: [25, 26] },
+      { k: "published", t: "The 1925 state police pension plan paid half pay after twenty years, which fits a 1934–55 career.", s: [5] }
+    ],
+    parents: ["pete", "carrie"], spouse: "cleo", married: "5 April 1930",
+    children: "Donald Jr. (born and died 3 November 1930), Jeryl Henry, Thomas Joseph, John Charles, James Eric and Donna Maria",
+    siblings: "Dorothy, Eleanor (Elnora), Bonita, Bernadine and Veronica"
+  },
+  { id: "cleo", line: "wathen", gen: 0, name: "Cleo Margaret Wathen", label: "Cleo M. Wathen", dates: "1911–2007",
+    born: "21 July 1911", died: "24 February 2007", buried: "",
+    role: "Family historian; Republic Aviation, Little Sisters of the Poor",
+    family: [
+      "Joseph and Bena's youngest, and the family historian. She graduated from Bosse High School in 1929 and from Lockyear Business College, worked in the employment office at Republic Aviation during the Second World War, and later was receptionist and secretary for the Little Sisters of the Poor.",
+      "She wrote poetry and made greeting cards for family, friends and veterans. Her 1988 account of her father's life is the source for much of the Wathen story. She and Donald were married for 67 years."
+    ],
+    found: [
+      { k: "published", t: "Bosse High School opened in 1924, so her class of 1929 was among its first. Lockyear began in 1893 as the Columbian Business College, took Melvin Lockyear's name about 1897, moved to 209 N.W. Fifth Street in 1911 and closed in April 1991.", s: [32, 43, 28] },
+      { k: "published", t: "Republic Aviation's Evansville plant broke ground in April 1942 and built 6,242 P-47 Thunderbolts, about forty percent of all P-47s. It hired roughly 5,000 people, about forty percent of them women. The last P-47N was delivered in September 1945; the plant later passed to International Harvester and then Whirlpool.", s: [27] },
+      { k: "published", t: "The Little Sisters of the Poor ran St. John's Home for the Aged at 1236 Lincoln Avenue in Knight Township from 1882 until the sisters withdrew on 31 October 2013.", s: [28, 29, 44] }
+    ],
+    parents: ["joseph", "bena"], spouse: "donald", married: "5 April 1930",
+    children: "Donald Jr. (born and died 3 November 1930), Jeryl Henry, Thomas Joseph, John Charles, James Eric and Donna Maria",
+    siblings: "Nadine (1897–1977), Joseph Lowell (1898–1971), Madison Bray (1902–1986), Elvis James (1906–1978) and Mildred Mae (1908–1955)"
+  },
+
+  /* ---------------- Their parents ---------------- */
+  { id: "pete", line: "zirkelbach", gen: 1, name: "Peter Frank Zirkelbach", nick: "Pete", label: "Peter F. “Pete” Zirkelbach", dates: "1875–1934",
+    born: "16 November 1875, near St. James", died: "17 February 1934, Evansville", buried: "St. Joseph Catholic Cemetery, Evansville",
+    role: "Saloonkeeper at Third and Locust; Evansville police until his death",
+    family: [
+      "Grew up on his parents' farm near St. James. At about ten he went to Ridgway, Illinois, when much of the family moved to Gallatin County in 1884–85, and in 1900 he was living there with his brother Frank. He met Carrie Daily there and married her at Waltonboro, Gallatin County, on 27 May 1903.",
+      "They were living in Evansville by 1905, and before Prohibition he ran a saloon at Third and Locust. He served on the Evansville police from 1920 until his death in 1934."
+    ],
+    found: [
+      { k: "conflict", t: "The police department's own history dates his appointment to 22 October 1924, four years later than the family's 1920. Its line-of-duty list has no 1934 entry, consistent with a death off duty.", s: [5] },
+      { k: "published", t: "The 1905 Memoirs of the Lower Ohio Valley lists him among his father's children as Peter, of Evansville, and its John Daily sketch names Carrie as the wife of Peter Zirkelbach of Evansville.", s: [1, 2] },
+      { k: "published", t: "Waltonboro was the post-office name (1877–87) of the Irish Catholic Pond Settlement midway between Shawneetown and New Haven; the office reopened in 1890 as Doherty. The parish there was St. Patrick's, whose registers for 1842–1956 survive on microfilm, so the 1903 wedding was almost certainly at St. Patrick's rather than in Ridgway.", s: [6, 16, 49] },
+      { k: "published", t: "His niece Celia Zirkelbach married Peter J. Valter near Ridgway in 1906, a reminder that his brothers were farming there when he met Carrie.", s: [15] },
+      { k: "published", t: "Prohibition opened with a 1920 federal investigation of the Evansville police; the chief was convicted of conspiring to run whiskey from Henderson, Kentucky. A former saloonkeeper joined a department still under that cloud.", s: [5] },
+      { k: "unverified", t: "A Find a Grave memorial (no. 114292310) carries the years 1876–1934; the page could not be opened to check the stone against the family's 1875.", s: [34] }
+    ],
+    parents: ["andrew", "katherine"], spouse: "carrie", married: "27 May 1903, Waltonboro (Pond Settlement), Gallatin County, Illinois",
+    children: "Dorothy, Eleanor (Elnora), Bonita, Bernadine, Veronica and Donald; a 2009 family register says there were seven",
+    siblings: "William J., Andrew, George, Frank, Lena, Regina, Mary M., Maggie (Teresia Margaret), Barbara, Mena, Mathias, Maria Catharina and Eva Christina"
+  },
+  { id: "carrie", line: "daily", gen: 1, name: "Carolyn Daily", nick: "Carrie", label: "Carolyn “Carrie” Daily", dates: "1877–1956",
+    born: "26 November 1877, Pond Settlement near Ridgway, Illinois", died: "16 April 1956, Evansville", buried: "St. Joseph Catholic Cemetery, Evansville, near Pete",
+    role: "One of a dozen children of a Pond Settlement farm",
+    family: [
+      "Grew up on her family's farm in the Pond Settlement near Ridgway, one of about a dozen children of John and Eleanora Daily. Late in life she lived in Evansville with her daughter Eleanor (Elnora) and her family."
+    ],
+    found: [
+      { k: "published", t: "The 1905 sketch of her father names her as Carrie, wife of Peter Zirkelbach of Evansville. Her daughter Eleanor carries her grandmother Eleanora's name.", s: [1] },
+      { k: "published", t: "The same sketch counts twelve births in the family, including a pair of twins who died in infancy, which matches the family's 'about a dozen'.", s: [1] }
+    ],
+    parents: ["john-daily", "eleanora"], spouse: "pete", married: "27 May 1903",
+    siblings: "William, Henry (died 1898), Aaron (died at 23), Mary A. (Mrs. John Frey), John Jr. (married Eunice Harrelson), Sarah (Mrs. Leonard Frey), Thomas (a lawyer in Shawneetown) and Charles, plus three who died as babies"
+  },
+  { id: "joseph", line: "wathen", gen: 1, name: "Joseph Waller Wathen", label: "Joseph W. Wathen", dates: "1874–1970",
+    born: "3 September 1874, Uniontown, Kentucky", died: "8 May 1970, Evansville", buried: "Park Lawn Cemetery, Evansville",
+    role: "Farmer, 5801 Pollack Avenue, Knight Township",
+    family: [
+      "Born at Uniontown, in Union County, Kentucky. His mother died when he was small, and from age four he was raised by his aunt, Florence Waller Clements. About 1884 his father brought his three sons to Knight Township.",
+      "Around 1900 he bought Madison Bray's 134-acre farm at 5801 Pollack Avenue, paying for it with his crops. He married Bena Vogt on 9 February 1896."
+    ],
+    found: [
+      { k: "published", t: "The Wathen Anthology (1999) and Reliques of the Rives (1929) both carry him as a son of Thomas Raphael and Polly (Waller) Wathen living in Evansville; Reliques gives his birth year as 1873 against the family's 1874.", s: [10, 11] },
+      { k: "published", t: "His mother's family is now better known: Polly was born 20 October 1851 in Union County, a daughter of Joseph Burwell Waller and Mary E. Harris.", s: [11] },
+      { k: "published", t: "Park Lawn Cemetery was laid out on a former farm; its earliest date is 1923 and the entrance was built in 1936.", s: [28] },
+      { k: "unverified", t: "Nothing on Madison Bray or the Pollack Avenue purchase turned up online. The Vanderburgh County deed index (Bray to Wathen, about 1900) would settle it.", s: [] }
+    ],
+    parents: ["thomas-r", "polly"], spouse: "bena", married: "9 February 1896",
+    children: "Nadine (1897–1977), Joseph Lowell (1898–1971), Madison Bray (1902–1986), Elvis James (1906–1978), Mildred Mae (1908–1955) and Cleo Margaret (1911–2007)",
+    siblings: "William (1870–1889) and George Frederick (1872–1967); the Wathen Anthology counts five children in all"
+  },
+  { id: "bena", line: "vogt", gen: 1, name: "Phoebe Vogt", nick: "Bena", label: "Phoebe “Bena” Vogt", dates: "1875–1961",
+    born: "20 October 1875, Knight Township", died: "14 August 1961", buried: "Park Lawn Cemetery, Evansville",
+    role: "Grew up on her father's farm in Knight Township",
+    family: [
+      "Grew up on her father's farm in Knight Township. She married Joseph Wathen on 9 February 1896."
+    ],
+    found: [
+      { k: "record", t: "The 1899 plat book lists Charles Vogt's seven children as Henry, Birdie, Ella, Lizzie, Flora, Hattie and Hary. Birdie is almost certainly Bena, since a phoebe is a bird, and Hary a misprint for Mary.", s: [7] },
+      { k: "record", t: "The same sketch says her parents were members of the Christian church, so the 1896 marriage joined a Catholic Wathen to a Protestant Vogt household.", s: [7] }
+    ],
+    parents: ["charles-vogt", "elizabeth-pfingston"], spouse: "joseph", married: "9 February 1896",
+    siblings: "Mary Jane (1874–1942, Mrs. George Caze), Henry Charles “Bud” (1877–1968), Sallie Gertrude (1880–1883), Ella Maude (1882–1901), Elizabeth May “Lizzie” (1885–1967, Mrs. Andrew J. Knight), Flora Alice (1888–1965, Mrs. Ed Pfingston) and Hettie Barbara “Hattie” (1892–1977, Mrs. William P. O'Sullivan)"
+  },
+
+  /* ---------------- Grandparents ---------------- */
+  { id: "andrew", line: "zirkelbach", gen: 2, name: "Andrew Zirkelbach", label: "Andrew Zirkelbach", dates: "1831–1917",
+    born: "24 June 1831 (or 1827), Bavaria", died: "10 March 1917, Evansville", buried: "St. Joseph Catholic Cemetery, Evansville",
+    role: "Farmed 160 acres near St. James for 35 years",
+    family: [
+      "Came to America with his parents around 1837–40. He and Katherine farmed the same 160 acres near St. James for about 35 years and raised about a dozen children. He was called one of the prominent Democrats in his neighborhood. Later he and Katherine lived for a time in Gallatin County, Illinois."
+    ],
+    found: [
+      { k: "published", t: "The 1905 sketch of his son William J. gives his birth as 24 June 1827 in Bavaria, arrival at about ten, marriage in Vanderburgh County, thirty-five years on the same farm near St. James, Democratic politics, and children all raised Catholic. It prints Katherine's maiden name as 'Leutzhuick', a garble of Lintzenich.", s: [2] },
+      { k: "conflict", t: "Birth year: the family says 1831, the 1905 book 1827. Day and month agree.", s: [2] },
+      { k: "record", t: "St. James burial registers record two of his children who died young: Matthew, buried 24 February 1872, and an infant entered as 'Guilelman' (William or Wilhelmina), died 10 July 1871 at fifteen months.", s: [3] },
+      { k: "record", t: "The 1850 census of Johnson Township, Gibson County, has no Zirkelbach household. The 1905 book says the family settled in Vanderburgh County, so the 1850 entry is probably just across the county line.", s: [42, 2] },
+      { k: "published", t: "The hamlet of St. James lies a mile south of Haubstadt and a quarter mile north of the Vanderburgh line, a stop on the railroad. Mass was first said there in 1836, a log church was blessed in July 1847, and the brick church's cornerstone was laid on 25 July 1855.", s: [22] }
+    ],
+    parents: ["andrew-sr", "regina"], spouse: "katherine",
+    children: "William J. (born 1854), Andrew, George, Frank, Lena, Regina (1856–1917), Maria Catharina (born 1858), Mary M., Maggie, Barbara, Mena, Mathias, Eva Christina (born 1866) and Peter Frank (1875–1934)",
+    siblings: "Anna Maria (married Valentine Pfister), Regina Barbara (married Henry Eberhard, 1846), Eva (married Jacob Meny, 1851), Margaret (married Francis W. J. Lintzenich, 1857; died 1858) and John A. (1836–1914)"
+  },
+  { id: "katherine", sub: "from the Rhineland", line: "zirkelbach", gen: 2, name: "Katherine Lintzenich", label: "Katherine Lintzenich", dates: "",
+    born: "Linzenich, Rhineland (Prussia)", died: "", buried: "",
+    role: "Maria Catherina in the church records; married at St. Wendel",
+    family: [
+      "Came from Prussia with her parents about the same time as the Zirkelbachs. She and Andrew married at St. Wendel. Her Lintzenich relatives farmed just south of the Zirkelbach farm."
+    ],
+    found: [
+      { k: "published", t: "Lintzenich is a place name: Linzenich is a village of Zülpich in the Rhineland, and that left-bank territory passed to Prussia in 1815, which is why the family remembered her as Prussian.", s: [21, 40] },
+      { k: "published", t: "St. Wendel was founded by Marcus and Wendel Wassmer, Baden-born coopers who came by way of Toronto in 1837. About twenty families built a log church in Christmas week 1841, after Mass had been said in Martin Kohl's home. She and Andrew married in a parish barely a decade old.", s: [23] },
+      { k: "record", t: "St. James registers list Lintzenich burials from 1858 to 1885, among them William J. Lintzenich (26 December 1831 – 10 March 1885), the men and children of the farm south of the Zirkelbachs.", s: [3] },
+      { k: "unverified", t: "Her parents' names and her own dates have not been found. The St. Wendel marriage register, held by the Diocese of Evansville, would give them.", s: [] }
+    ],
+    parents: ["lintzenich-parents"], spouse: "andrew"
+  },
+  { id: "john-daily", line: "daily", gen: 2, name: "John Daily", label: "John Daily", dates: "1839–1915",
+    born: "9 June 1839, Pond Settlement, Gallatin County, Illinois", died: "1915", buried: "",
+    role: "Farmed the Pond Settlement all his life",
+    family: [
+      "Born on his father's farm in Gallatin County. His first school was a log house with no floor. He started farming for himself at 19 and farmed in the Pond Settlement near Ridgway all his life."
+    ],
+    found: [
+      { k: "published", t: "His biographical sketch in the 1905 Memoirs of the Lower Ohio Valley is the source of the family's account, nearly word for word. It adds that the first school's seats were split sassafras saplings on pegs, that the second school a mile and a half away had a puncheon floor and a teacher named Watkins, that he married the year after he began farming (about 1859), that he owned the home place and another eighty acres, and that he was a Democrat.", s: [1] },
+      { k: "published", t: "By 1905 he was the only surviving child of his father's first marriage. He and his father were both bitten by the rabid dog that killed his stepmother, and neither took the disease.", s: [1] },
+      { k: "published", t: "Goodspeed's 1887 county history names the Dalys among the founding Irish Catholic families of the Pond Settlement, with the Lawlers, Maloneys, McGuires, Murphys, Keanes, Walshes and Duffys. The settlement's first chapel went up about 1848–49 and a large frame church in 1879.", s: [6] },
+      { k: "unverified", t: "Civil War service is unresolved. Goodspeed lists a James Dailey killed in Tennessee in 1864 and a John Dailey of Equality, first lieutenant in the 6th Illinois Cavalry, but Equality is a different settlement and the 1905 sketch mentions no service.", s: [6] }
+    ],
+    parents: ["william-daily", "sylvelia"], spouse: "eleanora", married: "about 1859",
+    children: "William, Henry (died 1898), Aaron (died at 23), Mary A. (Mrs. John Frey), John Jr., Sarah (Mrs. Leonard Frey), Thomas, Carrie (1877–1956), Charles, twins who died in infancy and one more infant"
+  },
+  { id: "eleanora", line: "daily", gen: 2, name: "Eleanora Stout", label: "Eleanora Stout", dates: "1841–1912",
+    born: "1841, near Mansfield, Ohio", died: "1912", buried: "",
+    role: "Started out in a one-room house with 15 cleared acres",
+    family: [
+      "Born near Mansfield, Ohio, to William and Mary (Van Horn) Stout. She and John started out in a one-room house with 15 cleared acres and raised a large family."
+    ],
+    found: [
+      { k: "published", t: "The 1905 sketch is the only source found for her: a one-room box-frame house with a kitchen, fifteen cleared acres, and twelve children.", s: [1] },
+      { k: "unverified", t: "No Stout or Van Horn record from Richland County, Ohio, was reached. The 1850 census there and the 1860 census of Gallatin County are the next places to look.", s: [] }
+    ],
+    parents: ["william-stout", "mary-van-horn"], spouse: "john-daily", married: "about 1859"
+  },
+  { id: "thomas-r", line: "wathen", gen: 2, name: "Thomas Raphael Wathen", label: "Thomas Raphael Wathen", dates: "1846–1898",
+    born: "27 December 1846, Union County, Kentucky", died: "22 December 1898, Evansville", buried: "St. Joseph Catholic Cemetery, Evansville",
+    role: "Brought his three sons from Uniontown to Knight Township",
+    family: [
+      "Lived at Uniontown, Kentucky. After his wife died, he brought his three sons to Knight Township about 1884."
+    ],
+    found: [
+      { k: "published", t: "The Wathen Anthology (1999) gives his birth as 27 December 1846 and his death as 22 December 1898 in Evansville, with burial at St. Joseph's Cemetery there, and places him in the line George, Thomas, Barton, John, John, back to the 1670 immigrant.", s: [10] },
+      { k: "published", t: "Reliques of the Rives (1929) calls him a farmer of Union County, a son of George and Elizabeth (Cissel) Wathen, married about 1870 to Polly Gillum Waller.", s: [11] },
+      { k: "published", t: "Webb's 1884 history of Kentucky Catholicism lists a Thomas Wathen among the earliest Catholic settlers of Union County, beside Elias and Wilfred Cissel, and notes that Wathens served on the lay committee that began St. Agnes church at Uniontown in 1860.", s: [12, 13] }
+    ],
+    parents: ["george-wathen", "elizabeth-cissell"], spouse: "polly", married: "about 1870",
+    children: "William (1870–1889), George Frederick (1872–1967), Joseph Waller (1874–1970) and two more; the Wathen Anthology counts five"
+  },
+  { id: "polly", line: "wathen", gen: 2, name: "Polly Gillum Waller", label: "Polly G. Waller", dates: "1851–after 1880",
+    born: "20 October 1851, Union County, Kentucky", died: "Young, after her fifth child", buried: "",
+    role: "From a Virginia family",
+    family: [
+      "Came from a Virginia family. She died young, after her fifth child was born."
+    ],
+    found: [
+      { k: "published", t: "Reliques of the Rives gives her birth as 20 October 1851 in Union County, a daughter of Joseph Burwell Waller and Mary E. Harris, and her marriage to Thomas Raphael Wathen about 1870.", s: [11] },
+      { k: "conflict", t: "The Wathen Anthology says she died after 1880 in Evansville and lies with Thomas at St. Joseph's Cemetery there; the family remembers her dying at Uniontown before the move. Vanderburgh County death records (kept from 1882) or the cemetery office would settle which is right.", s: [10] }
+    ],
+    parents: ["joseph-waller", "mary-harris"], spouse: "thomas-r", married: "about 1870"
+  },
+  { id: "charles-vogt", line: "vogt", gen: 2, name: "Charles Vogt", label: "Charles Vogt", dates: "1850–1900",
+    born: "10 January 1850, Hesse-Darmstadt", died: "17 April 1900", buried: "",
+    role: "Farmer, constable, justice of the peace, road supervisor",
+    family: [
+      "Called Henry Charles in a 2006 family register. He came to Vanderburgh County with his parents in 1852, aged two, farmed in Knight Township, and served as road supervisor, justice of the peace and constable."
+    ],
+    found: [
+      { k: "record", t: "His sketch in the 1899 Illustrated Plat Book of Vanderburgh and Warrick Counties, read from the page image, says he farmed in section 2 of Knight Township, was then road supervisor, had served one term as justice of the peace and two as constable, was an active Democrat, married Elizabeth Pfingston in 1873, and that he and his wife were members of the Christian church.", s: [7] },
+      { k: "record", t: "Elliott's 1897 county history lists his commission as justice of the peace on 5 April 1886, in a batch of six commissioned the same day.", s: [8] },
+      { k: "record", t: "The 1899 Knight Township plat shows no Vogt parcel in section 2; the land may have been rented, or still in his father's estate.", s: [7] },
+      { k: "published", t: "Knight Township was organized on 10 September 1840 from the east end of Pigeon Township. By 1899 its northern sections were almost wholly in German hands.", s: [8, 7] }
+    ],
+    parents: ["john-philip-vogt", "hettie"], spouse: "elizabeth-pfingston", married: "3 April 1873",
+    children: "Mary Jane (1874–1942), Phoebe “Bena” (1875–1961), Henry Charles “Bud” (1877–1968), Sallie Gertrude (1880–1883), Ella Maude (1882–1901), Elizabeth May (1885–1967), Flora Alice (1888–1965) and Hettie Barbara (1892–1977)",
+    siblings: "Peter (born 1855), Elizabeth “Baetta” (born 1856, Mrs. Peter Cody, of Cherry County, Nebraska), Barbara (born 1857, Mrs. John Becker) and Frederich (born 1859)"
+  },
+  { id: "elizabeth-pfingston", line: "vogt", gen: 2, name: "Elizabeth Pfingston", label: "Elizabeth Pfingston", dates: "1855–1922",
+    born: "1855", died: "1922", buried: "",
+    role: "Married Charles Vogt on 3 April 1873; eight children",
+    family: [
+      "Married Charles on 3 April 1873. They had eight children; Sallie Gertrude died at two and Ella Maude at nineteen."
+    ],
+    found: [
+      { k: "published", t: "A Henry Pfingston was among the 89 founding families of St. John's Evangelical Church in Evansville in 1850, and an August Pfingston's daughter married in Knight Township in 1877. Which household was Dietrich's remains to be worked out.", s: [8, 7] },
+      { k: "unverified", t: "Nothing found settles whether her mother was a Grimm or a Graham. A Daniel Grimm was commissioned justice of the peace in the county in 1862, which shows the Grimm name locally and proves nothing more.", s: [8] }
+    ],
+    parents: ["dietrich", "mary-grimm"], spouse: "charles-vogt", married: "3 April 1873"
+  },
+
+  /* ---------------- The immigrants and earliest known ---------------- */
+  { id: "andrew-sr", line: "zirkelbach", gen: 3, name: "Andrew Zirkelbach the elder", label: "Andrew Zirkelbach Sr.", dates: "1802–about 1870",
+    born: "1802, Bavaria", died: "About 1870 (or about 1877)", buried: "St. James Cemetery, by family account",
+    role: "A baker in Germany; farmed near St. James",
+    family: [
+      "Born in Bavaria in 1802, a baker. He and Regina married about 1820, came to America about 1840 with their children, and settled near St. James in Johnson Township, Gibson County. From a 2009 family register, not yet confirmed by original records."
+    ],
+    found: [
+      { k: "published", t: "The 1905 sketch confirms the baker's trade, says he never practiced it in America, and has him farming until his death at seventy-five, which would put his death about 1877 rather than 1870.", s: [2] },
+      { k: "unverified", t: "No stone or register entry for him appears in either St. James cemetery transcription. The statement that both he and Regina are buried there rests on the family register alone.", s: [3, 4] },
+      { k: "published", t: "The surname is a place name. Zirkenbach, a hamlet of Fulda in Hesse recorded in the twelfth century as Cirkumbach, lies just across the border from the Bavarian Rhön where the family lived.", s: [20] },
+      { k: "published", t: "About 575 to 680 people carry the name in the United States today, with Indiana and Illinois first, which is to say mostly this family.", s: [40] }
+    ],
+    spouse: "regina", married: "about 1820",
+    children: "Andrew (born 1831 or 1827), John A. (1836–1914), Anna Maria, Regina Barbara, Eva and Margaret"
+  },
+  { id: "regina", line: "zirkelbach", gen: 3, name: "Regina Rachel Frederich", label: "Regina R. Frederich", dates: "1799–1886",
+    born: "1799, Wegfurt, Lower Franconia", died: "16 May 1886", buried: "St. James Cemetery, Haubstadt",
+    role: "Born under the prince-bishops of Würzburg",
+    family: [
+      "Born in Wegfurt, Bavaria. Some family trees call her Regina Otillia; the 1850 and 1880 censuses call her Rachel."
+    ],
+    found: [
+      { k: "published", t: "Wegfurt is a Catholic village in the Brend valley on the old Bamberg–Fulda road, first recorded in 824, with a parish church of St. Peter and Paul built in 1601–07. In 1832 it had 81 houses and 423 people. It belongs to the town of Bischofsheim in der Rhön. When she was born it lay in the Prince-Bishopric of Würzburg; it became Bavarian for good in 1814.", s: [18, 19] },
+      { k: "published", t: "The 1905 sketch says one of the elder couple lived to eighty-seven, which fits her dates of 1799–1886 exactly.", s: [2] },
+      { k: "record", t: "A broken stone in the newer St. James cemetery reads '?egina O' Zirkelbach, which supports the Otillia middle name; the name recurs in her granddaughter Otilia “Tillie”.", s: [4] },
+      { k: "published", t: "The family's habit of calling a Regina 'Rachel' in English shows again a generation later: the 1905 book lists Andrew's daughter as Rachel, and her grave as Regina Zirkelbach Ziegler.", s: [2, 34] }
+    ],
+    spouse: "andrew-sr", married: "about 1820"
+  },
+  { id: "lintzenich-parents", sub: "names not yet found", line: "zirkelbach", gen: 3, name: "The Lintzenich parents", label: "The Lintzenich parents", dates: "",
+    born: "Linzenich, Rhineland (Prussia)", died: "", buried: "",
+    role: "Names not yet found",
+    family: [
+      "Katherine's parents, who came from Prussia about 1840. Their names have not yet been found."
+    ],
+    found: [
+      { k: "published", t: "Linzenich is a village of Zülpich in the Euskirchen district of the Rhineland, Prussian from 1815, and the surname is taken from it.", s: [21, 40] },
+      { k: "unverified", t: "The St. Wendel marriage register and the 1850 census of Vanderburgh County are the places to find their names.", s: [] }
+    ],
+    children: "Katherine, and the Lintzenichs who farmed south of the Zirkelbach place"
+  },
+  { id: "william-daily", line: "daily", gen: 3, name: "William Daily", label: "William Daily", dates: "died 1858",
+    born: "Queen's County (now Laois), Ireland", died: "1858, Gallatin County, Illinois", buried: "",
+    role: "Arrived with $10; died owning about 1,000 acres",
+    family: [
+      "From Queen's County, Ireland, now County Laois, and a cousin of the Civil War general Michael K. Lawler. He came over about 1816–19, nine weeks on a sailing ship, and reached Gallatin County with about $10. He started as a hired hand near Shawneetown and owned about 1,000 acres when he died in 1858. He married three times."
+    ],
+    found: [
+      { k: "published", t: "The 1905 sketch names his three wives: Sylvelia Cusick, mother of John and six others including two pairs of twins; Martha Huston, mother of Hannah, James, Samuel and an infant, who died of rabies after a mad dog's bite; and the widow Mary Luttrell, mother of one child and still living in White County at eighty in 1905.", s: [1] },
+      { k: "published", t: "His first purchase was 120 acres about a mile from John's later home, and he was counted among the county's leading stock raisers.", s: [1] },
+      { k: "published", t: "Shawneetown had a federal land office from 1814 and the state's first bank from 1816, and the salt works around Equality hired labor, which is how a man who landed with ten dollars could end with a thousand acres.", s: [46] },
+      { k: "unverified", t: "The Lawler cousinship rests on the 1905 sketch alone. The general's parents, John Lawler and Elizabeth Kelly, left Monasterevin, on the Kildare border with Queen's County, about 1818, paused in Frederick County, Maryland, and reached Gallatin County in 1819; no Lawler source names a Daily in the party. If the cousinship ran through the Kellys, William's mother may have been a Kelly.", s: [17] },
+      { k: "published", t: "Irish emigration surged in 1817 after the harvest failures of 1815–16 and the collapse of farm prices that followed Waterloo.", s: [38] }
+    ],
+    spouse: "sylvelia", spouseNote: "also Martha Huston and Mary Luttrell",
+    children: "By Sylvelia Cusick: Thomas (died young), John and Mary (twins), Sarah and Margaret (twins), William and Joseph. By Martha Huston: Hannah, James, Samuel and an infant. By Mary Luttrell: one child"
+  },
+  { id: "sylvelia", sub: "first wife; John's mother", line: "daily", gen: 3, name: "Sylvelia Cusick", label: "Sylvelia Cusick", dates: "",
+    born: "", died: "", buried: "",
+    role: "William Daily's first wife and John's mother",
+    family: [
+      "William Daily's first wife and John's mother. Not in the family's account; named in the 1905 sketch of her son."
+    ],
+    found: [
+      { k: "published", t: "Her children were Thomas (died young), the twins John and Mary (Mary died at twelve months), the twins Sarah and Margaret, William and Joseph. By 1905 John was the only one living.", s: [1] }
+    ],
+    spouse: "william-daily"
+  },
+  { id: "william-stout", sub: "of Ohio", line: "daily", gen: 3, name: "William Stout", label: "William Stout", dates: "",
+    born: "Ohio", died: "", buried: "", role: "Of Richland County, Ohio",
+    family: ["Eleanora's father, of Ohio, near Mansfield."],
+    found: [{ k: "unverified", t: "Known only from the 1905 sketch of his son-in-law; no Richland County record was reached.", s: [1] }],
+    spouse: "mary-van-horn"
+  },
+  { id: "mary-van-horn", sub: "of Ohio", line: "daily", gen: 3, name: "Mary Van Horn", label: "Mary Van Horn", dates: "",
+    born: "", died: "", buried: "", role: "Of Richland County, Ohio",
+    family: ["Eleanora's mother, of Ohio."],
+    found: [{ k: "unverified", t: "Known only from the 1905 sketch; the Van Horns were an old New Jersey and Ohio family, but her own line has not been traced.", s: [1] }],
+    spouse: "william-stout"
+  },
+  { id: "george-wathen", sub: "Union County, Ky.", line: "wathen", gen: 3, name: "George Wathen", label: "George Wathen", dates: "",
+    born: "Union County, Kentucky", died: "", buried: "", role: "Fifth generation from the Maryland immigrant",
+    family: ["Thomas Raphael's father."],
+    found: [
+      { k: "published", t: "Reliques of the Rives names George and Elizabeth (Cissel) Wathen as Thomas Raphael's parents; the Wathen Anthology numbers George as the fifth generation from John Wathen the immigrant.", s: [11, 10] },
+      { k: "published", t: "Webb's 1884 history lists a Thomas Wathen and Elias and Wilfred Cissel among Union County's earliest Catholic settlers; most of the county's Catholics arrived after 1818, many by way of the older Maryland colonies around Bardstown.", s: [12, 13] }
+    ],
+    parents: ["thomas-ann"], spouse: "elizabeth-cissell"
+  },
+  { id: "elizabeth-cissell", sub: "a Maryland family", line: "wathen", gen: 3, name: "Elizabeth Cissell", label: "Elizabeth Cissell", dates: "",
+    born: "", died: "", buried: "", role: "A Maryland Catholic family name",
+    family: ["Thomas Raphael's mother. The Cissells were, like the Wathens, a Catholic family that came from Maryland to Kentucky."],
+    found: [{ k: "published", t: "Reliques of the Rives spells the name Cissel. Elias and Wilfred Cissel appear among the first Catholic settlers of Union County in Webb's 1884 history.", s: [11, 12] }],
+    spouse: "george-wathen"
+  },
+  { id: "joseph-waller", line: "wathen", gen: 3, name: "Joseph Burwell Waller", label: "Joseph B. Waller", dates: "born 1816",
+    born: "23 August 1816", died: "", buried: "", role: "Married near Morganfield, Kentucky",
+    family: ["Polly's father, born in 1816. The family chart spells his middle name Burnell."],
+    found: [
+      { k: "conflict", t: "Reliques of the Rives (1929) spells it Burwell, a Virginia surname, and gives his birth as 23 August 1816, the son of Aaron Waller and a wife from the Rives family born in Virginia in 1790. He married near Morganfield. His siblings were Mary Gillum (born 1813) and Thomas Small (born 1818).", s: [11] },
+      { k: "published", t: "He married first a daughter of Benjamin and Innocent Ann (White) Harris and second, on 15 April 1861, Lydia Gough, so Polly lost her mother by about age ten. A son of the first marriage was Robert Aaron Waller, born 1845.", s: [11] }
+    ],
+    parents: ["aaron-waller"], spouse: "mary-harris"
+  },
+  { id: "mary-harris", line: "wathen", gen: 3, name: "Mary Elizabeth Harris", label: "Mary E. Harris", dates: "died before 1861",
+    born: "", died: "Before 1861", buried: "", role: "Her father's name is the open question",
+    family: ["Polly's mother. The family chart traces the Harrises back to Capt. Aaron Harris (1747–1809), a Revolutionary War officer, by family tradition."],
+    found: [
+      { k: "conflict", t: "Reliques of the Rives makes her a daughter of Benjamin and Innocent Ann (White) Harris. No Capt. Aaron Harris with the dates 1747–1809 turned up in any Revolutionary roster searched, and Aaron is the name of her father-in-law Aaron Waller and of a grandson, so two lines may have been run together.", s: [11] }
+    ],
+    parents: ["benjamin-harris"], spouse: "joseph-waller"
+  },
+  { id: "john-philip-vogt", line: "vogt", gen: 3, name: "John Philip Vogt", label: "John Philip Vogt", dates: "1815–1896 (or 1866)",
+    born: "8 April 1815, Bavaria", died: "20 September 1896 (or 1866)", buried: "Oak Hill Cemetery, Evansville",
+    role: "Came to Vanderburgh County in 1852",
+    family: ["Born in Bavaria. He and Hettie married about 1848 and came to Vanderburgh County in 1852 with Charles. Both are buried at Oak Hill."],
+    found: [
+      { k: "conflict", t: "The 1899 plat book, read from the page, calls him Philip, says the family came in 1852, and gives his death as 20 September 1866 and Hettie's as 7 March 1860. The family has 1896 and 1861; day and month agree in both cases. The family's note that the book gives 1860 and 1866 as arrival years is a misreading: those are its death dates, and it agrees on 1852.", s: [7] },
+      { k: "published", t: "The emigration wave that carried them was driven by repeated crop failures from 1846, especially potato rot, and peaked in 1854. Evansville's Germans mostly landed at New York or Baltimore and came on to the Ohio, others by New Orleans and the Mississippi.", s: [41, 39] },
+      { k: "published", t: "Oak Hill was laid out from 1850 and took its first burial in February 1853, so a death in 1860 or 1866 would be among its early graves. The city keeps a searchable burial database that would settle both dates.", s: [31] }
+    ],
+    spouse: "hettie", married: "about 1848",
+    children: "Charles (1850–1900), Peter (born 1855), Elizabeth “Baetta” (born 1856), Barbara (born 1857) and Frederich (born 1859); the 1899 sketch names only Charles, Barbara Becker and Mrs. Peter Cody"
+  },
+  { id: "hettie", line: "vogt", gen: 3, name: "Henrietta Stumpf", nick: "Hettie", label: "Hettie Stumpf", dates: "about 1823–1861 (or 1860)",
+    born: "About 1823, Hesse-Darmstadt", died: "7 March 1861 (or 1860)", buried: "Oak Hill Cemetery, Evansville",
+    role: "Nellie M. in the 1899 plat book",
+    family: ["Born in Hesse-Darmstadt about 1823. A county biography calls her Nellie M."],
+    found: [
+      { k: "conflict", t: "The 1899 sketch names her Nellie M. Stumpf and dates her death 7 March 1860; the family has 1861. The census taken in June 1860 would show whether she was living.", s: [7] }
+    ],
+    spouse: "john-philip-vogt", married: "about 1848"
+  },
+  { id: "dietrich", sub: "also written Dedrick", line: "vogt", gen: 3, name: "Dietrich Pfingston", label: "Dietrich Pfingston", dates: "",
+    born: "Germany", died: "", buried: "", role: "Also written Dedrick",
+    family: ["Elizabeth's father. His German origin is unknown."],
+    found: [{ k: "unverified", t: "Pfingsten, a North German name meaning Pentecost, usually marks a Whitsun birth or baptism. No household for Dietrich was reached; Henry and August Pfingston were in Evansville and Knight Township by the 1850s–70s.", s: [8, 7] }],
+    spouse: "mary-grimm"
+  },
+  { id: "mary-grimm", sub: "surname uncertain", line: "vogt", gen: 3, name: "Mary Grimm or Graham", label: "Mary Grimm (or Graham)", dates: "",
+    born: "", died: "", buried: "", role: "The charts and the 2006 register disagree",
+    family: ["Elizabeth's mother. The family charts and the 2006 register disagree on her surname."],
+    found: [{ k: "unverified", t: "No record found settles it. The 1873 Vanderburgh County marriage record of Elizabeth Pfingston and Charles Vogt, or Elizabeth's 1922 death certificate, should name her.", s: [] }],
+    spouse: "dietrich"
+  },
+
+  /* ---------------- Deeper roots ---------------- */
+  { id: "thomas-ann", sub: "first to Kentucky", line: "wathen", gen: 4, name: "Thomas Wathen and Ann Simms", label: "Thomas Wathen", dates: "",
+    born: "Charles County, Maryland", died: "Union County, Kentucky", buried: "", role: "“First to Ky.” on the family chart",
+    family: ["The family chart marks them 'first to Ky.' They moved from Charles County, Maryland, to Union County, Kentucky, before 1816, part of the movement of Catholic families from Maryland to Kentucky."],
+    found: [
+      { k: "published", t: "The Wathen Anthology numbers Thomas as the fourth generation: Thomas, son of Barton, son of John the younger, son of John the immigrant.", s: [10] },
+      { k: "published", t: "Webb counts fewer than a dozen Catholic families in Union County before 1818 and says most who came by 1840 arrived from Washington, Marion and Nelson counties, the older Maryland colonies around Bardstown, so the move was probably made in two stages.", s: [12] },
+      { k: "published", t: "The Maryland League of 1785: Basil Hayden led sixty Catholic families from Prince George's, Charles and St. Mary's counties overland to Pittsburgh, down the Ohio to Maysville and on to Pottinger's Creek. A log church rose there in 1790–92 and the Diocese of Bardstown was created in 1808.", s: [36, 12] }
+    ],
+    parents: ["barton"], children: "George Wathen"
+  },
+  { id: "barton", sub: "Charles County, Md.", line: "wathen", gen: 5, name: "Barton Wathen", label: "Barton Wathen", dates: "",
+    born: "Charles County, Maryland", died: "", buried: "", role: "Third generation in Maryland",
+    family: ["Third generation in the Wathen Anthology's numbering; a son of John Wathen the younger."],
+    found: [{ k: "published", t: "Known here only from the Anthology's lineage line. The Charles County registers and the Wathen's Adventure volume cover this generation.", s: [10] }],
+    parents: ["john2"]
+  },
+  { id: "john2", sub: "named in the 1705 will", line: "wathen", gen: 6, name: "John Wathen the younger", label: "John Wathen Jr.", dates: "",
+    born: "Charles County, Maryland", died: "", buried: "", role: "Named in his father's 1705 will",
+    family: ["Second generation; one of the eight children named in the immigrant's 1705 will."],
+    found: [{ k: "published", t: "His brother Hudson is the ancestor of the Kentucky distilling Wathens, which makes the two Wathen lines cousins through the immigrant.", s: [10, 14] }],
+    parents: ["john1"]
+  },
+  { id: "john1", line: "wathen", gen: 7, name: "John Wathen", label: "John Wathen", dates: "to Maryland 1670, died 1705",
+    born: "England", died: "1705, Charles County, Maryland", buried: "", role: "Indentured servant, carpenter, landowner",
+    family: ["Came to Maryland in the 1600s. A 1999 Wathen family history says he arrived in 1670 as an indentured servant and died in 1705."],
+    found: [
+      { k: "published", t: "He signed a three-year indenture to Hugh Thomas on 10 September 1670 and sailed from Bristol on the Francis and Mary; worked as a carpenter and wheelwright; claimed headright land in 1674; patented 200 acres at Port Tobacco in 1701 under the name Wathen's Adventure; held lots in Newport; and signed his will in Charles County on 28 February 1705, leaving an estate valued at £147. His children were John, Ignatius, James, Hudson, Henry, Judea, Jane and Ann.", s: [14] },
+      { k: "published", t: "The genealogist who assembled this believes he was Catholic but found no record that proves it.", s: [14] }
+    ]
+  },
+  { id: "aaron-waller", sub: "Virginia", line: "wathen", gen: 4, name: "Aaron Waller and a Rives wife", label: "Aaron Waller", dates: "",
+    born: "Virginia", died: "", buried: "", role: "The Virginia Wallers",
+    family: ["Joseph Burwell Waller's parents, from Virginia."],
+    found: [{ k: "published", t: "Reliques of the Rives, a genealogy of the Virginia Rives family, carries the Waller–Wathen entries that give this line its Virginia origin; Aaron's wife was born in Virginia on 29 January 1790.", s: [11] }],
+    children: "Mary Gillum (born 1813), Joseph Burwell (born 1816) and Thomas Small (born 1818)"
+  },
+  { id: "benjamin-harris", sub: "per Reliques of the Rives", line: "wathen", gen: 4, name: "Benjamin Harris and Innocent Ann White", label: "Benjamin Harris", dates: "",
+    born: "", died: "", buried: "", role: "Mary Elizabeth Harris's parents, per Reliques of the Rives",
+    family: ["Mary Elizabeth Harris's parents, as given by Reliques of the Rives. The family chart instead names Capt. Aaron Harris (1747–1809) as the Harris ancestor."],
+    found: [{ k: "unverified", t: "Whether this household descends from the Capt. Aaron Harris of family tradition is unproven. The DAR and SAR patriot databases are the place to test it.", s: [11] }],
+    children: "Mary Elizabeth Harris"
+  },
+
+  /* ---------------- The wider family ---------------- */
+  { id: "john-a", line: "zirkelbach", gen: 2, side: true, name: "John A. Zirkelbach", label: "John A. Zirkelbach", dates: "1836–1914",
+    born: "1836", died: "30 November 1914", buried: "St. James Cemetery, Haubstadt", role: "Andrew's younger brother; farmed near Staser",
+    family: ["Andrew's younger brother, who farmed near Staser. His daughter Otilia “Tillie” married Louis Weis, whose cousin Louisa married George Rexing. Another daughter, Anna Regina, married Michael Kissel."],
+    found: [{ k: "record", t: "The newer St. James cemetery records John Zirkelbach, died 30 November 1914 aged 77; his wife Maria O. Zirkelbach, 28 December 1841 – 24 November 1898; a son Anthony, died 8 April 1908 at thirty; and on the same lot Michael H. Kissel (1858–1925) and Anna R. Kissel (1864–1948).", s: [4, 34] }],
+    parents: ["andrew-sr", "regina"]
+  },
+  { id: "margaret-lintzenich", line: "zirkelbach", gen: 2, side: true, name: "Margaret Zirkelbach Lintzenich", label: "Margaret Zirkelbach", dates: "died 1858",
+    born: "", died: "1 November 1858", buried: "St. James Cemetery, Haubstadt", role: "Andrew's sister; married a Lintzenich in 1857",
+    family: ["Andrew's sister, who married Francis W. J. Lintzenich in 1857 and died in 1858."],
+    found: [
+      { k: "record", t: "The St. James burial register records Margarita Linzenich, née Zirchelbach, wife of Wilhelm Joseph, died 1 November 1858, and her infant son Andrew, 10 February – 8 November 1858, who outlived her by a week.", s: [3] },
+      { k: "unverified", t: "A Wilhelm Joseph Lintzenich and his wife Marie Butzel buried an infant in January 1860, so her widower may have remarried within the year.", s: [3] }
+    ],
+    parents: ["andrew-sr", "regina"]
+  },
+  { id: "regina-ziegler", line: "zirkelbach", gen: 1, side: true, name: "Regina Zirkelbach Ziegler", label: "Regina Zirkelbach Ziegler", dates: "1856–1917",
+    born: "1856", died: "1917", buried: "", role: "Andrew's daughter; the Ziegler and Kunkle cousins",
+    family: ["Andrew's daughter, who married Joseph Ziegler. Her children were Victor, Rose, Mamie, Amelia and Edward. Their descendants include the Kunkle family, who keep a family Bible with names and dates."],
+    found: [{ k: "unverified", t: "A Find a Grave memorial titled 1856–1917 was located but not opened; she died the same year as her father. The 1905 book lists her as Rachel.", s: [34, 2] }],
+    parents: ["andrew", "katherine"]
+  },
+  { id: "william-j", line: "zirkelbach", gen: 1, side: true, name: "William J. Zirkelbach", label: "William J. Zirkelbach", dates: "born 1854",
+    born: "14 November 1854, Vanderburgh County", died: "", buried: "", role: "Andrew's eldest son; to Ridgway in 1885",
+    family: ["Andrew's eldest son, who moved to Ridgway, Illinois, in 1885."],
+    found: [{ k: "published", t: "His own sketch in the 1905 Memoirs is the source for the family's Zirkelbach account. He married Anna K. Wenzel of Vanderburgh County, moved to a farm near Ridgway in 1885, kept a store in town for a year, and in 1901 bought eighty acres three-quarters of a mile west of Ridgway, where he bred Aberdeen and Polled Angus cattle. His children were Andrew, George, Cecilia, Katherine, Josie, William M., Eleanora and Rudolph, and one who died in infancy.", s: [2] }],
+    parents: ["andrew", "katherine"]
+  },
+  { id: "george-f-wathen", line: "wathen", gen: 1, side: true, name: "George Frederick Wathen", label: "George F. Wathen", dates: "1872–1967",
+    born: "1872, Union County, Kentucky", died: "1967", buried: "", role: "Joseph's brother",
+    family: ["Joseph's brother, one of the three sons brought to Knight Township about 1884."],
+    found: [],
+    parents: ["thomas-r", "polly"]
+  },
+  { id: "peter-vogt", line: "vogt", gen: 2, side: true, name: "Peter Vogt", label: "Peter Vogt", dates: "born 1855",
+    born: "1855", died: "", buried: "", role: "Brewer in 1880; Evansville police, 1885–1926",
+    family: ["Charles Vogt's brother, a brewer in Evansville in 1880, and possibly the Peter Vogt who joined the Evansville police in 1885."],
+    found: [
+      { k: "record", t: "The police department's history says that in 1925 Peter Vogt became the first officer in its history to complete forty years, retiring a year later with forty-one, which puts his appointment in 1885, among the first hires under the 1883 Metropolitan Police Act. Only four officers have reached forty years since. Whether this is the brewer born in 1855 is still unproven.", s: [5] },
+      { k: "published", t: "A brewer in 1880 would most likely have worked at the City Brewery of Cook & Reis or the Fulton Avenue brewery of Ullmer & Hoedt.", s: [35] }
+    ],
+    parents: ["john-philip-vogt", "hettie"]
+  },
+  { id: "donald-jr", line: "zirkelbach", gen: -1, side: true, name: "Donald Zirkelbach Jr.", label: "Donald Jr.", dates: "1930",
+    born: "3 November 1930", died: "3 November 1930", buried: "", role: "Donald and Cleo's first child",
+    family: ["Donald and Cleo's first child, born and died on 3 November 1930."],
+    found: [],
+    parents: ["donald", "cleo"]
+  },
+  { id: "lawler", line: "daily", gen: 3, side: true, context: true, name: "Gen. Michael Kelly Lawler", label: "Gen. Michael K. Lawler", dates: "1814–1882",
+    born: "16 November 1814, Monasterevin, County Kildare", died: "1882, near Equality, Illinois", buried: "", role: "Not an ancestor; William Daily's cousin, by the 1905 sketch",
+    family: ["Not an ancestor. William Daily was said to be his cousin."],
+    found: [{ k: "published", t: "Born to John Lawler and Elizabeth Kelly at Monasterevin, on the Kildare border with Queen's County. The family emigrated about 1818, paused in Maryland, came down the Ohio by flatboat and settled in Gallatin County in 1819. His father was remembered as the first Catholic in that part of Illinois, who bought land in the Pond, or Irish, Settlement and drew other Catholics to it. Michael married Elizabeth Crenshaw in 1837, led a dragoon company in Mexico, commanded the 18th Illinois Infantry in the Civil War, became a brigadier general and died in 1882; a monument to him was dedicated at Equality in 1913.", s: [17, 2, 6, 16] }]
+  }
+];
+
+/* Couples and the pedigree. `up` gives the couple that each partner came from, in [a, b] order. */
+const COUPLES = [
+  { id: "dc", a: "donald", b: "cleo", gen: 0, up: ["pc", "jb"] },
+  { id: "pc", a: "pete", b: "carrie", gen: 1, up: ["ak", "je"] },
+  { id: "jb", a: "joseph", b: "bena", gen: 1, up: ["tp", "ce"] },
+  { id: "ak", a: "andrew", b: "katherine", gen: 2, up: ["ar", "lp"] },
+  { id: "je", a: "john-daily", b: "eleanora", gen: 2, up: ["ws", "sm"] },
+  { id: "tp", a: "thomas-r", b: "polly", gen: 2, up: ["ge", "jm"] },
+  { id: "ce", a: "charles-vogt", b: "elizabeth-pfingston", gen: 2, up: ["jh", "dm"] },
+  { id: "ar", a: "andrew-sr", b: "regina", gen: 3 },
+  { id: "lp", a: "lintzenich-parents", gen: 3 },
+  { id: "ws", a: "william-daily", b: "sylvelia", gen: 3 },
+  { id: "sm", a: "william-stout", b: "mary-van-horn", gen: 3 },
+  { id: "ge", a: "george-wathen", b: "elizabeth-cissell", gen: 3, up: ["ta", null] },
+  { id: "jm", a: "joseph-waller", b: "mary-harris", gen: 3, up: ["aw", "bh"] },
+  { id: "jh", a: "john-philip-vogt", b: "hettie", gen: 3 },
+  { id: "dm", a: "dietrich", b: "mary-grimm", gen: 3 },
+  { id: "ta", a: "thomas-ann", bLabel: "Ann Simms", bSub: "", gen: 4, up: ["ba", null] },
+  { id: "aw", a: "aaron-waller", bLabel: "a Rives wife", bSub: "born in Virginia, 1790", gen: 4 },
+  { id: "bh", a: "benjamin-harris", bLabel: "Innocent Ann White", bSub: "", gen: 4 },
+  { id: "ba", a: "barton", gen: 5, up: ["j2", null], chain: true },
+  { id: "j2", a: "john2", gen: 6, up: ["j1", null], chain: true },
+  { id: "j1", a: "john1", gen: 7, chain: true }
+];
+
+const CHILDREN_ROW = "Donald Jr. (1930), Jeryl, Tom, John, Eric and Donna";
+
+/* ---------------- Timeline ---------------- */
+const EVENTS = [
+  { y: "1670", line: "wathen", t: "John Wathen signs a three-year indenture in Bristol and sails for Maryland on the Francis and Mary.", s: [14], n: true },
+  { y: "1701", line: "wathen", t: "He patents 200 acres at Port Tobacco, Charles County, and names the tract Wathen's Adventure.", s: [14], n: true },
+  { y: "1705", line: "wathen", t: "John Wathen's will, signed 28 February, names his wife Ann and eight children, among them John and Hudson.", s: [14] },
+  { y: "1785", line: "wathen", t: "The Maryland League: sixty Catholic families leave southern Maryland for Pottinger's Creek, Kentucky.", s: [36] },
+  { y: "1799", line: "zirkelbach", t: "Regina Frederich is born at Wegfurt in the Rhön, then under the prince-bishops of Würzburg.", s: [18] },
+  { y: "1802", line: "zirkelbach", t: "Andrew Zirkelbach the elder is born in Bavaria. He will train as a baker.", s: [2] },
+  { y: "1811", line: "wathen", t: "Union County, Kentucky, is organized from Henderson County.", s: [12] },
+  { y: "1814", line: "daily", t: "Michael Kelly Lawler is born at Monasterevin, on the Kildare border with Queen's County.", s: [17] },
+  { y: "1815", line: "vogt", t: "John Philip Vogt is born in Bavaria on 8 April.", s: [7] },
+  { y: "before 1816", line: "wathen", t: "Thomas Wathen and Ann Simms reach Union County, Kentucky, 'first to Ky.' on the family chart.", s: [10] },
+  { y: "1816", line: "wathen", t: "Joseph Burwell Waller is born on 23 August, a son of Aaron Waller and a Virginia-born Rives.", s: [11], n: true },
+  { y: "1816–19", line: "daily", t: "William Daily crosses from Ireland, nine weeks under sail, and reaches Gallatin County with about $10. The Lawlers arrive in 1819.", s: [1, 17] },
+  { y: "1827 or 1831", line: "zirkelbach", t: "Andrew Zirkelbach is born on 24 June in Bavaria. The family says 1831; the 1905 county history says 1827.", s: [2] },
+  { y: "1836", line: "zirkelbach", t: "First Mass at St. James, in F. X. Weis's house. John A. Zirkelbach is born.", s: [22] },
+  { y: "about 1837–40", line: "zirkelbach", t: "The Zirkelbachs and the Lintzenichs arrive and settle near St. James, on the Vanderburgh–Gibson line.", s: [2] },
+  { y: "1839", line: "daily", t: "John Daily is born on 9 June on the first farm his father ever owned.", s: [1] },
+  { y: "1840", line: "vogt", t: "Knight Township is organized on 10 September from the east end of Pigeon Township.", s: [8], n: true },
+  { y: "1841", line: "zirkelbach", t: "Twenty families build St. Wendel's log church in Christmas week. Eleanora Stout is born near Mansfield, Ohio.", s: [23, 1] },
+  { y: "1846", line: "wathen", t: "Thomas Raphael Wathen is born on 27 December in Union County.", s: [10], n: true },
+  { y: "1847", line: "zirkelbach", t: "The log church at St. James is blessed on 25 July.", s: [22] },
+  { y: "1850", line: "vogt", t: "Charles Vogt is born on 10 January in Hesse-Darmstadt.", s: [7] },
+  { y: "1851", line: "wathen", t: "Polly Gillum Waller is born on 20 October in Union County.", s: [11], n: true },
+  { y: "1852", line: "vogt", t: "John Philip and Hettie Vogt arrive in Vanderburgh County with two-year-old Charles.", s: [7] },
+  { y: "1854", line: "zirkelbach", t: "William J. Zirkelbach, the eldest of Andrew and Katherine's children, is born on 14 November.", s: [2] },
+  { y: "1858", line: "zirkelbach", t: "Margaret Zirkelbach Lintzenich dies on 1 November; her infant son Andrew follows on the 8th.", s: [3], n: true },
+  { y: "1858", line: "daily", t: "William Daily dies owning about 1,000 acres, one of the county's leading stock raisers.", s: [1] },
+  { y: "about 1859", line: "daily", t: "John Daily marries Eleanora Stout; they start in a one-room house with fifteen cleared acres.", s: [1] },
+  { y: "1860", line: "wathen", t: "St. Agnes church is begun at Uniontown; Wathens serve on the lay committee.", s: [12], n: true },
+  { y: "1860 or 1861", line: "vogt", t: "Hettie Vogt dies on 7 March. The family says 1861; the 1899 plat book says 1860.", s: [7] },
+  { y: "1866", line: "daily", t: "Ridgway begins as a railroad construction camp.", s: [24] },
+  { y: "1866 or 1896", line: "vogt", t: "John Philip Vogt dies on 20 September. The family says 1896; the 1899 plat book says 1866.", s: [7] },
+  { y: "about 1870", line: "wathen", t: "Thomas Raphael Wathen marries Polly Gillum Waller.", s: [11], n: true },
+  { y: "1871", line: "zirkelbach", t: "St. Joseph Catholic Cemetery is organized in Evansville by the Assumption, Holy Trinity and St. Mary parishes.", s: [30], n: true },
+  { y: "1872", line: "zirkelbach", t: "Matthew, a son of Andrew Zirkelbach, is buried at St. James on 24 February.", s: [3], n: true },
+  { y: "1873", line: "vogt", t: "Charles Vogt marries Elizabeth Pfingston on 3 April.", s: [7] },
+  { y: "1874", line: "wathen", t: "Joseph Waller Wathen is born on 3 September at Uniontown.", s: [10] },
+  { y: "1875", line: "zirkelbach", t: "Peter Frank Zirkelbach is born on 16 November near St. James.", s: [34] },
+  { y: "1875", line: "vogt", t: "Phoebe “Bena” Vogt is born on 20 October in Knight Township.", s: [7] },
+  { y: "1877", line: "daily", t: "Carrie Daily is born on 26 November in the Pond Settlement. That October the Waltonboro post office opens there.", s: [16] },
+  { y: "about 1884", line: "wathen", t: "Thomas Raphael Wathen brings his three sons from Uniontown to Knight Township.", s: [10] },
+  { y: "1884–85", line: "zirkelbach", t: "Much of the Zirkelbach family moves to Gallatin County, Illinois; William J. buys a farm near Ridgway. Pete is about ten.", s: [2] },
+  { y: "1885", line: "vogt", t: "Peter Vogt joins the Evansville police, two years after the Metropolitan Police Act.", s: [5], n: true },
+  { y: "1886", line: "vogt", t: "Charles Vogt is commissioned justice of the peace on 5 April.", s: [8], n: true },
+  { y: "1886", line: "zirkelbach", t: "Regina Frederich Zirkelbach dies on 16 May, aged about 87.", s: [2] },
+  { y: "1896", line: "wathen", t: "Joseph Wathen marries Bena Vogt on 9 February.", s: [10] },
+  { y: "1898", line: "wathen", t: "Thomas Raphael Wathen dies in Evansville on 22 December and is buried at St. Joseph's.", s: [10], n: true },
+  { y: "1899", line: "vogt", t: "The Illustrated Plat Book of Vanderburgh and Warrick Counties prints Charles Vogt's sketch.", s: [7], n: true },
+  { y: "1900", line: "vogt", t: "Charles Vogt dies on 17 April. About this year Joseph Wathen buys the Bray farm on Pollack Avenue.", s: [7] },
+  { y: "1903", line: "daily", t: "Pete Zirkelbach marries Carrie Daily at Waltonboro on 27 May, almost certainly at St. Patrick's, Pond Settlement.", s: [16, 49] },
+  { y: "1905", line: "daily", t: "Memoirs of the Lower Ohio Valley prints the John Daily and William J. Zirkelbach sketches, the source of the family's account.", s: [1, 2], n: true },
+  { y: "1911", line: "zirkelbach", t: "Cleo Wathen is born on 21 July; Donald Zirkelbach on 10 August.", s: [50] },
+  { y: "1912", line: "daily", t: "Eleanora Stout Daily dies.", s: [50] },
+  { y: "1914", line: "zirkelbach", t: "John A. Zirkelbach dies on 30 November, aged 77.", s: [4] },
+  { y: "1915", line: "daily", t: "John Daily dies.", s: [50] },
+  { y: "1917", line: "zirkelbach", t: "Andrew Zirkelbach dies in Evansville on 10 March. His daughter Regina Ziegler dies the same year.", s: [50, 34] },
+  { y: "1920 or 1924", line: "zirkelbach", t: "Pete Zirkelbach joins the Evansville police. The family says 1920; the department's history says 22 October 1924.", s: [5] },
+  { y: "1922", line: "vogt", t: "Elizabeth Pfingston Vogt dies.", s: [50] },
+  { y: "1929", line: "wathen", t: "Cleo graduates from Bosse High School, opened only five years before.", s: [32] },
+  { y: "1930", line: "zirkelbach", t: "Donald and Cleo marry on 5 April. Donald Jr. is born and dies on 3 November.", s: [50] },
+  { y: "1934", line: "zirkelbach", t: "Pete dies on 17 February. Donald joins the police on 14 June.", s: [5] },
+  { y: "1935", line: "zirkelbach", t: "Donald is one of twelve officers in the April police radio school, as the two-way radio system goes live.", s: [5] },
+  { y: "1942–45", line: "wathen", t: "Republic Aviation builds 6,242 P-47s at Evansville; Cleo works in the employment office.", s: [27] },
+  { y: "1948", line: "zirkelbach", t: "Donald and Herman Hayes become the department's two special-duty lieutenants.", s: [5] },
+  { y: "1955", line: "zirkelbach", t: "Donald leaves the police after 21 years and goes to work for Bob Wright Motors.", s: [50, 25] },
+  { y: "1956", line: "daily", t: "Carrie Daily Zirkelbach dies on 16 April.", s: [50] },
+  { y: "1961", line: "vogt", t: "Bena Vogt Wathen dies on 14 August.", s: [50] },
+  { y: "1970", line: "wathen", t: "Joseph Waller Wathen dies on 8 May.", s: [50] },
+  { y: "1988", line: "wathen", t: "Cleo writes her account of her father's life.", s: [50] },
+  { y: "1997", line: "zirkelbach", t: "Donald Zirkelbach dies on 16 November, after 67 years of marriage.", s: [50] },
+  { y: "2007", line: "wathen", t: "Cleo Wathen Zirkelbach dies on 24 February.", s: [50] },
+  { y: "2026", line: "zirkelbach", t: "The family tree is compiled from the family folder (30 October) and checked against the records (31 October).", s: [50] }
+];
+
+/* ---------------- Journeys ---------------- */
+const JOURNEY = {
+  nodes: [
+    { id: "weg", x: 100, y: 70,  line: "zirkelbach", l1: "Wegfurt, Rhön", l2: "Bavaria" },
+    { id: "lin", x: 100, y: 170, line: "zirkelbach", l1: "Linzenich, Rhineland", l2: "Prussia" },
+    { id: "irl", x: 100, y: 330, line: "daily", l1: "Queen's County", l2: "Ireland" },
+    { id: "bri", x: 100, y: 450, line: "wathen", l1: "Bristol", l2: "England" },
+    { id: "hes", x: 100, y: 540, line: "vogt", l1: "Hesse-Darmstadt", l2: "and Bavaria" },
+    { id: "stj", x: 350, y: 130, line: "zirkelbach", l1: "St. James and St. Wendel", l2: "Vanderburgh–Gibson line" },
+    { id: "oh",  x: 350, y: 250, line: "daily", l1: "Mansfield", l2: "Ohio" },
+    { id: "md",  x: 350, y: 450, line: "wathen", l1: "Charles County", l2: "Maryland" },
+    { id: "gal", x: 600, y: 330, line: "daily", l1: "Gallatin County", l2: "Illinois" },
+    { id: "ky",  x: 600, y: 450, line: "wathen", l1: "Union County", l2: "Kentucky" },
+    { id: "evv", x: 850, y: 330, line: "all", l1: "Evansville", l2: "married 5 April 1930" },
+    { id: "knt", x: 850, y: 500, line: "vogt", l1: "Knight Township", l2: "east of Evansville" }
+  ],
+  edges: [
+    { from: "weg", to: "stj", line: "zirkelbach", label: "about 1837–40", who: "the Zirkelbachs" },
+    { from: "lin", to: "stj", line: "zirkelbach", label: "about 1840", who: "the Lintzenichs" },
+    { from: "stj", to: "gal", line: "zirkelbach", label: "1884–85", who: "much of the Zirkelbach family" },
+    { from: "gal", to: "evv", line: "zirkelbach", label: "by 1905", who: "Pete and Carrie Zirkelbach" },
+    { from: "irl", to: "gal", line: "daily", label: "1816–19", who: "William Daily" },
+    { from: "oh",  to: "gal", line: "daily", label: "by 1859", who: "Eleanora Stout" },
+    { from: "bri", to: "md",  line: "wathen", label: "1670", who: "John Wathen" },
+    { from: "md",  to: "ky",  line: "wathen", label: "before 1816", who: "Thomas Wathen and Ann Simms" },
+    { from: "ky",  to: "knt", line: "wathen", label: "about 1884", who: "Thomas Raphael Wathen and his sons" },
+    { from: "hes", to: "knt", line: "vogt", label: "1852", who: "John Philip and Hettie Vogt" },
+    { from: "knt", to: "evv", line: "wathen", label: "1930", who: "Cleo Wathen, to marry Donald" }
+  ]
+};
+
+/* ---------------- Lawmen ---------------- */
+const LAWMEN = [
+  { who: "Charles Vogt", rel: "Bena's father", service: "Constable, two terms, and justice of the peace, Knight Township; commissioned JP 5 April 1886; road supervisor in 1899", line: "vogt", s: [7, 8] },
+  { who: "Peter Vogt", rel: "A Vogt relative, probably Bena's uncle", service: "Evansville police, 1885–1926; the first officer to complete forty years", line: "vogt", s: [5] },
+  { who: "Pete Zirkelbach", rel: "Donald's father", service: "Evansville police from 1920 (family) or 22 October 1924 (department history) until his death in 1934", line: "zirkelbach", s: [5] },
+  { who: "Donald H. Zirkelbach", rel: "Pete's son, Cleo's husband", service: "Evansville police, 14 June 1934 to 1955; radio school 1935; special-duty lieutenant from 1948", line: "zirkelbach", s: [5] },
+  { who: "John C. Zirkelbach", rel: "Donald and Cleo's son", service: "Evansville police", line: "zirkelbach", s: [] },
+  { who: "William H. Woehler", rel: "Donald and Cleo's son-in-law", service: "Evansville police", line: "zirkelbach", s: [] },
+  { who: "Adam Von Zirkelbach", rel: "Donald and Cleo's grandson", service: "Evansville police; the fourth generation", line: "zirkelbach", s: [5] },
+  { who: "James Eric Zirkelbach", rel: "Donald and Cleo's son", service: "Air Force military police", line: "zirkelbach", s: [] }
+];
+
+/* ---------------- What the records added ---------------- */
+const FINDINGS = [
+  { line: "daily", h: "The family account's source, found", k: "published",
+    t: "The Daily and Zirkelbach stories in the family tree match, nearly word for word, two sketches in Memoirs of the Lower Ohio Valley (Federal Publishing Co., 1905): John Daily in volume 1 and William J. Zirkelbach in volume 2. Both volumes are online in full, so every line of those two accounts can now be read in the original.", s: [1, 2] },
+  { line: "daily", h: "William Daily's three wives, named", k: "published",
+    t: "Sylvelia Cusick was John's mother; her other children were Thomas, Mary, the twins Sarah and Margaret, William and Joseph. Martha Huston, the second wife, died of rabies after a mad dog's bite that also bit William and John, who survived. The third was the widow Mary Luttrell, alive at eighty in White County in 1905. William's first land was 120 acres a mile from John's later home.", s: [1] },
+  { line: "wathen", h: "Eight generations to a Bristol indenture", k: "published",
+    t: "The Wathen Anthology (1999) runs the line Cleo, Joseph, Thomas Raphael, George, Thomas, Barton, John, John. The immigrant John Wathen signed a three-year indenture on 10 September 1670, sailed from Bristol on the Francis and Mary, worked as a carpenter and wheelwright, patented Wathen's Adventure at Port Tobacco in 1701 and signed his will in Charles County on 28 February 1705.", s: [10, 14] },
+  { line: "wathen", h: "Thomas Raphael Wathen's dates, and a question about Polly", k: "conflict",
+    t: "Born 27 December 1846, died 22 December 1898 in Evansville, buried at St. Joseph's Cemetery. The Anthology also says Polly died after 1880 in Evansville and is buried with him, where the family remembers her dying at Uniontown before the move. Vanderburgh death records, kept from 1882, would settle it.", s: [10] },
+  { line: "wathen", h: "The bourbon cousins: the arithmetic works", k: "published",
+    t: "The distilling Wathens descend from Hudson, a son named in the 1705 will; Cleo's line descends from his brother John. Henry Hudson Wathen settled near Lebanon in 1788, Richard Bernard built a distillery in 1852, and J. B. Wathen sold out to the Whiskey Trust in 1899 before the family bought Old Grand-Dad. On those two lineages Thomas Raphael and J. B. were fourth cousins, Joseph and R. E. Wathen fifth, and Cleo and R. E.'s children sixth. The Medley link was not reached in any source.", s: [10, 14, 33, 45] },
+  { line: "wathen", h: "Burwell, not Burnell", k: "conflict",
+    t: "Reliques of the Rives (1929) gives Polly's father as Joseph Burwell Waller, born 23 August 1816, a son of Aaron Waller and a Rives wife born in Virginia in 1790, and Polly's birth as 20 October 1851. It makes her mother Mary E. Harris a daughter of Benjamin and Innocent Ann (White) Harris. No Capt. Aaron Harris (1747–1809) was found in any Revolutionary roster; Aaron is the Waller name, so two lines may have been run together on the chart.", s: [11] },
+  { line: "vogt", h: "The 1899 plat book, read from the page", k: "record",
+    t: "The 'county biography' is the Illustrated Plat Book of Vanderburgh and Warrick Counties (Tillman & Fuller, 1899), digitized by the Indiana State Library. Its Vogt sketch says the family came in 1852, gives Philip's death as 20 September 1866 and Nellie M.'s as 7 March 1860, names Charles's offices (road supervisor; one term as justice, two as constable), and says Charles and Elizabeth were members of the Christian church. The years 1860 and 1866 are death dates, not arrival years.", s: [7] },
+  { line: "vogt", h: "Two Vogt dates from county records", k: "record",
+    t: "Elliott's 1897 county history lists Charles Vogt's commission as justice of the peace on 5 April 1886. The police department's history says Peter Vogt became its first forty-year officer in 1925 and retired in 1926 with forty-one years, which confirms an 1885 appointment.", s: [8, 5] },
+  { line: "zirkelbach", h: "Three Zirkelbach milestones in the department's own words", k: "record",
+    t: "The History of the Evansville Police Department dates Pete's appointment to 22 October 1924 and Donald's to 14 June 1934, names Donald among the twelve officers of the April 1935 radio school, and for 1948 names him and Herman Hayes as the two new special-duty lieutenants. It calls the Zirkelbachs the only family in the department's history with more than three generations of service.", s: [5] },
+  { line: "zirkelbach", h: "St. James burial registers", k: "record",
+    t: "Transcriptions of the St. James registers add Margaret Zirkelbach Lintzenich, died 1 November 1858, and her infant Andrew, who died a week later; Matthew, son of Andrew, buried 24 February 1872; an infant 'Guilelman', died 1871; John A. Zirkelbach, died 30 November 1914 aged 77, with his wife Maria O. (1841–1898) and son Anthony (died 1908); the Kissels on the same lot; and a broken stone reading '?egina O' that supports the Otillia name.", s: [3, 4] },
+  { line: "daily", h: "Waltonboro, found on the map", k: "published",
+    t: "Waltonboro was the post office of the Pond Settlement, the Irish Catholic colony midway between Shawneetown and New Haven, from 1877 to 1887; it reopened in 1890 as Doherty. The parish was St. Patrick's, with registers from 1842 to 1956 on microfilm, so Pete and Carrie's 1903 wedding was almost certainly there. Goodspeed names the Dalys among the settlement's founding families.", s: [6, 16, 49] },
+  { line: "zirkelbach", h: "Wegfurt, and where the name comes from", k: "published",
+    t: "Wegfurt belongs to Bischofsheim in der Rhön, a Catholic village on the old Bamberg–Fulda road with 423 people in 1832 and a parish church of 1601–07; it passed from the prince-bishops of Würzburg to Bavaria in 1814. The surname is taken from Zirkenbach, a hamlet of Fulda recorded in the twelfth century as Cirkumbach, just across the Hessian border. Indiana and Illinois lead the United States in Zirkelbachs today.", s: [18, 19, 20, 40] },
+  { line: "zirkelbach", h: "Lintzenich is a place on the map too", k: "published",
+    t: "Linzenich is a village of Zülpich in the Rhineland, Prussian from 1815 and now in North Rhine-Westphalia. The 1905 county history printed Katherine's name as 'Leutzhuick', which is why it never came up in a text search before.", s: [21, 40, 2] },
+  { line: "daily", h: "The Lawler cousinship, still unproven", k: "unverified",
+    t: "The only source for it is the 1905 sketch. Lawler's parents were John Lawler and Elizabeth Kelly of Monasterevin, County Kildare, on the Queen's County border; they left about 1818, paused in Frederick County, Maryland, and came down the Ohio to Gallatin County in 1819. John Lawler was remembered as the first Catholic in that part of Illinois and the founder of the Pond Settlement. No Lawler source names a Daily in the party.", s: [17, 2, 6] },
+  { line: "wathen", h: "Evansville places, given their names", k: "published",
+    t: "Wright Motors was Bob Wright Motors, Inc., Pontiac and Cadillac, 109 S.E. Third Street. The Little Sisters' home was St. John's Home for the Aged, 1236 Lincoln Avenue, 1882–2013. Republic Aviation built 6,242 P-47s between 1942 and 1945. Bosse opened in 1924; Lockyear ran from 1893 to 1991. St. Joseph Catholic Cemetery was organized in 1871 by three parishes; Oak Hill took its first burial in 1853; Park Lawn dates from 1923.", s: [25, 26, 28, 29, 27, 32, 43, 30, 31] },
+  { line: "zirkelbach", h: "A Ridgway wedding and an Angus herd", k: "published",
+    t: "William J. Zirkelbach married Anna K. Wenzel, farmed near Ridgway from 1885, kept a store for a year and by 1905 was breeding Aberdeen and Polled Angus cattle on eighty acres west of town. His daughter Cecilia married Peter J. Valter there in 1906.", s: [2, 15] }
+];
+
+/* Where the account and the records part ways */
+const DISAGREEMENTS = [
+  { who: "Andrew Zirkelbach", fam: "Born 24 June 1831", rec: "Born 24 June 1827 (1905 Memoirs)", s: [2] },
+  { who: "Andrew Zirkelbach the elder", fam: "Died about 1870", rec: "Farmed until his death at 75, so about 1877 (1905 Memoirs); no St. James stone or register entry found", s: [2, 3, 4] },
+  { who: "Pete Zirkelbach", fam: "Joined the police in 1920", rec: "Appointed 22 October 1924 (EPD history)", s: [5] },
+  { who: "Pete Zirkelbach", fam: "Born 16 November 1875", rec: "Find a Grave memorial titled 1876 (not opened)", s: [34] },
+  { who: "Polly Waller Wathen", fam: "Died at Uniontown before the family moved, about 1884", rec: "Died after 1880 in Evansville; buried with Thomas at St. Joseph's (Wathen Anthology)", s: [10] },
+  { who: "Joseph Waller Wathen", fam: "Born 3 September 1874", rec: "Born 1873 (Reliques of the Rives)", s: [11] },
+  { who: "Joseph Burwell Waller", fam: "Middle name Burnell", rec: "Burwell (Reliques of the Rives)", s: [11] },
+  { who: "Mary Elizabeth Harris", fam: "Descends from Capt. Aaron Harris (1747–1809)", rec: "Daughter of Benjamin and Innocent Ann (White) Harris; no Capt. Aaron Harris found", s: [11] },
+  { who: "John Philip Vogt", fam: "Died 20 September 1896", rec: "Died 20 September 1866 (1899 plat book)", s: [7] },
+  { who: "Hettie Stumpf Vogt", fam: "Died 7 March 1861", rec: "Died 7 March 1860 (1899 plat book)", s: [7] },
+  { who: "The Vogt county biography", fam: "A 1900 biography giving arrival years of 1860 and 1866", rec: "The 1899 plat book; it says the family arrived in 1852 and gives 1860 and 1866 as the parents' death dates", s: [7] },
+  { who: "William Daily", fam: "Came about 1816–19, with the Lawlers", rec: "Lawler sources date their emigration about 1818, arriving in Gallatin County in 1819; none names a Daily", s: [17] },
+  { who: "Thomas Wathen and Ann Simms", fam: "Moved from Charles County to Union County before 1816", rec: "Most Union County Catholics came by way of the older Kentucky colonies after 1818, so the move was probably in two stages", s: [12] }
+];
+
+/* Open questions, with the record that would answer each */
+const LEADS = [
+  { q: "Pete's birth year (1875 or 1876) and his police start (1920 or 1924)", how: "Open his Find a Grave memorial and the St. Joseph Catholic Cemetery records; search the Evansville Courier and Press for October 1924 and February 1934 in Hoosier State Chronicles.", links: [["Find a Grave 114292310", "https://www.findagrave.com/memorial/114292310/peter-zirkelbach"], ["Hoosier State Chronicles", "https://newspapers.library.in.gov/?a=q&txq=Zirkelbach"], ["St. Joseph Cemetery records", "https://www.stjoecemetery.org/"]] },
+  { q: "Where Polly Waller Wathen died, and when", how: "Vanderburgh County death records begin in 1882; the St. Joseph Catholic Cemetery office can check for a burial beside Thomas (died 22 December 1898).", links: [["St. Joseph Cemetery", "https://www.stjoecemetery.org/"], ["FamilySearch: Vanderburgh County", "https://www.familysearch.org/en/wiki/Vanderburgh_County,_Indiana_Genealogy"]] },
+  { q: "The Vogt death years (1860/1861, 1866/1896)", how: "The City of Evansville's Oak Hill Cemetery burial database lists plots and dates; the June 1860 and 1870 censuses of Knight Township would show who was alive.", links: [["Oak Hill Cemetery (City of Evansville)", "https://www.evansvillegov.org/city/department/division.php?structureid=67"], ["Find a Grave: Oak Hill", "https://www.findagrave.com/cemetery/1641002"]] },
+  { q: "Katherine Lintzenich's parents and dates", how: "The St. Wendel marriage register (Diocese of Evansville archives) and the 1850 census of Vanderburgh County; the Zirkelbachs do not appear in the 1850 Gibson County census.", links: [["Diocese of Evansville", "https://www.evdio.org/"], ["INGenWeb Gibson County", "http://www.ingenweb.org/ingibson/"]] },
+  { q: "William Daily's three marriages, his probate and his land", how: "Illinois Statewide Marriage Index (Daily/Daly, Gallatin County, 1820–1860); Gallatin County probate for 1858 at the Shawneetown courthouse or the Illinois Regional Archives Depository; BLM land patents for the 120 acres.", links: [["Illinois Statewide Marriage Index", "https://www.ilsos.gov/isavital/marriageSearch.do"], ["BLM General Land Office records", "https://glorecords.blm.gov/"]] },
+  { q: "The 1903 wedding and the Daily baptisms", how: "St. Patrick Parish, Pond Settlement, church records 1842–1956 (microfilm; FamilySearch's Diocese of Belleville collection); St. Patrick and St. Joseph cemeteries are kept today by St. Kateri Parish, Ridgway.", links: [["WorldCat: St. Patrick Parish records", "https://search.worldcat.org/title/oclc/866779017"], ["St. Kateri Parish, Ridgway", "https://stkateri.net/"]] },
+  { q: "The Lawler cousinship", how: "William Daily's mother's name is the key. The Lawler papers are at Southern Illinois University, Carbondale; Lucille Lawler's Gallatin County: Gateway to Illinois (1968) and Ridgway, Our Town (1971) cover the Pond Settlement families.", links: [["Lawler on Wikipedia, with sources", "https://en.wikipedia.org/wiki/Michael_Kelly_Lawler"]] },
+  { q: "Capt. Aaron Harris", how: "Search the DAR Genealogical Research System and the SAR Patriot Research System for an Aaron Harris born 1747, died 1809; then check Reliques of the Rives, pages 354–359, in a library or on HathiTrust.", links: [["DAR Genealogical Research System", "https://services.dar.org/Public/DAR_Research/search_adb/"], ["SAR Patriot Research System", "https://sarpatriots.sar.org/"], ["Reliques of the Rives (Google Books)", "https://books.google.com/books?id=ZhobAAAAYAAJ"]] },
+  { q: "The full Wathen line, generation by generation", how: "Carolyn Collins, The Wathen Anthology (1999), and Leonard E. Wathen Jr.'s Wathen's Adventure cover the Charles County generations; the Allen County Public Library in Fort Wayne holds genealogies of this kind.", links: [["The Wathen Anthology (Google Books)", "https://books.google.com/books?id=xr1YAAAAMAAJ"], ["thewathens.com", "https://www.thewathens.com/"]] },
+  { q: "The Medley connection to the bourbon Wathens", how: "No source reached ties R. Wathen Medley into the line. The Charles Medley Distillery's own history and the Kentucky Room of the Daviess County Public Library in Owensboro are the places to ask.", links: [["Loretto: the Wathen distillers", "https://www.lorettocommunity.org/loretto-sister-athanasius-and-the-spirited-wathens/"]] },
+  { q: "Wegfurt and the elder Zirkelbachs in Germany", how: "The Catholic registers of the Diocese of Würzburg are online at Matricula; emigration permits are at the Staatsarchiv Würzburg. Regina's 1799 baptism at Wegfurt would name her parents.", links: [["Matricula: Diocese of Würzburg", "https://data.matricula-online.eu/de/deutschland/wuerzburg/"], ["Bavarian State Archives", "https://www.gda.bayern.de"]] },
+  { q: "The Pollack Avenue farm and the Vogt land", how: "The Vanderburgh County Recorder's deed index for Bray to Wathen (about 1900) and for Knight Township section 2; the 1896 Vogt probate at the county clerk; Willard Library's Regional and Family History Center, 21 N. First Avenue, Evansville.", links: [["Willard Library", "https://www.willard.lib.in.us/"], ["Browning Genealogy Database (EVPL)", "https://browning.evpl.org/"]] },
+  { q: "The newspapers", how: "The Evansville Courier (1888–1998) and Press (1906–98) are on microfilm and in part online. Searches for Zirkelbach, Wathen and Lintzenich could not be run by script; run them in a browser.", links: [["Hoosier State Chronicles", "https://newspapers.library.in.gov/"], ["Chronicling America", "https://www.loc.gov/collections/chronicling-america/?q=Zirkelbach"], ["EVPL Browning database", "https://browning.evpl.org/"]] }
+];
+
+/* ---------------- Sources ---------------- */
+const SOURCES = [
+  { n: 1, t: "Memoirs of the Lower Ohio Valley, vol. 1 (Federal Publishing Co., 1905), pp. 409–410, John Daily sketch", u: "https://archive.org/details/memoirsofloweroh01fede", k: "published" },
+  { n: 2, t: "Memoirs of the Lower Ohio Valley, vol. 2 (1905), pp. 303–304, William J. Zirkelbach sketch", u: "https://archive.org/details/memoirsofloweroh02fede", k: "published" },
+  { n: 3, t: "St. James Cemetery (old), Johnson Township, Gibson County: transcription of stones and church burial records (D. Ellott, 2009), INGenWeb", u: "http://ingenweb.org/ingibson/Cemeteries_wPhotos/Johnson%20Twp/St_James_Old/St_James_Old_textonly.html", k: "record" },
+  { n: 4, t: "St. James Cemetery (new), Johnson Township, Gibson County: transcription, INGenWeb", u: "http://ingenweb.org/ingibson/Cemeteries_wPhotos/Johnson%20Twp/St_James_New/St_James_New_textonly.html", k: "record" },
+  { n: 5, t: "History of the Evansville Police Department (unabridged), Evansville Police Department", u: "https://evansvillepolice.com/wp-content/uploads/2022/05/HISTORY-OF-THE-EVANSVILLE-POLICE-DEPARTMENT-unabridged.pdf", k: "record" },
+  { n: 6, t: "Goodspeed, History of Gallatin, Saline, Hamilton, Franklin and Williamson Counties, Illinois (1887)", u: "https://archive.org/details/historyofgallati00chic", k: "published" },
+  { n: 7, t: "An Illustrated Plat Book of Vanderburgh and Warrick Counties, Indiana (Tillman & Fuller, 1899), Indiana State Library on Indiana Memory; Vogt sketch on the biographical pages, Knight Township plat", u: "https://indianamemory.contentdm.oclc.org/digital/collection/p15078coll8/id/1374", k: "record" },
+  { n: 8, t: "Joseph P. Elliott, A History of Evansville and Vanderburgh County (1897)", u: "https://archive.org/details/historyofevansvi00elli", k: "published" },
+  { n: 9, t: "Brant & Fuller, History of Vanderburgh County, Indiana (1889)", u: "https://archive.org/details/historyofvanderb00bran", k: "published" },
+  { n: 10, t: "Carolyn Collins, The Wathen Anthology (1999), snippet view", u: "https://books.google.com/books?id=xr1YAAAAMAAJ", k: "published" },
+  { n: 11, t: "James Rives Childs, Reliques of the Rives (1929), Waller and Wathen entries, snippet view", u: "https://books.google.com/books?id=ZhobAAAAYAAJ", k: "published" },
+  { n: 12, t: "Benedict J. Webb, The Centenary of Catholicity in Kentucky (1884)", u: "https://archive.org/details/centenaryofcatho00webb", k: "published" },
+  { n: 13, t: "History of Union County, Kentucky (1886), religion chapter, Genealogy Trails transcription", u: "http://genealogytrails.com/ken/union/histofunion_religion.html", k: "published" },
+  { n: 14, t: "Leonard E. Wathen Jr., “Who was John Wathen of Southern Maryland?”, thewathens.com", u: "https://www.thewathens.com/pages/who-was-john-wathen-of-southern-maryland", k: "published" },
+  { n: 15, t: "George W. Smith, A History of Southern Illinois, vol. 3 (1912), Peter J. Valter sketch", u: "https://archive.org/details/historyofsouther03smit", k: "published" },
+  { n: 16, t: "Gallatin County town histories (Waltonboro, Doherty, Pond Settlement), Genealogy Trails", u: "http://genealogytrails.com/ill/gallatin/townhistories.html", k: "published" },
+  { n: 17, t: "Michael Kelly Lawler, Wikipedia (citing Pitkin 1965 and Dorris 1955)", u: "https://en.wikipedia.org/wiki/Michael_Kelly_Lawler", k: "published" },
+  { n: 18, t: "Wegfurt, German Wikipedia", u: "https://de.wikipedia.org/wiki/Wegfurt", k: "published" },
+  { n: 19, t: "Bischofsheim in der Rhön, German Wikipedia", u: "https://de.wikipedia.org/wiki/Bischofsheim_an_der_Rh%C3%B6n", k: "published" },
+  { n: 20, t: "Surname Zirkelbach (Geneanet) and Zirkenbach, Fulda (German Wikipedia)", u: "https://en.geneanet.org/surnames/ZIRKELBACH", k: "unverified" },
+  { n: 21, t: "Zülpich (with Linzenich), Wikipedia", u: "https://en.wikipedia.org/wiki/Z%C3%BClpich", k: "published" },
+  { n: 22, t: "History of St. James Catholic Church, Haubstadt, compiled from the 1888 and 1914 Gibson County histories", u: "https://www.adlerreunion.com/single-post/2013/12/28/history-of-st-james-catholic-church-in-haubstadt-indiana", k: "published" },
+  { n: 23, t: "Saint Wendel, Indiana, Wikipedia", u: "https://en.wikipedia.org/wiki/Saint_Wendel,_Indiana", k: "published" },
+  { n: 24, t: "Ridgway, Illinois, Wikipedia; St. Kateri Parish, Ridgway", u: "https://en.wikipedia.org/wiki/Ridgway,_Illinois", k: "published" },
+  { n: 25, t: "Bob Wright Motors postcard (1940s), EVPL Digital Archive", u: "https://digital.evpl.org/digital/collection/evapost/id/208/", k: "record" },
+  { n: 26, t: "Willard Library historic photograph collection: Wright Motors used car lot, Sixth and Walnut, early 1950s", u: "https://www.willardlib.org/historic-photo-collection-businesses-and-industries-q-z", k: "record" },
+  { n: 27, t: "National Park Service, “Defense Manufacturing in Evansville, Indiana”", u: "https://www.nps.gov/articles/000/h-our-history-lesson-defense-manufacturing-in-evansville-indiana-world-war-ii-heritage-city.htm", k: "published" },
+  { n: 28, t: "Historic Evansville: Little Sisters of the Poor; Lockyear Business College; Park Lawn Cemetery", u: "https://historicevansville.com/site.php?id=poorsisters", k: "published" },
+  { n: 29, t: "WFIE, “Little Sisters of the Poor's century-old legacy of caring draws to a close” (2013)", u: "https://www.14news.com/story/23706744/little-sisters-of-the-poors-century-old-legacy-of-caring-draws-to-a-close/", k: "published" },
+  { n: 30, t: "St. Joseph Catholic Cemetery, Evansville: history", u: "https://www.stjoecemetery.org/history", k: "published" },
+  { n: 31, t: "Oak Hill Cemetery (Evansville), Wikipedia", u: "https://en.wikipedia.org/wiki/Oak_Hill_Cemetery_(Evansville,_Indiana)", k: "published" },
+  { n: 32, t: "Benjamin Bosse High School, Wikipedia", u: "https://en.wikipedia.org/wiki/Benjamin_Bosse_High_School", k: "published" },
+  { n: 33, t: "Brian Haara, “The Wathen Family Pokes the 800-Pound Gorilla” (2014); Loretto Community, “Sister Athanasius and the Spirited Wathens”", u: "https://brianhaara.com/2014/12/17/the-wathen-family-pokes-the-800-pound-gorilla-the-whiskey-trust/", k: "published" },
+  { n: 34, t: "Find a Grave memorials located by search but not opened: Peter F. Zirkelbach (114292310); Regina Zirkelbach Ziegler (118871163); Michael H. Kissel (44287231)", u: "https://www.findagrave.com/memorial/114292310/peter-zirkelbach", k: "unverified" },
+  { n: 35, t: "Evansville breweries, transcribed from Brant & Fuller (1889), Genealogy Trails", u: "https://genealogytrails.com/ind/vanderburgh/Evansvillebeer.html", k: "published" },
+  { n: 36, t: "Holy Cross Church (Marion County, Kentucky), Wikipedia", u: "https://en.wikipedia.org/wiki/Holy_Cross_Church_(Marion_County,_Kentucky)", k: "published" },
+  { n: 37, t: "Uniontown, Kentucky, Wikipedia", u: "https://en.wikipedia.org/wiki/Uniontown,_Kentucky", k: "published" },
+  { n: 38, t: "“Famine and emigration hit Ireland: 1817”, History Home", u: "https://www.historyhome.co.uk/c-eight/ireland/ire1817.htm", k: "published" },
+  { n: 39, t: "Evansville's German Heritage, historical marker (HMDB)", u: "https://www.hmdb.org/m.asp?m=226796", k: "published" },
+  { n: 40, t: "Surname statistics: MyNameStats (Zirkelbach); NameCensus (Lintzenich)", u: "https://www.mynamestats.com/Last-Names/Z/ZI/ZIRKELBACH/index.html", k: "unverified" },
+  { n: 41, t: "Willi Paul Adams, The German-Americans, ch. 1 (Max Kade German-American Center)", u: "https://library.indianapolis.iu.edu/static/collections/kade/adams/chap1.html", k: "published" },
+  { n: 42, t: "1850 census, Johnson Township, Gibson County, Indiana, INGenWeb transcription", u: "http://www.ingenweb.org/ingibson/CensusRecords/FC1850/Census_1850_links.html", k: "record" },
+  { n: 43, t: "Lockyear College, Wikipedia", u: "https://en.wikipedia.org/wiki/Lockyear_College", k: "published" },
+  { n: 44, t: "Indiana Historical Bureau, Little Sisters of the Poor marker", u: "https://www.in.gov/history/state-historical-markers/find-a-marker/find-historical-markers-by-county/indiana-historical-markers-by-county/little-sisters-of-the-poor/", k: "published" },
+  { n: 45, t: "Richard B. Wathen, Wikipedia", u: "https://en.wikipedia.org/wiki/Richard_B._Wathen", k: "published" },
+  { n: 46, t: "History of Gallatin County, Illinois (RootsWeb)", u: "https://sites.rootsweb.com/~ilgallat/gch.htm", k: "published" },
+  { n: 47, t: "Evansville Police Department, history timeline", u: "https://evansvillepolice.com/epd-history/", k: "published" },
+  { n: 48, t: "Diocese of Evansville, History of the Diocese", u: "https://www.evdio.org/history-of-the-diocese.html", k: "published" },
+  { n: 49, t: "Pond Settlement, St. Patrick Parish, church records 1842–1956 (microfilm), WorldCat", u: "https://search.worldcat.org/title/oclc/866779017", k: "record" },
+  { n: 50, t: "The family folder: Cleo Wathen Zirkelbach's 1988 account, the family charts, the law-enforcement list, a 2009 register of Andrew Zirkelbach's descendants, a 2006 register of the Vogt family's descendants, and a 1999 Wathen family history, as compiled in the family tree of 30 October 2026", u: "", k: "family" }
+];
+
+</script>
+<script>
+(function () {
+  'use strict';
+
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var P = {}; PEOPLE.forEach(function (p) { P[p.id] = p; });
+  var C = {}; COUPLES.forEach(function (c) { C[c.id] = c; });
+  var COUPLE_OF = {}; COUPLES.forEach(function (c) { if (c.a) COUPLE_OF[c.a] = c.id; if (c.b) COUPLE_OF[c.b] = c.id; });
+  var PILL = { record: 'Record', published: 'Published', unverified: 'Not yet verified', conflict: 'Sources disagree', family: 'Family folder' };
+
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+
+  function h(tag, attrs) {
+    var el = document.createElement(tag);
+    attrs = attrs || {};
+    Object.keys(attrs).forEach(function (k) {
+      var v = attrs[k];
+      if (v == null || v === false) return;
+      if (k === 'class') el.className = v;
+      else if (k === 'text') el.textContent = v;
+      else if (k === 'html') el.innerHTML = v;
+      else if (k.indexOf('on') === 0) el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v);
+    });
+    for (var i = 2; i < arguments.length; i++) append(el, arguments[i]);
+    return el;
+  }
+  function s(tag, attrs) {
+    var el = document.createElementNS(SVGNS, tag);
+    attrs = attrs || {};
+    Object.keys(attrs).forEach(function (k) {
+      var v = attrs[k];
+      if (v == null || v === false) return;
+      if (k === 'text') el.textContent = v;
+      else if (k.indexOf('on') === 0) el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v);
+    });
+    for (var i = 2; i < arguments.length; i++) append(el, arguments[i]);
+    return el;
+  }
+  function append(el, kid) {
+    if (kid == null || kid === false) return;
+    if (Array.isArray(kid)) { kid.forEach(function (k) { append(el, k); }); return; }
+    if (typeof kid === 'string' || typeof kid === 'number') el.appendChild(document.createTextNode(String(kid)));
+    else el.appendChild(kid);
+  }
+  function lineClass(line) { return 'line-' + (line || 'all'); }
+  function lineName(line) { return LINES[line] ? LINES[line].name : 'The marriage'; }
+
+  function srcLinks(nums, prefix) {
+    if (!nums || !nums.length) return null;
+    var brackets = prefix !== undefined;
+    var span = h('span', { class: 'src' }, brackets ? '[' : 'Sources ');
+    nums.forEach(function (n, i) {
+      if (i) span.appendChild(document.createTextNode(', '));
+      span.appendChild(h('a', { href: '#src-' + n, title: (SOURCES[n - 1] || {}).t || '' }, String(n)));
+    });
+    if (brackets) span.appendChild(document.createTextNode(']'));
+    return span;
+  }
+  function pill(k) { return h('span', { class: 'pill pill-' + k, text: PILL[k] || k }); }
+
+  /* ---------------- story ---------------- */
+  function renderFamilies() {
+    var box = $('#families');
+    Object.keys(LINES).forEach(function (key) {
+      box.appendChild(h('article', { class: 'fam ' + lineClass(key) },
+        h('h3', { text: LINES[key].name }),
+        h('p', { text: LINES[key].blurb })));
+    });
+  }
+
+  /* ---------------- tree ---------------- */
+  var UNIT = 190, BW = 172, RH = 30, PAD = 7, W = 1520, HGT = 840;
+  var ROW_Y = { 7: 14, 6: 78, 5: 142, 4: 206, 3: 296, 2: 418, 1: 540, 0: 662, kids: 782 };
+  var COL = { ar: 0, lp: 1, ws: 2, sm: 3, ge: 4, jm: 5, jh: 6, dm: 7, ta: 4, aw: 5, bh: 6, ba: 4, j2: 4, j1: 4 };
+  var tree = { g: null, view: { x: 0, y: 0, k: 1 }, frame: null, svg: null, nodes: {}, filter: 'all' };
+
+  function coupleHeight(c) { return ((c.b || c.bLabel) ? 2 * RH : RH) + 2 * PAD; }
+  function layoutTree() {
+    COUPLES.forEach(function (c) {
+      if (COL[c.id] !== undefined) c.x = 92 + COL[c.id] * UNIT;
+    });
+    [2, 1, 0].forEach(function (gen) {
+      COUPLES.filter(function (c) { return c.gen === gen; }).forEach(function (c) {
+        var xs = c.up.filter(Boolean).map(function (id) { return C[id].x; });
+        c.x = xs.reduce(function (a, b) { return a + b; }, 0) / xs.length;
+      });
+    });
+    COUPLES.forEach(function (c) { c.y = ROW_Y[c.gen]; c.h = coupleHeight(c); });
+  }
+
+  function personRow(c, id, yOff) {
+    var p = P[id];
+    var row = s('g', { 'class': 'prow ' + lineClass(p.line), transform: 'translate(0 ' + yOff + ')', tabindex: '0', role: 'button', 'aria-label': p.name + (p.dates ? ', ' + p.dates : '') });
+    row.setAttribute('data-id', id);
+    row.appendChild(s('rect', { 'class': 'hit', x: 6, y: 0, width: BW - 12, height: RH, rx: 4 }));
+    row.appendChild(s('rect', { 'class': 'bar', x: 6, y: 5, width: 3, height: RH - 10, rx: 1 }));
+    row.appendChild(s('text', { x: 15, y: 13, text: p.label || p.name }));
+    row.appendChild(s('text', { 'class': 'sub', x: 15, y: 25, text: p.dates || p.sub || '' }));
+    row.addEventListener('click', function () { if (!tree.dragged) openPerson(id); });
+    row.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPerson(id); } });
+    return row;
+  }
+
+  function plainRow(label, sub, yOff, line) {
+    var row = s('g', { 'class': 'prow plain ' + lineClass(line), transform: 'translate(0 ' + yOff + ')' });
+    row.appendChild(s('rect', { 'class': 'bar', x: 6, y: 5, width: 3, height: RH - 10, rx: 1 }));
+    row.appendChild(s('text', { x: 15, y: 13, text: label }));
+    if (sub) row.appendChild(s('text', { 'class': 'sub', x: 15, y: 25, text: sub }));
+    return row;
+  }
+  function renderTree() {
+    layoutTree();
+    tree.frame = $('#tree-frame');
+    tree.svg = $('#tree-svg');
+    tree.svg.setAttribute('viewBox', '0 0 ' + W + ' ' + HGT);
+    tree.svg.removeAttribute('width'); tree.svg.removeAttribute('height');
+    tree.g = s('g');
+    tree.svg.appendChild(tree.g);
+    var links = s('g', { 'class': 'links' });
+    var nodes = s('g', { 'class': 'nodes' });
+    tree.g.appendChild(links); tree.g.appendChild(nodes);
+
+    COUPLES.forEach(function (c) {
+      if (!c.up) return;
+      var ups = c.up.filter(Boolean).map(function (id) { return C[id]; });
+      if (!ups.length) return;
+      var topY = c.y;
+      if (ups.length === 1 && Math.abs(ups[0].x - c.x) < 1) {
+        var u = ups[0];
+        links.appendChild(s('path', { 'class': 'link', d: 'M' + u.x + ' ' + (u.y + u.h) + ' L' + c.x + ' ' + topY }));
+      } else {
+        var busY = topY - 22;
+        var xs = ups.map(function (u) { return u.x; }).concat([c.x]);
+        var x1 = Math.min.apply(null, xs), x2 = Math.max.apply(null, xs);
+        var d = 'M' + x1 + ' ' + busY + ' L' + x2 + ' ' + busY;
+        ups.forEach(function (u) { d += ' M' + u.x + ' ' + (u.y + u.h) + ' L' + u.x + ' ' + busY; });
+        d += ' M' + c.x + ' ' + busY + ' L' + c.x + ' ' + topY;
+        links.appendChild(s('path', { 'class': 'link', d: d }));
+      }
+    });
+
+    COUPLES.forEach(function (c) {
+      var line = P[c.a].line;
+      var node = s('g', { 'class': 'node ' + lineClass(line), transform: 'translate(' + (c.x - BW / 2) + ' ' + c.y + ')' });
+      node.setAttribute('data-couple', c.id);
+      node.appendChild(s('rect', { 'class': 'box', x: 0, y: 0, width: BW, height: c.h, rx: 6 }));
+      node.appendChild(personRow(c, c.a, PAD));
+      if (c.b) node.appendChild(personRow(c, c.b, PAD + RH));
+      else if (c.bLabel) node.appendChild(plainRow(c.bLabel, c.bSub || '', PAD + RH, line));
+      nodes.appendChild(node);
+      tree.nodes[c.id] = node;
+    });
+
+    var dc = C.dc;
+    var kidsW = 340;
+    var kids = s('g', { 'class': 'kids', transform: 'translate(' + (dc.x - kidsW / 2) + ' ' + ROW_Y.kids + ')' });
+    links.appendChild(s('path', { 'class': 'link', d: 'M' + dc.x + ' ' + (dc.y + dc.h) + ' L' + dc.x + ' ' + ROW_Y.kids }));
+    kids.appendChild(s('rect', { x: 0, y: 0, width: kidsW, height: 46, rx: 6 }));
+    kids.appendChild(s('text', { 'class': 't1', x: kidsW / 2, y: 18, 'text-anchor': 'middle', text: "Donald and Cleo's children" }));
+    kids.appendChild(s('text', { x: kidsW / 2, y: 35, 'text-anchor': 'middle', text: CHILDREN_ROW }));
+    nodes.appendChild(kids);
+
+    var labelX = C.dm.x + BW / 2 + 4;
+    [['dc', 'Donald and Cleo'], ['jb', 'their parents']].forEach(function (pair) {
+      var c = C[pair[0]];
+      nodes.appendChild(s('text', { 'class': 'rowlabel', x: labelX, y: c.y + 14, 'text-anchor': 'end', text: pair[1] }));
+    });
+    nodes.appendChild(s('text', { 'class': 'rowlabel', x: C.ak.x - BW / 2 - 6, y: C.ak.y + 14, 'text-anchor': 'end', text: 'grandparents' }));
+    nodes.appendChild(s('text', { 'class': 'rowlabel', x: labelX, y: ROW_Y[3] - 16, 'text-anchor': 'end', text: 'the immigrants, and the earliest known' }));
+    nodes.appendChild(s('text', { 'class': 'rowlabel', x: C.ta.x + BW / 2 + 10, y: ROW_Y[7] + 26, text: 'eight generations to Maryland' }));
+
+    setupPanZoom();
+    $('#tree-fit').addEventListener('click', fitTree);
+    $('#tree-home').addEventListener('click', function () { focusCouple('dc', 1.1, 60); });
+    $('#tree-in').addEventListener('click', function () { zoomAt(1.25, tree.frame.clientWidth / 2, tree.frame.clientHeight / 2); });
+    $('#tree-out').addEventListener('click', function () { zoomAt(0.8, tree.frame.clientWidth / 2, tree.frame.clientHeight / 2); });
+    $$('.tree-tools .chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        $$('.tree-tools .chip').forEach(function (c) { c.classList.remove('is-on'); });
+        chip.classList.add('is-on');
+        tree.filter = chip.getAttribute('data-line');
+        $$('.prow', tree.svg).forEach(function (row) {
+          var id = row.getAttribute('data-id');
+          var line = id ? P[id].line : (row.className.baseVal.match(/line-(\w+)/) || [])[1];
+          row.classList.toggle('is-dim', tree.filter !== 'all' && line !== tree.filter);
+        });
+      });
+    });
+    if (tree.frame.clientWidth >= 900) fitTree(); else focusCouple('dc', 1, 90);
+  }
+
+  function applyView() {
+    var v = tree.view;
+    tree.g.setAttribute('transform', 'translate(' + v.x.toFixed(1) + ' ' + v.y.toFixed(1) + ') scale(' + v.k.toFixed(3) + ')');
+  }
+  function frameScale() {
+    /* user units per CSS pixel: the viewBox is scaled to the frame width (preserveAspectRatio meet) */
+    var fw = tree.frame.clientWidth || 1, fh = tree.frame.clientHeight || 1;
+    return Math.min(fw / W, fh / HGT);
+  }
+  function fitTree() {
+    var fw = tree.frame.clientWidth, fh = tree.frame.clientHeight;
+    var base = frameScale();
+    /* with meet, the viewBox already fits; k=1 shows the whole tree centred by the browser */
+    tree.view.k = 1; tree.view.x = 0; tree.view.y = 0;
+    void fw; void fh; void base;
+    applyView();
+  }
+  function focusCouple(id, cssPerUnit, bias) {
+    var c = C[id]; bias = bias || 0;
+    var base = frameScale();
+    var k = Math.min(8, Math.max(0.3, cssPerUnit / base)); /* so that one tree unit is cssPerUnit screen pixels */
+    var fw = tree.frame.clientWidth / base, fh = tree.frame.clientHeight / base; /* frame size in user units at k=1 */
+    var offX = (fw - W) / 2, offY = (fh - HGT) / 2; /* meet-centering offsets, in user units */
+    tree.view.k = k;
+    tree.view.x = fw / 2 - offX - c.x * k;
+    tree.view.y = fh / 2 - offY - (c.y + c.h / 2 - bias) * k;
+    applyView();
+  }
+  function zoomAt(f, px, py) {
+    /* px, py in CSS pixels relative to the frame; convert to user units */
+    var base = frameScale();
+    var fw = tree.frame.clientWidth / base, fh = tree.frame.clientHeight / base;
+    var offX = (fw - W) / 2, offY = (fh - HGT) / 2;
+    var ux = px / base - offX, uy = py / base - offY;
+    var v = tree.view;
+    var nk = Math.min(8, Math.max(0.3, v.k * f));
+    v.x = ux - (ux - v.x) * (nk / v.k);
+    v.y = uy - (uy - v.y) * (nk / v.k);
+    v.k = nk;
+    applyView();
+  }
+  function setupPanZoom() {
+    var frame = tree.frame, pointers = {}, count = 0, last = null, pinch = null, moved = 0, listening = false;
+    tree.dragged = false;
+    function pt(e) { var r = frame.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+    function pinchState() {
+      var ids = Object.keys(pointers), a = pointers[ids[0]], b = pointers[ids[1]];
+      return { d: Math.hypot(a.x - b.x, a.y - b.y) || 1, mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2 };
+    }
+    function onMove(e) {
+      if (!pointers[e.pointerId]) return;
+      var p = pt(e); pointers[e.pointerId] = p;
+      var base = frameScale();
+      if (count === 1 && last) {
+        var dx = p.x - last.x, dy = p.y - last.y;
+        moved += Math.abs(dx) + Math.abs(dy);
+        if (moved > 4) tree.dragged = true;
+        tree.view.x += dx / base; tree.view.y += dy / base; last = p; applyView();
+      } else if (count === 2 && pinch) {
+        var now = pinchState();
+        zoomAt(now.d / pinch.d, now.mx, now.my);
+        tree.view.x += (now.mx - pinch.mx) / base; tree.view.y += (now.my - pinch.my) / base; applyView();
+        pinch = now; tree.dragged = true;
+      }
+    }
+    function onUp(e) {
+      if (!pointers[e.pointerId]) return;
+      delete pointers[e.pointerId]; count = Object.keys(pointers).length;
+      if (count === 1) { var id = Object.keys(pointers)[0]; last = pointers[id]; pinch = null; }
+      if (count === 0) {
+        last = null; pinch = null; frame.classList.remove('is-dragging');
+        window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); window.removeEventListener('pointercancel', onUp);
+        listening = false;
+        setTimeout(function () { tree.dragged = false; }, 0);
+      }
+    }
+    frame.addEventListener('pointerdown', function (e) {
+      if (e.button) return;
+      pointers[e.pointerId] = pt(e); count = Object.keys(pointers).length;
+      moved = 0; tree.dragged = false;
+      if (count === 1) { last = pointers[e.pointerId]; }
+      else if (count === 2) { pinch = pinchState(); }
+      frame.classList.add('is-dragging');
+      if (!listening) {
+        window.addEventListener('pointermove', onMove); window.addEventListener('pointerup', onUp); window.addEventListener('pointercancel', onUp);
+        listening = true;
+      }
+    });
+    frame.addEventListener('wheel', function (e) {
+      if (!(e.ctrlKey || e.metaKey)) return;
+      e.preventDefault();
+      var p = pt(e);
+      zoomAt(e.deltaY < 0 ? 1.15 : 0.87, p.x, p.y);
+    }, { passive: false });
+    window.addEventListener('resize', function () { applyView(); });
+  }
+  function showInTree(id) {
+    var cid = COUPLE_OF[id];
+    if (!cid) return;
+    closePanel();
+    $('#tree').scrollIntoView({ block: 'center' });
+    setTimeout(function () {
+      focusCouple(cid, 1.15);
+      var node = tree.nodes[cid];
+      node.classList.add('is-active');
+      setTimeout(function () { node.classList.remove('is-active'); }, 2600);
+    }, 250);
+  }
+
+  /* ---------------- people ---------------- */
+  var GROUPS = [
+    { t: 'Donald and Cleo', f: function (p) { return p.gen === 0 && !p.side; } },
+    { t: 'Their parents', f: function (p) { return p.gen === 1 && !p.side; } },
+    { t: 'Grandparents', f: function (p) { return p.gen === 2 && !p.side; } },
+    { t: 'The immigrants, and the earliest known', f: function (p) { return p.gen === 3 && !p.side; } },
+    { t: 'Deeper roots', f: function (p) { return p.gen >= 4 && !p.side; } },
+    { t: 'The wider family', f: function (p) { return p.side; } }
+  ];
+  function personCard(p) {
+    return h('button', { class: 'pcard ' + lineClass(p.line), type: 'button', onclick: function () { openPerson(p.id); } },
+      h('span', { class: 'n', text: p.name }),
+      h('span', { class: 'd', text: p.dates || (p.born ? p.born : '') }),
+      h('span', { class: 'r', text: p.role || '' }),
+      h('span', { class: 'tag', text: p.context ? 'Context, not an ancestor' : lineName(p.line) + ' line' }));
+  }
+  var people = { line: 'all', q: '' };
+  function renderPeople() {
+    var box = $('#people-list'); box.innerHTML = '';
+    var q = people.q.trim().toLowerCase();
+    var list = PEOPLE.filter(function (p) {
+      if (people.line !== 'all' && p.line !== people.line) return false;
+      if (!q) return true;
+      var hay = [p.name, p.nick, p.dates, p.born, p.died, p.buried, p.role, (p.family || []).join(' '), (p.found || []).map(function (f) { return f.t; }).join(' '), p.children, p.siblings].join(' ').toLowerCase();
+      return hay.indexOf(q) !== -1;
+    });
+    if (!list.length) { box.appendChild(h('p', { class: 'people-empty', text: 'No one matches that. Try a surname, a place or a year.' })); return; }
+    if (q) {
+      box.appendChild(h('p', { class: 'people-group', text: list.length + (list.length === 1 ? ' match' : ' matches') }));
+      box.appendChild(h('div', { class: 'people-grid' }, list.map(personCard)));
+      return;
+    }
+    GROUPS.forEach(function (g) {
+      var members = list.filter(g.f);
+      if (!members.length) return;
+      box.appendChild(h('p', { class: 'people-group', text: g.t }));
+      box.appendChild(h('div', { class: 'people-grid' }, members.map(personCard)));
+    });
+  }
+  function setupPeople() {
+    $('#people-search').addEventListener('input', function (e) { people.q = e.target.value; renderPeople(); });
+    $$('.people-tools .chip[data-pline]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        $$('.people-tools .chip[data-pline]').forEach(function (c) { c.classList.remove('is-on'); });
+        chip.classList.add('is-on'); people.line = chip.getAttribute('data-pline'); renderPeople();
+      });
+    });
+    renderPeople();
+  }
+
+  /* ---------------- timeline ---------------- */
+  function renderTimeline() {
+    var ol = $('#tl');
+    EVENTS.forEach(function (ev) {
+      var li = h('li', { class: lineClass(ev.line) });
+      li.setAttribute('data-line', ev.line);
+      var body = h('div', { class: 'b' }, ev.t);
+      if (ev.n) body.appendChild(h('span', { class: 'new', text: 'new' }));
+      var refs = srcLinks(ev.s, ' ');
+      if (refs) { body.appendChild(document.createTextNode(' ')); body.appendChild(refs); }
+      li.appendChild(h('div', { class: 'y', text: ev.y }));
+      li.appendChild(body);
+      ol.appendChild(li);
+    });
+    $$('.chip[data-tline]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        $$('.chip[data-tline]').forEach(function (c) { c.classList.remove('is-on'); });
+        chip.classList.add('is-on');
+        var line = chip.getAttribute('data-tline');
+        $$('#tl li').forEach(function (li) { li.classList.toggle('is-hidden', line !== 'all' && li.getAttribute('data-line') !== line); });
+      });
+    });
+  }
+
+  /* ---------------- journeys ---------------- */
+  function renderJourneys() {
+    var svg = $('#jmap'), N = {}, NW = 168, NH = 46;
+    JOURNEY.nodes.forEach(function (n) { N[n.id] = n; });
+    [[100, 'Where they started'], [350, 'First home in America'], [600, 'Illinois and Kentucky'], [850, 'Vanderburgh County']].forEach(function (c) {
+      svg.appendChild(s('text', { 'class': 'col', x: c[0], y: 26, 'text-anchor': 'middle', text: c[1] }));
+    });
+    var routes = s('g'), places = s('g');
+    svg.appendChild(routes); svg.appendChild(places);
+    var active = null;
+    function setActive(line) {
+      active = (active === line) ? null : line;
+      $$('.route', svg).forEach(function (r) { r.classList.toggle('is-dim', !!active && r.getAttribute('data-line') !== active); });
+      $$('.place', svg).forEach(function (pl) {
+        var l = pl.getAttribute('data-line');
+        pl.classList.toggle('is-dim', !!active && l !== active && l !== 'all');
+      });
+    }
+    JOURNEY.edges.forEach(function (e) {
+      var a = N[e.from], b = N[e.to], d, mid, anchor = 'middle', lx = 0, ly = -7;
+      if (Math.abs(a.x - b.x) < 1) {
+        var up = a.y > b.y;
+        var v0 = [a.x, a.y + (up ? -NH / 2 : NH / 2)], v1 = [b.x, b.y + (up ? NH / 2 : -NH / 2)];
+        d = 'M' + v0 + ' L' + v1;
+        mid = [(v0[0] + v1[0]) / 2, (v0[1] + v1[1]) / 2]; anchor = 'start'; lx = 9; ly = 4;
+      } else {
+        var q0 = [a.x + NW / 2, a.y], q3 = [b.x - NW / 2, b.y];
+        var dx = (q3[0] - q0[0]) * 0.5;
+        var q1 = [q0[0] + dx, q0[1]], q2 = [q3[0] - dx, q3[1]];
+        d = 'M' + q0 + ' C' + q1 + ' ' + q2 + ' ' + q3;
+        mid = bezMid(q0, q1, q2, q3);
+      }
+      var g = s('g', { 'class': 'route ' + lineClass(e.line), role: 'button', tabindex: '0', 'aria-label': e.who + ', ' + e.label });
+      g.setAttribute('data-line', e.line);
+      g.appendChild(s('path', { 'class': 'hit', d: d }));
+      g.appendChild(s('path', { d: d }));
+      g.appendChild(s('text', { x: mid[0] + lx, y: mid[1] + ly, 'text-anchor': anchor, text: e.label }));
+      g.addEventListener('click', function () { setActive(e.line); });
+      g.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); setActive(e.line); } });
+      routes.appendChild(g);
+    });
+    JOURNEY.nodes.forEach(function (n) {
+      var g = s('g', { 'class': 'place ' + lineClass(n.line), transform: 'translate(' + (n.x - NW / 2) + ' ' + (n.y - NH / 2) + ')' });
+      g.setAttribute('data-line', n.line);
+      g.appendChild(s('rect', { x: 0, y: 0, width: NW, height: NH, rx: 7 }));
+      g.appendChild(s('text', { x: NW / 2, y: 19, 'text-anchor': 'middle', text: n.l1 }));
+      g.appendChild(s('text', { 'class': 'sub', x: NW / 2, y: 35, 'text-anchor': 'middle', text: n.l2 }));
+      places.appendChild(g);
+    });
+    var ol = $('#routes');
+    JOURNEY.edges.forEach(function (e) {
+      var a = N[e.from], b = N[e.to];
+      ol.appendChild(h('li', { class: lineClass(e.line) }, h('b', { text: e.who }), ' ', h('span', { text: a.l1 + ' to ' + b.l1 + ', ' + e.label })));
+    });
+  }
+  function bezMid(p0, p1, p2, p3) {
+    return [(p0[0] + 3 * p1[0] + 3 * p2[0] + p3[0]) / 8, (p0[1] + 3 * p1[1] + 3 * p2[1] + p3[1]) / 8];
+  }
+
+  /* ---------------- lawmen ---------------- */
+  function renderLawmen() {
+    var tb = $('#law-body');
+    LAWMEN.forEach(function (l) {
+      var td3 = h('td', {}, l.service);
+      var refs = srcLinks(l.s, ' ');
+      if (refs) { td3.appendChild(document.createTextNode(' ')); td3.appendChild(refs); }
+      tb.appendChild(h('tr', { class: lineClass(l.line) }, h('td', { text: l.who }), h('td', { text: l.rel }), td3));
+    });
+  }
+
+  /* ---------------- research ---------------- */
+  function renderResearch() {
+    var box = $('#findings');
+    FINDINGS.forEach(function (f) {
+      box.appendChild(h('article', { class: 'finding ' + lineClass(f.line) },
+        h('h3', { text: f.h }),
+        h('p', { text: f.t }),
+        h('div', { class: 'meta' }, pill(f.k), srcLinks(f.s))));
+    });
+    var tb = $('#disagree-body');
+    DISAGREEMENTS.forEach(function (d) {
+      tb.appendChild(h('tr', {},
+        h('td', { text: d.who }),
+        h('td', { 'data-l': 'Family:', text: d.fam }),
+        h('td', { 'data-l': 'Record:', text: d.rec }),
+        h('td', { 'data-l': '' }, srcLinks(d.s, ''))));
+    });
+    var ol = $('#leads');
+    LEADS.forEach(function (l) {
+      ol.appendChild(h('li', {},
+        h('div', { class: 'q', text: l.q }),
+        h('div', { class: 'how', text: l.how }),
+        h('div', { class: 'links' }, l.links.map(function (lk) { return h('a', { href: lk[1], target: '_blank', rel: 'noopener', text: lk[0] }); }))));
+    });
+    var sl = $('#sources-list');
+    SOURCES.forEach(function (src) {
+      var li = h('li', { id: 'src-' + src.n });
+      var body = h('div', {}, src.u ? h('a', { href: src.u, target: '_blank', rel: 'noopener', text: src.t }) : src.t, ' ', pill(src.k));
+      li.appendChild(body);
+      sl.appendChild(li);
+    });
+  }
+
+  /* ---------------- person panel ---------------- */
+  var panel = { el: null, body: null, open: false, lastFocus: null, current: null };
+  function kinButton(id) {
+    var p = P[id]; if (!p) return null;
+    return h('button', { type: 'button', text: p.name, onclick: function () { openPerson(id); } });
+  }
+  function openPerson(id) {
+    var p = P[id]; if (!p) return;
+    panel.current = id;
+    ['line-zirkelbach', 'line-daily', 'line-wathen', 'line-vogt', 'line-all'].forEach(function (c) { panel.el.classList.remove(c); });
+    panel.el.classList.add(lineClass(p.line));
+    $('#panel-line').textContent = p.context ? 'Context, not an ancestor' : lineName(p.line) + ' line';
+    $('#panel-name').textContent = p.name + (p.nick ? ' (' + p.nick + ')' : '');
+    $('#panel-dates').textContent = p.dates || '';
+    var body = panel.body; body.innerHTML = '';
+
+    var facts = h('dl', { class: 'facts' });
+    [['Born', p.born], ['Died', p.died], ['Buried', p.buried], ['Married', p.married]].forEach(function (f) {
+      if (!f[1]) return;
+      facts.appendChild(h('dt', { text: f[0] })); facts.appendChild(h('dd', { text: f[1] }));
+    });
+    if (facts.childNodes.length) body.appendChild(facts);
+
+    if (p.family && p.family.length) {
+      body.appendChild(h('section', { class: 'account' }, h('h3', { text: 'In the family account' }), p.family.map(function (t) { return h('p', { text: t }); })));
+    }
+    if (p.found && p.found.length) {
+      body.appendChild(h('section', {}, h('h3', { text: 'What the records say' }),
+        h('ul', { class: 'found' }, p.found.map(function (f) {
+          return h('li', {}, h('span', { text: f.t }), h('div', { class: 'meta' }, pill(f.k), srcLinks(f.s)));
+        }))));
+    } else if (!p.context) {
+      body.appendChild(h('section', {}, h('h3', { text: 'What the records say' }), h('p', { class: 'kinlist', text: 'Nothing found yet beyond the family account.' })));
+    }
+
+    var kinSec = h('section', {}, h('h3', { text: 'Family' }));
+    var chips = h('div', { class: 'kin' });
+    (p.parents || []).forEach(function (pid) { var b = kinButton(pid); if (b) chips.appendChild(b); });
+    if (p.spouse) { var sb = kinButton(p.spouse); if (sb) chips.appendChild(sb); }
+    var kids = PEOPLE.filter(function (q) { return (q.parents || []).indexOf(id) !== -1 && q.id !== id; });
+    kids.forEach(function (k) { chips.appendChild(kinButton(k.id)); });
+    if (chips.childNodes.length) kinSec.appendChild(chips);
+    var lists = h('div', { class: 'kinlist' });
+    if (p.spouseNote) lists.appendChild(h('p', { text: 'Also married: ' + p.spouseNote + '.' }));
+    if (p.children) lists.appendChild(h('p', { text: 'Children: ' + p.children + '.' }));
+    if (p.siblings) lists.appendChild(h('p', { text: 'Brothers and sisters: ' + p.siblings + '.' }));
+    if (lists.childNodes.length) kinSec.appendChild(lists);
+    if (chips.childNodes.length || lists.childNodes.length) body.appendChild(kinSec);
+
+    var actions = h('div', { class: 'panel-actions' });
+    if (COUPLE_OF[id]) actions.appendChild(h('button', { class: 'btn', type: 'button', text: 'Show in the tree', onclick: function () { showInTree(id); } }));
+    actions.appendChild(h('button', { class: 'btn', type: 'button', text: 'Copy link to this person', onclick: function () { copyLink(id); } }));
+    body.appendChild(actions);
+
+    if (!panel.open) {
+      panel.lastFocus = document.activeElement;
+      panel.el.hidden = false; $('#backdrop').hidden = false;
+      requestAnimationFrame(function () { panel.el.classList.add('is-open'); $('#backdrop').classList.add('is-open'); });
+      panel.open = true;
+    }
+    body.scrollTop = 0;
+    $('#panel-close').focus();
+    if (location.hash !== '#person-' + id) {
+      try { history.replaceState(null, '', '#person-' + id); } catch (err) { location.hash = 'person-' + id; }
+    }
+  }
+  function closePanel() {
+    if (!panel.open) return;
+    panel.open = false; panel.current = null;
+    panel.el.classList.remove('is-open'); $('#backdrop').classList.remove('is-open');
+    var done = function () { if (!panel.open) { panel.el.hidden = true; $('#backdrop').hidden = true; } };
+    setTimeout(done, 320);
+    if (/^#person-/.test(location.hash)) { try { history.replaceState(null, '', location.pathname + location.search); } catch (err) { /* ignore */ } }
+    if (panel.lastFocus && panel.lastFocus.focus) panel.lastFocus.focus();
+  }
+  function copyLink(id) {
+    var url = location.href.split('#')[0] + '#person-' + id;
+    var ok = function () { toast('Link copied'); };
+    var fallback = function () {
+      var inp = h('input', { value: url, readonly: 'readonly', 'aria-label': 'Link' });
+      inp.style.position = 'fixed'; inp.style.left = '-999px';
+      document.body.appendChild(inp); inp.select();
+      try { document.execCommand('copy'); ok(); } catch (err) { toast(url); }
+      document.body.removeChild(inp);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(ok, fallback); else fallback();
+  }
+  var toastTimer = null;
+  function toast(msg) {
+    var t = $('.toast'); if (!t) { t = h('div', { class: 'toast', role: 'status' }); document.body.appendChild(t); }
+    t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 2200);
+  }
+  function setupPanel() {
+    panel.el = $('#panel'); panel.body = $('#panel-body');
+    $('#panel-close').addEventListener('click', closePanel);
+    $('#backdrop').addEventListener('click', closePanel);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && panel.open) closePanel(); });
+    function fromHash() {
+      var m = /^#person-([a-z0-9-]+)$/.exec(location.hash);
+      if (m && P[m[1]]) { if (panel.current !== m[1]) openPerson(m[1]); }
+    }
+    window.addEventListener('hashchange', fromHash);
+    fromHash();
+  }
+
+  /* ---------------- nav highlight ---------------- */
+  function setupNav() {
+    if (!('IntersectionObserver' in window)) return;
+    var links = $$('.nav a'); var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        links.forEach(function (a) { a.classList.remove('is-current'); });
+        var a = map[en.target.id]; if (a) a.classList.add('is-current');
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    $$('main section').forEach(function (sec) { io.observe(sec); });
+  }
+
+  function init() {
+    renderFamilies();
+    renderTree();
+    setupPeople();
+    renderTimeline();
+    renderJourneys();
+    renderLawmen();
+    renderResearch();
+    setupPanel();
+    setupNav();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+
+</script>
+</body>
+</html>
