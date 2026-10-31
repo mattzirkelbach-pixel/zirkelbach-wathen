@@ -1,0 +1,36 @@
+name: Family inbox
+# Every few hours: collect notes sent from the site's "Add to the tree" form and file each as an issue.
+on:
+  schedule:
+    - cron: '23 */3 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: inbox
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Make sure the label exists
+        run: gh label create family-submission --repo "$GITHUB_REPOSITORY" --color 2b6a4e --description "Sent from the site's Add to the tree form" --force
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: File new notes as issues
+        run: node scripts/inbox.mjs
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Remember what was filed
+        run: |
+          if ! git diff --quiet -- inbox/seen.json; then
+            git config user.name "family-inbox[bot]"
+            git config user.email "family-inbox@users.noreply.github.com"
+            git add inbox/seen.json
+            git commit -m "inbox: record filed submissions"
+            git push
+          fi

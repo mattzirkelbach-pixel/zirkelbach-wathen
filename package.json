@@ -1,0 +1,13 @@
+{
+  "name": "zirkelbach-wathen",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "build": "node build.js",
+    "test": "node build.js && node test.js",
+    "inbox": "node scripts/inbox.mjs --dry-run"
+  },
+  "devDependencies": {
+    "jsdom": "^24.1.0"
+  }
+}

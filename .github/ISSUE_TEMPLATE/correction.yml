@@ -1,0 +1,32 @@
+name: Add to the tree
+description: Add a person, a story or a correction to the family site
+title: "Family submission: "
+labels: [family-submission]
+body:
+  - type: markdown
+    attributes:
+      value: No GitHub account? Use the form on the site instead, under "Add to the tree".
+  - type: input
+    id: who
+    attributes:
+      label: Your name and how you're related
+      placeholder: Jane Doe, granddaughter of Tom
+    validations:
+      required: true
+  - type: input
+    id: about
+    attributes:
+      label: About whom
+      placeholder: the person or branch this concerns
+  - type: textarea
+    id: note
+    attributes:
+      label: What to add or correct
+      description: Names, dates, places, relationships, a story. Leave out private details about living people; this is public.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Where this comes from
+      placeholder: family Bible, certificate, obituary, memory

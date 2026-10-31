@@ -1,0 +1,286 @@
+<a class="skip" href="#story">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <div class="menu" id="menu">
+      <button class="menu-btn" id="menu-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu-list"><span class="menu-icon" aria-hidden="true"><i></i><i></i><i></i></span>Sections</button>
+      <div class="menu-list" id="menu-list" role="menu" hidden>
+        <a role="menuitem" href="#story">The story</a>
+        <a role="menuitem" href="#tree">The tree</a>
+        <a role="menuitem" href="#family">Donald and Cleo's family</a>
+        <a role="menuitem" href="#people">People</a>
+        <a role="menuitem" href="#timeline">Timeline</a>
+        <a role="menuitem" href="#journeys">Journeys</a>
+        <a role="menuitem" href="#lawmen">Lawmen in the family</a>
+        <a role="menuitem" href="#research">What the records added</a>
+        <a role="menuitem" href="#sources">Sources</a>
+        <a role="menuitem" class="menu-cta" href="#contribute">Add to the tree</a>
+      </div>
+    </div>
+    <a class="brand" href="#story"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="brand-text">Zirkelbach–Wathen</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#story">Story</a><a href="#tree">Tree</a><a href="#family">Family</a><a href="#people">People</a><a href="#timeline">Timeline</a><a href="#journeys">Journeys</a><a href="#lawmen">Lawmen</a><a href="#research">Research</a><a href="#sources">Sources</a>
+    </nav>
+    <a class="cta" href="#contribute">Add to the tree</a>
+  </div>
+</header>
+
+<main>
+  <section id="story" class="hero">
+    <div class="wrap">
+      <h1>Four families, one marriage.</h1>
+      <p class="lede">The Zirkelbachs, Dailys, Wathens and Vogts came together in Evansville, Indiana, when Donald Zirkelbach married Cleo Wathen in 1930. This is who they were, where they came from, and what the records say.</p>
+
+      <figure class="braid" aria-label="Four family lines converging on the 1930 marriage of Donald Zirkelbach and Cleo Wathen">
+        <svg viewBox="0 0 400 236" role="img">
+          <text class="lbl-fam" x="0" y="38">Zirkelbach</text>
+          <text class="lbl-org" x="0" y="50">Bavarian Rhön, about 1840</text>
+          <text class="lbl-fam" x="0" y="93">Daily</text>
+          <text class="lbl-org" x="0" y="105">Queen's County, Ireland, 1816–19</text>
+          <text class="lbl-fam" x="0" y="148">Wathen</text>
+          <text class="lbl-org" x="0" y="160">Maryland 1670, Kentucky by 1816</text>
+          <text class="lbl-fam" x="0" y="203">Vogt</text>
+          <text class="lbl-org" x="0" y="215">Hesse-Darmstadt, 1852</text>
+          <path class="ribbon r-z" d="M120 42 C 195 42, 225 121, 285 121"/>
+          <path class="ribbon r-d" d="M146 97 C 205 97, 230 121, 285 121"/>
+          <path class="ribbon r-w" d="M144 152 C 205 152, 230 121, 285 121"/>
+          <path class="ribbon r-v" d="M106 207 C 195 207, 225 121, 285 121"/>
+          <circle class="knot" cx="285" cy="121" r="5"/>
+          <text class="lbl-end" x="295" y="117">Donald and Cleo</text>
+          <text class="lbl-end2" x="295" y="129">married 5 April 1930</text>
+          <text class="lbl-end2" x="295" y="140">Evansville, Indiana</text>
+          <path class="tail" d="M285 128 L285 170"/>
+          <text class="lbl-end2 lbl-kids" x="292" y="174">six children</text>
+        </svg>
+      </figure>
+
+      <div class="families" id="families"></div>
+
+      <div class="police">
+        <p>Police work runs through the family. Bena's father, Charles Vogt, was a township constable and justice of the peace. Pete Zirkelbach joined the Evansville police in the 1920s, and his son Donald followed in 1934. After them came Donald's son John and his grandson Adam.</p>
+        <p class="small">Living relatives are listed by name only. Everything about them stops at the name.</p>
+      </div>
+
+      <p class="invite">Are you family? The tree now runs downward from Donald and Cleo, and it is only as complete as what the family sends in. <a href="#contribute">Add yourself, your parents, or a correction.</a></p>
+    </div>
+  </section>
+
+  <section id="tree">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>The tree</h2>
+        <p>Donald and Cleo at the bottom, their four grandparent couples across the middle, the immigrants above. Tap any name.</p>
+      </div>
+      <div class="tree-tools" role="group" aria-label="Tree controls">
+        <button class="chip all is-on" data-line="all" type="button">All four lines</button>
+        <button class="chip line-zirkelbach" data-line="zirkelbach" type="button">Zirkelbach</button>
+        <button class="chip line-daily" data-line="daily" type="button">Daily</button>
+        <button class="chip line-wathen" data-line="wathen" type="button">Wathen</button>
+        <button class="chip line-vogt" data-line="vogt" type="button">Vogt</button>
+        <button class="btn" id="tree-fit" type="button">Fit</button>
+        <button class="btn" id="tree-home" type="button">Donald and Cleo</button>
+        <button class="btn icon" id="tree-in" type="button" aria-label="Zoom in">+</button>
+        <button class="btn icon" id="tree-out" type="button" aria-label="Zoom out">−</button>
+        <span class="hint">Drag to move; pinch or Ctrl-scroll to zoom. Everyone is also listed under People.</span>
+      </div>
+      <div class="tree-frame" id="tree-frame">
+        <svg id="tree-svg" aria-label="Family tree" role="group"></svg>
+      </div>
+      <div class="tree-legend">
+        <span class="line-zirkelbach">Zirkelbach and Lintzenich</span>
+        <span class="line-daily">Daily and Stout</span>
+        <span class="line-wathen">Wathen, Waller and Harris</span>
+        <span class="line-vogt">Vogt and Pfingston</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="family">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Donald and Cleo's family</h2>
+        <p>The tree going forward. Deceased relatives come from public records; living relatives appear by name only, as the family sends them in. Branches marked waiting need you.</p>
+      </div>
+      <div class="desc" id="descendants"></div>
+      <div class="sub-head">
+        <h3 class="serif" style="font-size:1.45rem">Not yet placed</h3>
+        <p>Zirkelbachs in Evansville records who belong somewhere on this tree. If one of these is yours, say so below.</p>
+      </div>
+      <ul class="unplaced" id="unplaced"></ul>
+    </div>
+  </section>
+
+  <section id="contribute">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Add to the tree</h2>
+        <p>Add yourself or your branch, correct a date, tell a story, or point to a record. Notes go to the family historian and are added to the site after a look, usually within a day.</p>
+      </div>
+      <div class="contribute">
+        <form id="cform" class="cform" novalidate>
+          <label class="field"><span>Your name</span><input id="c-name" name="name" type="text" autocomplete="name" required maxlength="120"></label>
+          <label class="field"><span>How you're related</span><input id="c-rel" name="rel" type="text" placeholder="granddaughter of Tom, married to a Woehler, …" maxlength="200"></label>
+          <label class="field"><span>About whom</span>
+            <select id="c-about" name="about">
+              <option value="">Someone not on the site yet, or the site in general</option>
+            </select>
+          </label>
+          <label class="field"><span>What to add or correct</span><textarea id="c-note" name="note" rows="6" required maxlength="6000" placeholder="Names, dates, places, how people are related, a story worth keeping. For a correction, say what the site has now and what it should say."></textarea></label>
+          <label class="field"><span>Where this comes from (optional)</span><input id="c-source" name="source" type="text" placeholder="family Bible, a certificate you hold, an obituary, memory" maxlength="300"></label>
+          <label class="field hp" aria-hidden="true"><span>Leave this empty</span><input id="c-web" name="website" type="text" tabindex="-1" autocomplete="off"></label>
+          <p class="cnote">Everything sent here becomes part of a public family record. Leave out birthdates, addresses and anything private about people who are living.</p>
+          <div class="cactions">
+            <button class="btn primary" id="c-send" type="submit">Send to the family historian</button>
+            <span class="cstatus" id="c-status" role="status"></span>
+          </div>
+        </form>
+        <div class="cdone" id="cdone" hidden>
+          <h3 class="serif">Received. Thank you.</h3>
+          <p>Your note is in the family historian's queue and will appear on the site after a look. If you'd like to keep a copy, the text is below.</p>
+          <pre id="c-copy" class="ccopy"></pre>
+          <div class="cactions"><button class="btn" id="c-copybtn" type="button">Copy the text</button><button class="btn" id="c-again" type="button">Send another</button></div>
+        </div>
+        <div class="cfail" id="cfail" hidden>
+          <h3 class="serif">The note didn't go through.</h3>
+          <p>Copy the text below and send it another way, or try again in a minute.</p>
+          <pre id="c-copy2" class="ccopy"></pre>
+          <div class="cactions"><button class="btn" id="c-copybtn2" type="button">Copy the text</button><a class="btn" id="c-gh" href="#" target="_blank" rel="noopener">Post it on GitHub instead</a><button class="btn" id="c-retry" type="button">Try again</button></div>
+        </div>
+        <aside class="chow">
+          <h3 class="serif">How this works</h3>
+          <p>Each note lands in the site's public queue, where the family historian reviews it, checks it against the records where possible, and adds it to the tree with you credited in the updates list. No account is needed.</p>
+          <p class="small">If you use GitHub, you can also <a id="c-ghlink" href="#" target="_blank" rel="noopener">open the queue directly</a>.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="people">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>People</h2>
+        <p>Every ancestor with a page, plus the relatives the records brought back. Open one for the family's account and what the research found.</p>
+      </div>
+      <div class="people-tools">
+        <label class="search"><span aria-hidden="true">⌕</span><input id="people-search" type="search" placeholder="Search a name, a place, a year" autocomplete="off"></label>
+        <button class="chip all is-on" data-pline="all" type="button">All</button>
+        <button class="chip line-zirkelbach" data-pline="zirkelbach" type="button">Zirkelbach</button>
+        <button class="chip line-daily" data-pline="daily" type="button">Daily</button>
+        <button class="chip line-wathen" data-pline="wathen" type="button">Wathen</button>
+        <button class="chip line-vogt" data-pline="vogt" type="button">Vogt</button>
+      </div>
+      <div id="people-list"></div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Timeline</h2>
+        <p>From a Bristol indenture in 1670 to the family tree of 2026. Entries marked new came from the records research.</p>
+      </div>
+      <div class="people-tools">
+        <button class="chip all is-on" data-tline="all" type="button">All</button>
+        <button class="chip line-zirkelbach" data-tline="zirkelbach" type="button">Zirkelbach</button>
+        <button class="chip line-daily" data-tline="daily" type="button">Daily</button>
+        <button class="chip line-wathen" data-tline="wathen" type="button">Wathen</button>
+        <button class="chip line-vogt" data-tline="vogt" type="button">Vogt</button>
+      </div>
+      <ol class="tl" id="tl"></ol>
+    </div>
+  </section>
+
+  <section id="journeys">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Journeys</h2>
+        <p>How each line reached Vanderburgh County. Tap a route to follow one family; the diagram scrolls sideways on a phone.</p>
+      </div>
+      <div class="scroll-x"><svg id="jmap" class="jmap" viewBox="0 0 960 590" width="960" height="590" aria-label="Migration routes of the four families"></svg></div>
+      <ol class="routes" id="routes"></ol>
+    </div>
+  </section>
+
+  <section id="lawmen">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Lawmen in the family</h2>
+        <p>The Evansville Police Department's own history calls the Zirkelbachs the only family with more than three generations on the force.</p>
+      </div>
+      <table class="law">
+        <thead><tr><th>Who</th><th>How related</th><th>Service</th></tr></thead>
+        <tbody id="law-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>What the records added</h2>
+        <p>On 31 October 2026 the family tree was checked against county histories, cemetery registers, the police department's own history and two compiled genealogies. Each finding carries its sources and a mark for how much weight it can bear.</p>
+      </div>
+      <div class="legend">
+        <span><span class="pill pill-record">Record</span> an original record, or a transcription of one</span>
+        <span><span class="pill pill-published">Published</span> a county history or compiled genealogy</span>
+        <span><span class="pill pill-unverified">Not yet verified</span> a search-result title, a surname site, or tradition</span>
+        <span><span class="pill pill-conflict">Sources disagree</span> the account and a record part ways</span>
+      </div>
+      <div class="findings" id="findings"></div>
+
+      <div class="sub-head">
+        <h3 class="serif" style="font-size:1.45rem">Where the account and the records disagree</h3>
+        <p>None of these is settled here. Each names the record that would settle it.</p>
+      </div>
+      <table class="disagree">
+        <thead><tr><th>Who</th><th>The family account</th><th>What the record says</th><th>Sources</th></tr></thead>
+        <tbody id="disagree-body"></tbody>
+      </table>
+
+      <div class="sub-head">
+        <h3 class="serif" style="font-size:1.45rem">Updates from the family</h3>
+        <p>What has been added or corrected since the site went up, with thanks to whoever sent it.</p>
+      </div>
+      <ol class="changelog" id="changelog"></ol>
+
+      <div class="sub-head">
+        <h3 class="serif" style="font-size:1.45rem">Open questions, and the record that would answer each</h3>
+        <p>Several databases refuse automated searches and had to be left to a person with a browser. These are the next steps, in rough order of payoff.</p>
+      </div>
+      <ol class="leads" id="leads"></ol>
+    </div>
+  </section>
+
+  <section id="sources">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Sources</h2>
+        <p>Numbered as cited throughout. Most are free to read online.</p>
+      </div>
+      <ol class="sources" id="sources-list"></ol>
+      <div class="method">
+        <p>The family account on each person's page is the family tree compiled by Clayton on 30 October 2026 from the family folder: Cleo's 1988 account of her father's life, the family charts, the law-enforcement list, the 2009 Zirkelbach and 2006 Vogt registers, and a 1999 Wathen family history. The research notes were added on 31 October 2026 and are kept separate from it, so that a reader can always tell which is which.</p>
+        <p>Anything marked not yet verified still needs an original record. Find a Grave, the Indiana and Illinois newspaper archives, the Illinois marriage index and the EVPL Browning database all turned away automated searches; the open questions list links to them for a reader to run by hand.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>The Zirkelbach–Wathen family of Evansville, Indiana. Family tree by Clayton, October 2026; records research and this site, 31 October 2026.</p>
+    <p>Living relatives are listed by name only. To add or correct something, use <a href="#contribute">Add to the tree</a>.</p>
+  </div>
+</footer>
+
+<div id="backdrop" hidden></div>
+<aside id="panel" class="panel" hidden role="dialog" aria-modal="true" aria-labelledby="panel-name">
+  <div class="panel-head" id="panel-head">
+    <div class="who">
+      <div class="line-tag" id="panel-line"></div>
+      <h2 id="panel-name"></h2>
+      <div class="dates" id="panel-dates"></div>
+    </div>
+    <button class="close" id="panel-close" type="button" aria-label="Close">×</button>
+  </div>
+  <div class="panel-body" id="panel-body"></div>
+</aside>

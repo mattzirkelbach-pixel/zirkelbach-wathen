@@ -1,37 +1,31 @@
 # Zirkelbach–Wathen family site
 
-One file, no build step, no accounts: `index.html` is the whole site. It works offline, on phones, in light and dark mode, and anyone can open it without Claude.
+Live at **https://mattzirkelbach-pixel.github.io/zirkelbach-wathen/**
 
-## Put it online (pick one)
+The site is one self-contained page, built from the files in `src/`. It works on phones, in light and dark mode, and needs no account to read or to contribute.
 
-- **Netlify Drop** (fastest, free, no account needed to try): go to https://app.netlify.com/drop and drag the folder that contains `index.html` onto the page. You get a public link in a few seconds.
-- **GitHub Pages**: create a repository, upload `index.html`, then in the repo's Settings choose Pages and publish from the main branch. The site appears at `https://<you>.github.io/<repo>/`.
-- **Cloudflare Pages**: Workers & Pages, then Create, then Upload assets, and upload the folder.
-- **Any web host**: upload `index.html` to the folder your host serves.
+## How the family contributes
 
-## Share a person
+1. On the site, **Add to the tree** (top right, or from any person's page) opens a form. No account needed.
+2. The note goes to a relay and, within three hours, the **Family inbox** action files it as an issue here, labeled `family-submission`. The repository owner is notified by GitHub.
+3. The family historian (or Claude, on its daily check) reviews each issue, updates `src/data.js`, pushes, comments on the issue with what changed, and closes it. Every push republishes the site.
+4. Changes are credited in the site's **Updates from the family** list.
 
-Every person has a link of the form `…/index.html#person-pete` (the id is the lowercase name used in the tree, for example `person-cleo`, `person-john-daily`, `person-john1`). The panel has a "Copy link to this person" button.
+People with a GitHub account can also open an issue directly with the *Add to the tree* template.
 
-## Edit it
+Everything sent in is public. Living relatives appear on the site by name only.
 
-Everything is inside `index.html`:
+## Editing
 
-- The people, timeline, journeys, findings and sources are plain JavaScript data near the bottom, in the first `<script>` block (`PEOPLE`, `EVENTS`, `JOURNEY`, `LAWMEN`, `FINDINGS`, `DISAGREEMENTS`, `LEADS`, `SOURCES`).
-- Each person has `family` (the family account, kept as written) and `found` (research notes, each with a confidence mark and source numbers), so the two never get mixed.
-- Confidence marks: `record`, `published`, `unverified`, `conflict`.
+- `src/data.js` holds all the content: `PEOPLE`, `COUPLES`, `EVENTS`, `JOURNEY`, `LAWMEN`, `FINDINGS`, `DISAGREEMENTS`, `LEADS`, `DESCENDANTS`, `UNPLACED`, `CHANGELOG`, `SOURCES`.
+  Each person has `family` (the family account, kept as written) and `found` (research notes, each with a confidence mark and source numbers), so the two never get mixed.
+- `src/body.html`, `src/style.css`, `src/app.js` are the page.
+- `node build.js` writes `dist/index.html` (the whole site) and `dist/artifact.html` (the same page for a claude.ai preview).
+- `npm install && npm test` builds and runs the jsdom smoke test.
+- `node scripts/inbox.mjs --dry-run` shows what is waiting on the relay without filing anything.
 
-Fonts are pulled from Google Fonts when online; without a connection the page falls back to the system serif and sans.
+Confidence marks on research notes: `record` (an original record or a transcription), `published` (a county history or compiled genealogy), `unverified` (a search-result title, a surname site, tradition), `conflict` (sources disagree).
 
-## What is in it
+## Hosting elsewhere
 
-- Story: the four families and the braid of lines that meet in 1930.
-- Tree: eight generations, pannable and zoomable, every name opens a page.
-- People: searchable, grouped by generation, with the wider family.
-- Timeline: 1670 to 2026, filterable by family line.
-- Journeys: how each line reached Vanderburgh County.
-- Lawmen: the family's police service.
-- Research: what the records added on 31 October 2026, where they disagree with the family account, and the open questions with the record that would settle each.
-- Sources: fifty numbered sources, most free to read online.
-
-Living relatives appear by name only.
+`dist/index.html` is the entire site. Copy it anywhere that serves static files, or open it from disk. Fonts come from Google Fonts when online and fall back to system faces offline.
