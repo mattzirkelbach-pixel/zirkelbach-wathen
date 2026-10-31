@@ -6,7 +6,7 @@ const { JSDOM } = require('jsdom');
 const html = fs.readFileSync(path.join(__dirname, 'dist', 'index.html'), 'utf8');
 const errors = [];
 const vc = new (require('jsdom').VirtualConsole)();
-vc.on('jsdomError', (e) => errors.push('jsdomError: ' + (e && e.message)));
+vc.on('jsdomError', (e) => { if (!/getContext/.test(String(e && e.message))) errors.push('jsdomError: ' + (e && e.message)); });
 vc.on('error', (m) => errors.push('console.error: ' + m));
 
 const dom = new JSDOM(html, { runScripts: 'dangerously', pretendToBeVisual: true, virtualConsole: vc, url: 'https://example.org/family/' });
@@ -25,7 +25,10 @@ function assert(cond, msg) { if (!cond) errors.push('ASSERT: ' + msg); }
 
 setTimeout(() => {
   try {
-    assert(document.querySelectorAll('#families .fam').length === 4, 'four family blurbs');
+    assert(document.querySelectorAll('#families .plate').length === 4, 'four family plates');
+    assert(document.querySelectorAll('#service svg rect.bar').length === 6, 'service bars');
+    assert(document.querySelectorAll('#tl li[data-year]').length > 60, 'timeline years');
+    assert(document.getElementById('year-big').textContent === '2026', 'year readout');
     const rows = document.querySelectorAll('#tree .prow');
     assert(rows.length >= 30, 'tree rows rendered: ' + rows.length);
     assert(document.querySelectorAll('#tree .node').length === 21, 'tree couples: ' + document.querySelectorAll('#tree .node').length);
@@ -33,8 +36,6 @@ setTimeout(() => {
     const cards = document.querySelectorAll('.pcard');
     assert(cards.length === PEOPLE_ ? true : cards.length > 30, 'people cards: ' + cards.length);
     assert(document.querySelectorAll('#tl li').length > 60, 'timeline entries: ' + document.querySelectorAll('#tl li').length);
-    assert(document.querySelectorAll('#jmap .route').length === 11, 'journey routes: ' + document.querySelectorAll('#jmap .route').length);
-    assert(document.querySelectorAll('#jmap .place').length === 12, 'journey places');
     assert(document.querySelectorAll('#law-body tr').length === 8, 'lawmen rows');
     assert(document.querySelectorAll('#findings .finding').length === 16, 'findings: ' + document.querySelectorAll('#findings .finding').length);
     assert(document.querySelectorAll('#disagree-body tr').length === 14, 'disagreements');
@@ -120,6 +121,14 @@ setTimeout(() => {
           assert(sent.length === 3, 'long note split into 3 relay messages: ' + sent.length);
           if (sent.length) { const m = JSON.parse(sent[0].body); assert(m.part === 1 && m.of === 3 && m.name === 'Test Cousin' && /^zw-/.test(m.id), 'relay message shape'); assert(/ntfy\.sh\/zw-family-/.test(sent[0].url), 'relay url'); }
           assert(document.getElementById('cdone').hidden === false, 'thank-you shown');
+          // time machine: scrub to 1900 and check the tree dims the unborn and the readouts follow
+          const yr = document.getElementById('year'); yr.value = '1900'; yr.dispatchEvent(new window.Event('input', { bubbles: true }));
+          assert(document.getElementById('year-big').textContent === '1900', 'year follows slider');
+          assert(document.querySelectorAll('#tree-svg .is-unborn').length >= 4, 'unborn dimmed: ' + document.querySelectorAll('#tree-svg .is-unborn').length);
+          assert(/living in 1900/.test(document.getElementById('alive').textContent), 'alive readout: ' + document.getElementById('alive').textContent.slice(0, 60));
+          assert(document.getElementById('tree-asof').hidden === false, 'as-of chip shows');
+          document.getElementById('year-reset').click();
+          assert(document.querySelectorAll('#tree-svg .is-unborn').length === 0, 'reset clears unborn');
           // finished
           if (errors.length) { console.log('FAILURES:\n' + errors.join('\n')); process.exit(1); }
           else { console.log('ALL CHECKS PASSED'); process.exit(0); }

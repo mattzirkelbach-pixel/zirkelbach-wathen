@@ -64,14 +64,20 @@
   function renderFamilies() {
     var box = $('#families');
     Object.keys(LINES).forEach(function (key) {
-      box.appendChild(h('article', { class: 'fam ' + lineClass(key) },
-        h('h3', { text: LINES[key].name }),
-        h('p', { text: LINES[key].blurb })));
+      var L = LINES[key];
+      var svg = document.createElementNS(SVGNS, 'svg'); svg.setAttribute('class', 'mark'); svg.setAttribute('aria-hidden', 'true');
+      var use = document.createElementNS(SVGNS, 'use'); use.setAttribute('href', '#' + L.mark); svg.appendChild(use);
+      box.appendChild(h('article', { class: 'plate ' + lineClass(key) },
+        svg,
+        h('h3', { text: L.name }),
+        h('p', { class: 'meaning', text: L.meaning }),
+        h('p', { text: L.blurb }),
+        h('div', { class: 'route' }, h('b', { text: L.from }), h('span', { class: 'arrow', text: '→' }), h('b', { text: L.to }), h('span', { text: L.when }))));
     });
   }
 
   /* ---------------- tree ---------------- */
-  var UNIT = 190, BW = 172, RH = 30, PAD = 7, W = 1520, HGT = 1160;
+  var UNIT = 190, BW = 172, RH = 30, PAD = 7, W = 1520, HGT = 1250;
   var ROW_Y = { 7: 14, 6: 78, 5: 142, 4: 206, 3: 296, 2: 418, 1: 540, 0: 662, kids: 782 };
   var COL = { ar: 0, lp: 1, ws: 2, sm: 3, ge: 4, jm: 5, jh: 6, dm: 7, ta: 4, aw: 5, bh: 6, ba: 4, j2: 4, j1: 4 };
   var tree = { g: null, view: { x: 0, y: 0, k: 1 }, frame: null, svg: null, nodes: {}, filter: 'all' };
@@ -94,6 +100,7 @@
     var p = P[id];
     var row = s('g', { 'class': 'prow ' + lineClass(p.line), transform: 'translate(0 ' + yOff + ')', tabindex: '0', role: 'button', 'aria-label': p.name + (p.dates ? ', ' + p.dates : '') });
     row.setAttribute('data-id', id);
+    var by = yearOf(p.dates && /^\d{4}/.test(p.dates) ? p.dates : p.born); if (by) row.setAttribute('data-born', String(by));
     row.appendChild(s('rect', { 'class': 'hit', x: 6, y: 0, width: BW - 12, height: RH, rx: 4 }));
     row.appendChild(s('rect', { 'class': 'bar', x: 6, y: 5, width: 3, height: RH - 10, rx: 1 }));
     row.appendChild(s('text', { x: 15, y: 13, text: p.label || p.name }));
@@ -129,7 +136,7 @@
       var topY = c.y;
       if (ups.length === 1 && Math.abs(ups[0].x - c.x) < 1) {
         var u = ups[0];
-        links.appendChild(s('path', { 'class': 'link', d: 'M' + u.x + ' ' + (u.y + u.h) + ' L' + c.x + ' ' + topY }));
+        links.appendChild(s('path', { 'class': 'link', 'data-for': c.id, d: 'M' + u.x + ' ' + (u.y + u.h) + ' L' + c.x + ' ' + topY }));
       } else {
         var busY = topY - 22;
         var xs = ups.map(function (u) { return u.x; }).concat([c.x]);
@@ -137,7 +144,7 @@
         var d = 'M' + x1 + ' ' + busY + ' L' + x2 + ' ' + busY;
         ups.forEach(function (u) { d += ' M' + u.x + ' ' + (u.y + u.h) + ' L' + u.x + ' ' + busY; });
         d += ' M' + c.x + ' ' + busY + ' L' + c.x + ' ' + topY;
-        links.appendChild(s('path', { 'class': 'link', d: d }));
+        links.appendChild(s('path', { 'class': 'link', 'data-for': c.id, d: d }));
       }
     });
 
@@ -213,6 +220,7 @@
     var key = descKey(path), kids = n.children || [], open = !!descOpen[key];
     var card = s('g', { 'class': 'dcard prow line-zirkelbach' + (n.open ? ' is-open-branch' : ''), transform: 'translate(' + (cx - DW / 2) + ' ' + y + ')', tabindex: '0', role: 'button',
       'aria-label': n.name + (n.dates ? ', ' + n.dates : '') + (kids.length ? (open ? ', expanded' : ', has ' + kids.length + ' below') : '') });
+    var cby = n.dates && /^\d{1,2} \w+ \d{4}|^\d{4}/.test(n.dates) ? yearOf(n.dates) : null; if (cby && !/died/.test(n.dates)) card.setAttribute('data-born', String(cby));
     card.appendChild(s('rect', { 'class': 'dbox', x: 0, y: 0, width: DW, height: DH, rx: 6 }));
     card.appendChild(s('rect', { 'class': 'bar', x: 6, y: 7, width: 3, height: DH - 14, rx: 1 }));
     var nm = n.name.replace(/ “[^”]+”/, '').replace(/^(\S+) .* (\S+)$/, function (m, a, b) { return m.length > (kids.length ? 17 : 22) ? a + ' ' + b : m; });
@@ -255,6 +263,8 @@
     panel.current = 'desc';
     ['line-zirkelbach', 'line-daily', 'line-wathen', 'line-vogt', 'line-all'].forEach(function (c) { panel.el.classList.remove(c); });
     panel.el.classList.add('line-zirkelbach');
+    $('#panel-mark-use').setAttribute('href', '#mark-zirkelbach');
+    highlightLineage(null);
     $('#panel-line').textContent = "Donald and Cleo's family";
     $('#panel-name').textContent = n.name;
     $('#panel-dates').textContent = n.dates || '';
@@ -433,7 +443,10 @@
     { t: 'The wider family', f: function (p) { return p.side; } }
   ];
   function personCard(p) {
+    var ws = p.name.replace(/[“”"().]/g, '').split(/\s+/).filter(function (w) { return /^[A-Z]/.test(w) && !/^(Jr|Sr|The|Gen)$/.test(w); });
+    var initials = ws.length > 1 ? ws[0][0] + ws[ws.length - 1][0] : (ws[0] || '?')[0];
     return h('button', { class: 'pcard ' + lineClass(p.line), type: 'button', onclick: function () { openPerson(p.id); } },
+      h('span', { class: 'mono', 'aria-hidden': 'true', text: initials }),
       h('span', { class: 'n', text: p.name }),
       h('span', { class: 'd', text: p.dates || (p.born ? p.born : '') }),
       h('span', { class: 'r', text: p.role || '' }),
@@ -473,12 +486,14 @@
     renderPeople();
   }
 
-  /* ---------------- timeline ---------------- */
+  /* ---------------- timeline (drives the globe) ---------------- */
+  function yearOf(str) { var m = /(\d{4})/.exec(str || ''); return m ? +m[1] : null; }
   function renderTimeline() {
     var ol = $('#tl');
     EVENTS.forEach(function (ev) {
       var li = h('li', { class: lineClass(ev.line) });
       li.setAttribute('data-line', ev.line);
+      var y = yearOf(ev.y); if (y) li.setAttribute('data-year', String(y));
       var body = h('div', { class: 'b' }, ev.t);
       if (ev.n) body.appendChild(h('span', { class: 'new', text: 'new' }));
       var refs = srcLinks(ev.s, ' ');
@@ -495,69 +510,53 @@
         $$('#tl li').forEach(function (li) { li.classList.toggle('is-hidden', line !== 'all' && li.getAttribute('data-line') !== line); });
       });
     });
-  }
-
-  /* ---------------- journeys ---------------- */
-  function renderJourneys() {
-    var svg = $('#jmap'), N = {}, NW = 168, NH = 46;
-    JOURNEY.nodes.forEach(function (n) { N[n.id] = n; });
-    [[100, 'Where they started'], [350, 'First home in America'], [600, 'Illinois and Kentucky'], [850, 'Vanderburgh County']].forEach(function (c) {
-      svg.appendChild(s('text', { 'class': 'col', x: c[0], y: 26, 'text-anchor': 'middle', text: c[1] }));
-    });
-    var routes = s('g'), places = s('g');
-    svg.appendChild(routes); svg.appendChild(places);
-    var active = null;
-    function setActive(line) {
-      active = (active === line) ? null : line;
-      $$('.route', svg).forEach(function (r) { r.classList.toggle('is-dim', !!active && r.getAttribute('data-line') !== active); });
-      $$('.place', svg).forEach(function (pl) {
-        var l = pl.getAttribute('data-line');
-        pl.classList.toggle('is-dim', !!active && l !== active && l !== 'all');
-      });
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          var y = +en.target.getAttribute('data-year');
+          if (y && !TIME.playing && !TIME.scrubbing) TIME.set(y, 'scroll');
+        });
+      }, { rootMargin: '-42% 0px -50% 0px', threshold: 0 });
+      $$('#tl li[data-year]').forEach(function (li) { io.observe(li); });
     }
-    JOURNEY.edges.forEach(function (e) {
-      var a = N[e.from], b = N[e.to], d, mid, anchor = 'middle', lx = 0, ly = -7;
-      if (Math.abs(a.x - b.x) < 1) {
-        var up = a.y > b.y;
-        var v0 = [a.x, a.y + (up ? -NH / 2 : NH / 2)], v1 = [b.x, b.y + (up ? NH / 2 : -NH / 2)];
-        d = 'M' + v0 + ' L' + v1;
-        mid = [(v0[0] + v1[0]) / 2, (v0[1] + v1[1]) / 2]; anchor = 'start'; lx = 9; ly = 4;
-      } else {
-        var q0 = [a.x + NW / 2, a.y], q3 = [b.x - NW / 2, b.y];
-        var dx = (q3[0] - q0[0]) * 0.5;
-        var q1 = [q0[0] + dx, q0[1]], q2 = [q3[0] - dx, q3[1]];
-        d = 'M' + q0 + ' C' + q1 + ' ' + q2 + ' ' + q3;
-        mid = bezMid(q0, q1, q2, q3);
-      }
-      var g = s('g', { 'class': 'route ' + lineClass(e.line), role: 'button', tabindex: '0', 'aria-label': e.who + ', ' + e.label });
-      g.setAttribute('data-line', e.line);
-      g.appendChild(s('path', { 'class': 'hit', d: d }));
-      g.appendChild(s('path', { d: d }));
-      g.appendChild(s('text', { x: mid[0] + lx, y: mid[1] + ly, 'text-anchor': anchor, text: e.label }));
-      g.addEventListener('click', function () { setActive(e.line); });
-      g.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); setActive(e.line); } });
-      routes.appendChild(g);
+    TIME.on(function (y) {
+      var best = null;
+      $$('#tl li[data-year]').forEach(function (li) {
+        var ly = +li.getAttribute('data-year');
+        li.classList.toggle('is-far', Math.abs(ly - y) > 40);
+        if (ly <= y && (!best || ly >= +best.getAttribute('data-year'))) best = li;
+      });
+      $$('#tl li.is-now').forEach(function (li) { li.classList.remove('is-now'); });
+      if (best) best.classList.add('is-now');
     });
-    JOURNEY.nodes.forEach(function (n) {
-      var g = s('g', { 'class': 'place ' + lineClass(n.line), transform: 'translate(' + (n.x - NW / 2) + ' ' + (n.y - NH / 2) + ')' });
-      g.setAttribute('data-line', n.line);
-      g.appendChild(s('rect', { x: 0, y: 0, width: NW, height: NH, rx: 7 }));
-      g.appendChild(s('text', { x: NW / 2, y: 19, 'text-anchor': 'middle', text: n.l1 }));
-      g.appendChild(s('text', { 'class': 'sub', x: NW / 2, y: 35, 'text-anchor': 'middle', text: n.l2 }));
-      places.appendChild(g);
-    });
-    var ol = $('#routes');
-    JOURNEY.edges.forEach(function (e) {
-      var a = N[e.from], b = N[e.to];
-      ol.appendChild(h('li', { class: lineClass(e.line) }, h('b', { text: e.who }), ' ', h('span', { text: a.l1 + ' to ' + b.l1 + ', ' + e.label })));
-    });
-  }
-  function bezMid(p0, p1, p2, p3) {
-    return [(p0[0] + 3 * p1[0] + 3 * p2[0] + p3[0]) / 8, (p0[1] + 3 * p1[1] + 3 * p2[1] + p3[1]) / 8];
   }
 
   /* ---------------- lawmen ---------------- */
+  function renderService() {
+    var box = $('#service'); if (!box) return;
+    var y0 = 1870, y1 = 2030, left = 170, right = 24, rowH = 30, top = 26, width = 900;
+    var rows = SERVICE.slice().sort(function (a, b) { return a.from - b.from; });
+    var height = top + rows.length * rowH + 10;
+    var svg = s('svg', { viewBox: '0 0 ' + width + ' ' + height, role: 'img', 'aria-label': 'Years of police and township service by family member' });
+    var X = function (y) { return left + (y - y0) / (y1 - y0) * (width - left - right); };
+    for (var y = 1880; y <= 2020; y += 20) {
+      svg.appendChild(s('line', { 'class': 'grid', x1: X(y), x2: X(y), y1: top - 8, y2: height - 8 }));
+      svg.appendChild(s('text', { 'class': 'axis', x: X(y), y: 12, 'text-anchor': 'middle', text: String(y) }));
+    }
+    rows.forEach(function (r, i) {
+      var yy = top + i * rowH, end = r.to || 2026;
+      var g = s('g', { 'class': lineClass(r.line) });
+      g.appendChild(s('text', { 'class': 'who', x: left - 10, y: yy + 15, 'text-anchor': 'end', text: r.who }));
+      g.appendChild(s('rect', { 'class': 'bar' + (r.to ? '' : ' open') + (r.approx ? ' open' : ''), x: X(r.from), y: yy + 4, width: Math.max(4, X(end) - X(r.from)), height: 16 }));
+      g.appendChild(s('text', { 'class': 'yrs', x: X(end) + 6, y: yy + 16, text: r.from + (r.to ? '–' + r.to : ' →') + (r.approx ? ' ≈' : '') }));
+      g.appendChild(s('title', { text: r.who + ': ' + r.note }));
+      svg.appendChild(g);
+    });
+    box.appendChild(svg);
+  }
   function renderLawmen() {
+    renderService();
     var tb = $('#law-body');
     LAWMEN.forEach(function (l) {
       var td3 = h('td', {}, l.service);
@@ -611,6 +610,8 @@
     panel.current = id;
     ['line-zirkelbach', 'line-daily', 'line-wathen', 'line-vogt', 'line-all'].forEach(function (c) { panel.el.classList.remove(c); });
     panel.el.classList.add(lineClass(p.line));
+    $('#panel-mark-use').setAttribute('href', '#' + ((LINES[p.line] || {}).mark || 'mark-zirkelbach'));
+    highlightLineage(COUPLE_OF[id]);
     $('#panel-line').textContent = p.context ? 'Context, not an ancestor' : lineName(p.line) + ' line';
     $('#panel-name').textContent = p.name + (p.nick ? ' (' + p.nick + ')' : '');
     $('#panel-dates').textContent = p.dates || '';
@@ -667,9 +668,22 @@
       try { history.replaceState(null, '', '#person-' + id); } catch (err) { location.hash = 'person-' + id; }
     }
   }
+  function highlightLineage(cid) {
+    $$('.is-path', tree.svg).forEach(function (el) { el.classList.remove('is-path'); });
+    if (!cid) return;
+    var down = {}; COUPLES.forEach(function (c) { (c.up || []).forEach(function (u) { if (u) down[u] = c.id; }); });
+    var cur = cid, guard = 0;
+    while (cur && guard++ < 12) {
+      if (tree.nodes[cur]) tree.nodes[cur].classList.add('is-path');
+      var nxt = down[cur];
+      if (nxt) $$('.link[data-for="' + nxt + '"]', tree.svg).forEach(function (l) { l.classList.add('is-path'); });
+      cur = nxt;
+    }
+    if (tree.nodes.dc) tree.nodes.dc.classList.add('is-path');
+  }
   function closePanel() {
     if (!panel.open) return;
-    panel.open = false; panel.current = null;
+    panel.open = false; panel.current = null; highlightLineage(null);
     panel.el.classList.remove('is-open'); $('#backdrop').classList.remove('is-open');
     var done = function () { if (!panel.open) { panel.el.hidden = true; $('#backdrop').hidden = true; } };
     setTimeout(done, 320);
@@ -867,12 +881,288 @@
     ['#c-name', '#c-note'].forEach(function (s) { $(s).addEventListener('input', function () { this.closest('.field').classList.remove('is-bad'); }); });
   }
 
+  /* ======================= time ======================= */
+  var TIME = {
+    year: YEAR_MAX, playing: false, scrubbing: false, listeners: [],
+    on: function (fn) { this.listeners.push(fn); },
+    set: function (y, why) {
+      y = Math.max(YEAR_MIN, Math.min(YEAR_MAX, Math.round(y)));
+      if (y === this.year && why !== 'force') return;
+      this.year = y; var self = this;
+      this.listeners.forEach(function (fn) { try { fn(y, why); } catch (e) { /* keep going */ } });
+    }
+  };
+  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function presenceAt(place, y) {
+    return (place.at || []).reduce(function (a, span) { return a + (y >= span[0] && y <= span[1] ? span[2] : 0); }, 0);
+  }
+  var BORN = []; /* [{name, born, died, line}] for the "living in" readout */
+  function buildBornIndex() {
+    PEOPLE.forEach(function (p) {
+      if (p.context) return;
+      var born = yearOf(/^\d{4}/.test(p.dates || '') ? p.dates : p.born);
+      var died = null; var m = /–\s*(?:after\s*)?(\d{4})|died\s+(?:\d{1,2}\s+\w+\s+)?(\d{4})/.exec(p.dates || '');
+      if (m) died = +(m[1] || m[2]); else if (p.died) died = yearOf(p.died);
+      if (!born && died && /died/.test(p.dates || '')) return;
+      if (born) BORN.push({ name: p.name, born: born, died: died, line: p.line });
+    });
+    (function walk(n) {
+      (n.children || []).forEach(function (c) {
+        var born = yearOf(c.dates || ''), died = null, m = /–\s*(?:\d{1,2}\s+\w+\s+)?(\d{4})/.exec(c.dates || '');
+        if (/^died/.test(c.dates || '')) { died = born; born = null; }
+        else if (m) died = +m[1];
+        if (born) BORN.push({ name: c.name, born: born, died: died, line: 'zirkelbach' });
+        walk(c);
+      });
+    })(DESCENDANTS);
+    BORN.sort(function (a, b) { return a.born - b.born; });
+  }
+  function setupTime() {
+    buildBornIndex();
+    var slider = $('#year'), big = $('#year-big'), sub = $('#year-sub'), play = $('#play'), reset = $('#year-reset');
+    if (!slider) return;
+    var ticks = $('#ticks');
+    [1670, 1750, 1800, 1850, 1900, 1950, 2000].forEach(function (y) {
+      var sp = h('span', { text: String(y) }); sp.style.left = ((y - YEAR_MIN) / (YEAR_MAX - YEAR_MIN) * 100) + '%'; ticks.appendChild(sp);
+    });
+    slider.addEventListener('input', function () { TIME.scrubbing = true; TIME.set(+slider.value, 'slider'); clearTimeout(slider._t); slider._t = setTimeout(function () { TIME.scrubbing = false; }, 400); });
+    var raf = null, last = 0;
+    function stop() { TIME.playing = false; play.textContent = '▶'; play.setAttribute('aria-label', 'Play through time'); if (raf) cancelAnimationFrame(raf); raf = null; }
+    function step(ts) {
+      if (!TIME.playing) return;
+      if (!last) last = ts;
+      var dt = Math.min(100, ts - last); last = ts;
+      /* slower through the busy nineteenth century, faster through the quiet stretches */
+      var y = TIME.year, speed = (y >= 1800 && y <= 1935) ? 9 : 22; /* years per second */
+      TIME.set(Math.min(YEAR_MAX, y + dt / 1000 * speed), 'play');
+      if (TIME.year >= YEAR_MAX) { stop(); return; }
+      raf = requestAnimationFrame(step);
+    }
+    play.addEventListener('click', function () {
+      if (TIME.playing) { stop(); return; }
+      if (TIME.year >= YEAR_MAX) TIME.set(YEAR_MIN, 'play');
+      TIME.playing = true; last = 0; play.textContent = '❚❚'; play.setAttribute('aria-label', 'Pause');
+      raf = requestAnimationFrame(step);
+    });
+    reset.addEventListener('click', function () { stop(); TIME.set(YEAR_MAX, 'reset'); });
+    var asof = $('#tree-asof');
+    if (asof) asof.addEventListener('click', function () { stop(); TIME.set(YEAR_MAX, 'reset'); });
+    TIME.on(function (y, why) {
+      if (why !== 'slider') slider.value = String(y);
+      big.textContent = String(y);
+      sub.textContent = y >= YEAR_MAX ? 'the family today' : y < 1700 ? 'a carpenter sails from Bristol' : y < 1790 ? 'a century in Charles County, Maryland' : y < 1817 ? 'Catholic Maryland moves to Kentucky' : y < 1837 ? 'the Irish reach Gallatin County' : y < 1853 ? 'the Germans arrive in Vanderburgh County' : y < 1885 ? 'farms at St. James, the Pond Settlement, Knight Township' : y < 1905 ? 'the move to Ridgway, and back' : y < 1931 ? 'Evansville: a saloon, a badge, a farm on Pollack Avenue' : y < 1960 ? 'Donald and Cleo raise six children' : 'the family spreads out';
+      /* where */
+      var rows = Object.keys(PLACES).map(function (k) { return { k: k, p: PLACES[k], w: presenceAt(PLACES[k], y) }; }).filter(function (r) { return r.w > 0; }).sort(function (a, b) { return b.w - a.w; });
+      var where = $('#where'); where.innerHTML = '';
+      if (rows.length) { where.appendChild(h('b', { text: 'Where the family was' })); where.appendChild(document.createElement('br')); rows.slice(0, 5).forEach(function (r) { where.appendChild(h('span', { class: 'w ' + lineClass(r.p.line) }, h('i'), r.p.n.split(',')[0] + (r.p.r ? ', ' + r.p.r : ''))); }); }
+      /* living */
+      var alive = BORN.filter(function (b) { return b.born <= y && (b.died == null || b.died >= y); });
+      var box = $('#alive'); box.innerHTML = '';
+      if (y >= YEAR_MAX) { box.appendChild(h('b', { text: BORN.length + ' people on this site' })); box.appendChild(document.createTextNode(' with a known birth year, from John Wathen in the 1640s to the family today.')); }
+      else if (alive.length) { box.appendChild(h('b', { text: alive.length + (alive.length === 1 ? ' person' : ' people') + ' on this site living in ' + y })); box.appendChild(document.createTextNode(': ' + alive.slice(0, 7).map(function (b) { return b.name.replace(/ “[^”]+”/, ''); }).join(', ') + (alive.length > 7 ? ' and ' + (alive.length - 7) + ' more' : '') + '.')); }
+      else box.appendChild(h('span', { text: 'No one on this site had been born yet.' }));
+      /* tree reveal */
+      var tf = $('#tree-frame');
+      if (tf) {
+        $$('[data-born]', tf).forEach(function (el) { el.classList.toggle('is-unborn', +el.getAttribute('data-born') > y); });
+        if (asof) { asof.hidden = y >= YEAR_MAX; asof.textContent = 'Showing the family as of ' + y + ' · show everyone'; }
+      }
+    });
+    TIME.set(YEAR_MAX, 'force');
+  }
+
+  /* ======================= globe ======================= */
+  var DOTS = null;
+  function decodeDots() {
+    if (DOTS) return DOTS;
+    var bin = atob(LAND_DOTS_B64), n = bin.length / 2, i16 = new Int16Array(n);
+    for (var i = 0; i < n; i++) { var lo = bin.charCodeAt(2 * i), hi = bin.charCodeAt(2 * i + 1); var v = lo | (hi << 8); i16[i] = v > 32767 ? v - 65536 : v; }
+    var m = n / 2, xs = new Float32Array(m), ys = new Float32Array(m), zs = new Float32Array(m);
+    for (var j = 0; j < m; j++) {
+      var lat = i16[2 * j] / 10 * Math.PI / 180, lon = i16[2 * j + 1] / 10 * Math.PI / 180, c = Math.cos(lat);
+      xs[j] = c * Math.sin(lon); ys[j] = Math.sin(lat); zs[j] = c * Math.cos(lon);
+    }
+    DOTS = { n: m, x: xs, y: ys, z: zs };
+    return DOTS;
+  }
+  function vec(lat, lon) { var la = lat * Math.PI / 180, lo = lon * Math.PI / 180, c = Math.cos(la); return [c * Math.sin(lo), Math.sin(la), c * Math.cos(lo)]; }
+  function slerp(a, b, t) {
+    var d = Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2])), om = Math.acos(d);
+    if (om < 1e-6) return a.slice();
+    var sa = Math.sin((1 - t) * om) / Math.sin(om), sb = Math.sin(t * om) / Math.sin(om);
+    return [a[0] * sa + b[0] * sb, a[1] * sa + b[1] * sb, a[2] * sa + b[2] * sb];
+  }
+  function cssColor(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function lineHex(line) { return cssColor(line === 'daily' ? '--c-d' : line === 'wathen' ? '--c-w' : line === 'vogt' ? '--c-v' : line === 'zirkelbach' ? '--c-z' : '--ink-2'); }
+  function hexToRgb(hex) { var m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(hex); return m ? [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)] : [120, 120, 120]; }
+
+  function Globe(canvas, opts) {
+    var ctx = canvas.getContext && canvas.getContext('2d');
+    if (!ctx) return null;
+    var dots = decodeDots();
+    var G = { canvas: canvas, ctx: ctx, lon: -40, lat: 28, targetLon: null, targetLat: null, idleAt: 0, dragging: false, year: YEAR_MAX, needs: true, visible: true, auto: opts.auto !== false, size: 0 };
+    var routes = ROUTES.map(function (r) {
+      var a = PLACES[r.from], b = PLACES[r.to], va = vec(a.lat, a.lon), vb = vec(b.lat, b.lon), pts = [];
+      var ang = Math.acos(Math.max(-1, Math.min(1, va[0] * vb[0] + va[1] * vb[1] + va[2] * vb[2])));
+      var lift = 0.02 + 0.10 * Math.min(1, ang / 1.2);
+      for (var i = 0; i <= 64; i++) { var tt = i / 64, v = slerp(va, vb, tt), k = 1 + lift * Math.sin(tt * Math.PI); pts.push([v[0] * k, v[1] * k, v[2] * k]); }
+      var mid = slerp(va, vb, 0.5), mlat = Math.asin(mid[1]) * 180 / Math.PI, mlon = Math.atan2(mid[0], mid[2]) * 180 / Math.PI;
+      return { r: r, pts: pts, mlat: mlat, mlon: mlon, rgb: hexToRgb(lineHex(r.line)) };
+    });
+    var places = Object.keys(PLACES).map(function (k) { var p = PLACES[k]; return { k: k, p: p, v: vec(p.lat, p.lon), rgb: hexToRgb(lineHex(p.line)) }; });
+    function resize() {
+      var rect = canvas.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+      var sz = Math.max(1, Math.floor(Math.min(rect.width, rect.height || rect.width)));
+      if (sz === G.size && canvas.width === Math.floor(sz * dpr)) return;
+      G.size = sz; canvas.width = Math.floor(sz * dpr); canvas.height = Math.floor(sz * dpr); G.dpr = dpr; G.needs = true;
+    }
+    function rot() {
+      var lo = G.lon * Math.PI / 180, la = G.lat * Math.PI / 180;
+      G.cl = Math.cos(lo); G.sl = Math.sin(lo); G.ca = Math.cos(la); G.sa = Math.sin(la);
+    }
+    function proj(x, y, z) { /* returns [sx, sy, depth] in unit sphere coords */
+      var x1 = x * G.cl - z * G.sl, z1 = x * G.sl + z * G.cl;
+      var y2 = y * G.ca - z1 * G.sa, z2 = y * G.sa + z1 * G.ca;
+      return [x1, y2, z2];
+    }
+    function draw() {
+      resize(); rot();
+      var S = canvas.width, cx = S / 2, cy = S / 2, R = S * 0.46, c = ctx, dotRGB = cssColor('--globe-dot') || '27, 32, 38', seaRGB = cssColor('--globe-sea') || '233, 234, 227', heatRGB = cssColor('--heat') || '214, 122, 38';
+      c.clearRect(0, 0, S, S);
+      /* sphere */
+      var grd = c.createRadialGradient(cx - R * 0.35, cy - R * 0.4, R * 0.1, cx, cy, R);
+      grd.addColorStop(0, 'rgba(' + seaRGB + ', 0.0)'); grd.addColorStop(1, 'rgba(' + seaRGB + ', 1)');
+      c.fillStyle = 'rgba(' + seaRGB + ', 0.55)'; c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.fill();
+      c.fillStyle = grd; c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.fill();
+      c.strokeStyle = 'rgba(' + dotRGB + ', 0.18)'; c.lineWidth = Math.max(1, S / 700); c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.stroke();
+      /* land dots, in four depth buckets so alpha changes stay cheap */
+      var r0 = Math.max(0.9, S / 420), buckets = [[], [], [], []];
+      for (var i = 0; i < dots.n; i++) {
+        var p = proj(dots.x[i], dots.y[i], dots.z[i]);
+        if (p[2] <= 0.02) continue;
+        buckets[p[2] > 0.75 ? 3 : p[2] > 0.5 ? 2 : p[2] > 0.25 ? 1 : 0].push(cx + p[0] * R, cy - p[1] * R);
+      }
+      [0.18, 0.32, 0.5, 0.68].forEach(function (a, bi) {
+        var b = buckets[bi]; c.fillStyle = 'rgba(' + dotRGB + ', ' + a + ')'; c.beginPath();
+        var rr = r0 * (0.75 + bi * 0.1);
+        for (var k = 0; k < b.length; k += 2) { c.moveTo(b[k] + rr, b[k + 1]); c.arc(b[k], b[k + 1], rr, 0, 6.2832); }
+        c.fill();
+      });
+      var y = G.year;
+      /* glows: presence at this year */
+      places.forEach(function (pl) {
+        var w = presenceAt(pl.p, y); if (!w) return;
+        var p = proj(pl.v[0], pl.v[1], pl.v[2]); if (p[2] <= 0) return;
+        var sx = cx + p[0] * R, sy = cy - p[1] * R, rad = R * (0.04 + 0.03 * Math.sqrt(w)) * (0.6 + 0.4 * p[2]);
+        var a0 = Math.min(0.7, 0.22 + 0.07 * Math.sqrt(w)) * p[2];
+        var g = c.createRadialGradient(sx, sy, 0, sx, sy, rad);
+        g.addColorStop(0, 'rgba(' + heatRGB + ', ' + a0 + ')'); g.addColorStop(0.45, 'rgba(' + heatRGB + ', ' + (a0 * 0.45) + ')'); g.addColorStop(1, 'rgba(' + heatRGB + ', 0)');
+        c.fillStyle = g; c.beginPath(); c.arc(sx, sy, rad, 0, 6.2832); c.fill();
+        c.fillStyle = 'rgba(' + pl.rgb.join(',') + ', ' + (0.9 * p[2]) + ')'; c.beginPath(); c.arc(sx, sy, Math.max(1.5, S / 260), 0, 6.2832); c.fill();
+      });
+      /* routes */
+      c.lineCap = 'round'; c.lineJoin = 'round';
+      routes.forEach(function (rt) {
+        var r = rt.r, prog = (y - r.y) / r.dur; if (prog <= 0) return; prog = Math.min(1, prog);
+        var done = prog >= 1, n = Math.floor(prog * (rt.pts.length - 1)), col = rt.rgb.join(',');
+        c.strokeStyle = 'rgba(' + col + ', ' + (done ? 0.5 : 0.95) + ')'; c.lineWidth = Math.max(1.2, S / (done ? 520 : 380));
+        c.beginPath(); var pen = false;
+        for (var i = 0; i <= n; i++) {
+          var q = rt.pts[i], p = proj(q[0], q[1], q[2]);
+          if (p[2] <= -0.05) { pen = false; continue; }
+          var sx = cx + p[0] * R, sy = cy - p[1] * R;
+          if (!pen) { c.moveTo(sx, sy); pen = true; } else c.lineTo(sx, sy);
+        }
+        c.stroke();
+        if (!done && n > 0) { var hq = rt.pts[n], hp = proj(hq[0], hq[1], hq[2]); if (hp[2] > -0.05) { c.fillStyle = 'rgba(' + col + ', 1)'; c.beginPath(); c.arc(cx + hp[0] * R, cy - hp[1] * R, Math.max(2, S / 160), 0, 6.2832); c.fill(); } }
+      });
+      /* labels: a few of the most populated visible places */
+      if (opts.labels !== false) {
+        var vis = places.map(function (pl) { var w = presenceAt(pl.p, y); var p = proj(pl.v[0], pl.v[1], pl.v[2]); return { pl: pl, w: w, p: p }; }).filter(function (o) { return o.w > 0 && o.p[2] > 0.25; }).sort(function (a, b) { return b.w - a.w; }).slice(0, S > 700 ? 6 : 4);
+        c.font = Math.round(Math.max(10, S / 52)) + 'px ' + (cssColor('--font-ui') || 'system-ui');
+        c.textBaseline = 'middle';
+        var used = [];
+        vis.forEach(function (o) {
+          var sx = cx + o.p[0] * R + S / 90, sy = cy - o.p[1] * R;
+          if (used.some(function (u) { return Math.abs(u[1] - sy) < S / 40 && Math.abs(u[0] - sx) < S / 6; })) return;
+          used.push([sx, sy]);
+          var label = o.pl.p.n.split(',')[0].replace(' and Knight Township', '').replace(' and Ridgway', '').replace(' and St. Wendel', '');
+          c.lineWidth = 3; c.strokeStyle = 'rgba(' + seaRGB + ', 0.85)'; c.strokeText(label, sx, sy);
+          c.fillStyle = 'rgba(' + dotRGB + ', ' + (0.55 + 0.4 * o.p[2]) + ')'; c.fillText(label, sx, sy);
+        });
+      }
+      G.needs = false;
+    }
+    function tick(ts) {
+      if (!G.visible) { G.raf = null; return; }
+      var moving = false;
+      if (!G.dragging) {
+        if (G.targetLon != null) {
+          var dl = ((G.targetLon - G.lon + 540) % 360) - 180, da = G.targetLat - G.lat;
+          if (Math.abs(dl) > 0.05 || Math.abs(da) > 0.05) { G.lon += dl * 0.06; G.lat += da * 0.06; moving = true; } else { G.targetLon = null; }
+        } else if (G.auto && !reducedMotion && ts - G.idleAt > 4000) { G.lon += 0.035; moving = true; }
+      }
+      if (moving || G.needs) draw();
+      G.raf = requestAnimationFrame(tick);
+    }
+    function pt(e) { var r = canvas.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+    var last = null;
+    canvas.addEventListener('pointerdown', function (e) { if (e.button) return; G.dragging = true; last = pt(e); G.targetLon = null; try { canvas.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ } });
+    canvas.addEventListener('pointermove', function (e) {
+      if (!G.dragging || !last) return; var p = pt(e), k = 180 / Math.max(200, G.size);
+      G.lon += (p[0] - last[0]) * k * 0.9; G.lat = Math.max(-80, Math.min(80, G.lat + (p[1] - last[1]) * k * 0.9)); last = p; G.needs = true; G.idleAt = performance.now();
+    });
+    function up() { G.dragging = false; last = null; G.idleAt = performance.now(); }
+    canvas.addEventListener('pointerup', up); canvas.addEventListener('pointercancel', up);
+    canvas.addEventListener('keydown', function (e) { var d = { ArrowLeft: [-8, 0], ArrowRight: [8, 0], ArrowUp: [0, 6], ArrowDown: [0, -6] }[e.key]; if (!d) return; e.preventDefault(); G.lon += d[0]; G.lat = Math.max(-80, Math.min(80, G.lat + d[1])); G.needs = true; G.idleAt = performance.now(); });
+    canvas.tabIndex = 0;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { G.visible = en[0].isIntersecting; if (G.visible && !G.raf) G.raf = requestAnimationFrame(tick); }, { threshold: 0.05 }).observe(canvas);
+    window.addEventListener('resize', function () { G.needs = true; });
+    if (window.matchMedia) { var mq = window.matchMedia('(prefers-color-scheme: dark)'); if (mq.addEventListener) mq.addEventListener('change', function () { routes.forEach(function (rt) { rt.rgb = hexToRgb(lineHex(rt.r.line)); }); places.forEach(function (pl) { pl.rgb = hexToRgb(lineHex(pl.p.line)); }); G.needs = true; }); }
+    G.setYear = function (y, follow) {
+      G.year = y; G.needs = true;
+      if (follow) {
+        var active = routes.filter(function (rt) { return y >= rt.r.y && y <= rt.r.y + rt.r.dur + 2; });
+        if (active.length) { var a = active[active.length - 1]; G.targetLon = a.mlon; G.targetLat = Math.max(10, Math.min(55, a.mlat)); }
+        else if (y >= YEAR_MAX) { G.targetLon = -40; G.targetLat = 28; }
+        else {
+          var sx = 0, sy = 0, sz = 0, sw = 0;
+          places.forEach(function (pl) { var w = presenceAt(pl.p, y); if (!w) return; sx += pl.v[0] * w; sy += pl.v[1] * w; sz += pl.v[2] * w; sw += w; });
+          if (sw) { var L = Math.hypot(sx, sy, sz) || 1; G.targetLat = Math.max(10, Math.min(50, Math.asin(sy / L) * 180 / Math.PI)); G.targetLon = Math.atan2(sx / L, sz / L) * 180 / Math.PI; }
+        }
+      }
+    };
+    G.lookAt = function (lon, lat) { G.targetLon = lon; G.targetLat = lat; };
+    G.raf = requestAnimationFrame(tick);
+    return G;
+  }
+  function setupGlobes() {
+    var hero = $('#globe-hero'), main = $('#globe-main');
+    var gh = hero && Globe(hero, { auto: true, labels: false });
+    var gm = main && Globe(main, { auto: true, labels: true });
+    if (gh) {
+      /* a cinematic loop: the routes draw themselves across three centuries, hold, and begin again */
+      if (reducedMotion) { gh.setYear(YEAR_MAX, false); gh.lookAt(-45, 30); }
+      else {
+        var t0 = null, LEN = 16000, HOLD = 5000;
+        gh.lookAt(-45, 30);
+        (function loop(ts) {
+          if (!t0) t0 = ts;
+          var el = (ts - t0) % (LEN + HOLD), yr = el < LEN ? YEAR_MIN + (YEAR_MAX - YEAR_MIN) * easeInOut(el / LEN) : YEAR_MAX;
+          gh.setYear(Math.round(yr), false);
+          requestAnimationFrame(loop);
+        })(0);
+      }
+    }
+    if (gm) TIME.on(function (y, why) { gm.setYear(y, why === 'play' || why === 'scroll' || why === 'slider'); });
+    function easeInOut(x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
+  }
+
   function init() {
     renderFamilies();
     renderTree();
     setupPeople();
     renderTimeline();
-    renderJourneys();
     renderLawmen();
     renderResearch();
     renderDescendants();
@@ -880,6 +1170,8 @@
     setupPanel();
     setupMenu();
     setupNav();
+    setupTime();
+    setupGlobes();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

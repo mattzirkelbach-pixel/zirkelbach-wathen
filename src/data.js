@@ -16,10 +16,22 @@
 ------------------------------------------------------------------- */
 
 const LINES = {
-  zirkelbach: { key: "z", name: "Zirkelbach", blurb: "German Catholic farmers. Andrew Zirkelbach came from the Bavarian Rhön as a boy, about 1837–40, with his parents, brother and sisters, and farmed 160 acres near St. James church on the Vanderburgh–Gibson county line. His wife, Katherine Lintzenich, came from the Prussian Rhineland, and her family farmed just down the road." },
-  daily:      { key: "d", name: "Daily", blurb: "Irish Catholic farmers in Illinois. William Daily came from Queen's County about 1816–19 with almost nothing and built up about 1,000 acres near Ridgway. His granddaughter Carrie married Pete Zirkelbach." },
-  wathen:     { key: "w", name: "Wathen", blurb: "An old Catholic family from Maryland by way of Kentucky. They moved from Uniontown, Kentucky, to Knight Township about 1884. Their line runs back to a man who landed in Maryland under indenture in 1670." },
-  vogt:       { key: "v", name: "Vogt", blurb: "German farmers from Bavaria and Hesse-Darmstadt who came to Vanderburgh County in 1852 and settled in Knight Township, near the farm the Wathens later bought." }
+  zirkelbach: { key: "z", name: "Zirkelbach", mark: "mark-zirkelbach",
+    meaning: "From Zirkenbach, a hamlet of Fulda recorded in the twelfth century as Cirkumbach. In German the parts read Zirkel, a compass, and Bach, a brook.",
+    blurb: "German Catholic farmers from the Bavarian Rhön. Andrew Zirkelbach came as a boy about 1837 with his parents, a baker turned farmer, and worked 160 acres near St. James church for thirty-five years. His wife Katherine Lintzenich came from the Prussian Rhineland.",
+    from: "Wegfurt, in the Rhön", to: "St. James, Indiana", when: "about 1837–40" },
+  daily:      { key: "d", name: "Daily", mark: "mark-daily",
+    meaning: "Ó Dálaigh, descendant of Dálach, from dáil, an assembly. The family were Ireland's hereditary poets; Cú Connacht Ó Dálaigh, who died in 1139, was called the first ollamh of poetry in all Ireland.",
+    blurb: "Irish Catholic farmers in Illinois. William Daily crossed from Queen's County about 1817, nine weeks under sail, and reached Gallatin County with ten dollars. He died in 1858 owning a thousand acres. His granddaughter Carrie married Pete Zirkelbach.",
+    from: "Queen's County, Ireland", to: "Gallatin County, Illinois", when: "1816–19" },
+  wathen:     { key: "w", name: "Wathen", mark: "mark-wathen",
+    meaning: "An English place-name surname: Watendlath in Cumberland, Old Norse for lake's end, or Watton in Yorkshire, the wet hill. John Wathen, the immigrant, was a carpenter and wheelwright.",
+    blurb: "Maryland Catholics by way of Kentucky. John Wathen signed a three-year indenture in Bristol in 1670 and died a landowner in Charles County in 1705. His descendants moved to Kentucky with the Catholic migration and to Knight Township about 1884.",
+    from: "Bristol, England", to: "Charles County, Maryland", when: "1670" },
+  vogt:       { key: "v", name: "Vogt", mark: "mark-vogt",
+    meaning: "German for a steward or bailiff, from the Latin advocatus, one called to speak for others. Charles Vogt was Knight Township's constable and justice of the peace.",
+    blurb: "German farmers from Bavaria and Hesse-Darmstadt who crossed in 1852, in the hungry years after the potato failures, and settled in Knight Township east of Evansville, near the farm the Wathens later bought.",
+    from: "Hesse-Darmstadt", to: "Knight Township, Indiana", when: "1852" }
 };
 
 const PEOPLE = [
@@ -602,36 +614,57 @@ const EVENTS = [
   { y: "2026", line: "zirkelbach", t: "The family tree is compiled from the family folder (30 October) and checked against the records (31 October).", s: [50] }
 ];
 
-/* ---------------- Journeys ---------------- */
-const JOURNEY = {
-  nodes: [
-    { id: "weg", x: 100, y: 70,  line: "zirkelbach", l1: "Wegfurt, Rhön", l2: "Bavaria" },
-    { id: "lin", x: 100, y: 170, line: "zirkelbach", l1: "Linzenich, Rhineland", l2: "Prussia" },
-    { id: "irl", x: 100, y: 330, line: "daily", l1: "Queen's County", l2: "Ireland" },
-    { id: "bri", x: 100, y: 450, line: "wathen", l1: "Bristol", l2: "England" },
-    { id: "hes", x: 100, y: 540, line: "vogt", l1: "Hesse-Darmstadt", l2: "and Bavaria" },
-    { id: "stj", x: 350, y: 130, line: "zirkelbach", l1: "St. James and St. Wendel", l2: "Vanderburgh–Gibson line" },
-    { id: "oh",  x: 350, y: 250, line: "daily", l1: "Mansfield", l2: "Ohio" },
-    { id: "md",  x: 350, y: 450, line: "wathen", l1: "Charles County", l2: "Maryland" },
-    { id: "gal", x: 600, y: 330, line: "daily", l1: "Gallatin County", l2: "Illinois" },
-    { id: "ky",  x: 600, y: 450, line: "wathen", l1: "Union County", l2: "Kentucky" },
-    { id: "evv", x: 850, y: 330, line: "all", l1: "Evansville", l2: "married 5 April 1930" },
-    { id: "knt", x: 850, y: 500, line: "vogt", l1: "Knight Township", l2: "east of Evansville" }
-  ],
-  edges: [
-    { from: "weg", to: "stj", line: "zirkelbach", label: "about 1837–40", who: "the Zirkelbachs" },
-    { from: "lin", to: "stj", line: "zirkelbach", label: "about 1840", who: "the Lintzenichs" },
-    { from: "stj", to: "gal", line: "zirkelbach", label: "1884–85", who: "much of the Zirkelbach family" },
-    { from: "gal", to: "evv", line: "zirkelbach", label: "by 1905", who: "Pete and Carrie Zirkelbach" },
-    { from: "irl", to: "gal", line: "daily", label: "1816–19", who: "William Daily" },
-    { from: "oh",  to: "gal", line: "daily", label: "by 1859", who: "Eleanora Stout" },
-    { from: "bri", to: "md",  line: "wathen", label: "1670", who: "John Wathen" },
-    { from: "md",  to: "ky",  line: "wathen", label: "before 1816", who: "Thomas Wathen and Ann Simms" },
-    { from: "ky",  to: "knt", line: "wathen", label: "about 1884", who: "Thomas Raphael Wathen and his sons" },
-    { from: "hes", to: "knt", line: "vogt", label: "1852", who: "John Philip and Hettie Vogt" },
-    { from: "knt", to: "evv", line: "wathen", label: "1930", who: "Cleo Wathen, to marry Donald" }
-  ]
+/* ---------------- Places and movements (for the globes) ----------------
+   Presence weights are rough counts of family members the records place in each spot during each span,
+   used for the glow; they are estimates, not a census. */
+const PLACES = {
+  bristol:    { n: "Bristol", r: "England", lat: 51.45, lon: -2.59, line: "wathen", at: [[1640, 1670, 1]] },
+  charles:    { n: "Port Tobacco, Charles County", r: "Maryland", lat: 38.51, lon: -77.03, line: "wathen", at: [[1670, 1705, 4], [1705, 1790, 10], [1790, 1816, 5]] },
+  pottinger:  { n: "Pottinger's Creek", r: "Kentucky", lat: 37.66, lon: -85.52, line: "wathen", at: [[1785, 1830, 6]] },
+  union:      { n: "Uniontown, Union County", r: "Kentucky", lat: 37.77, lon: -87.93, line: "wathen", at: [[1811, 1850, 6], [1850, 1884, 12], [1884, 1920, 4]] },
+  laois:      { n: "Queen's County", r: "Ireland", lat: 53.03, lon: -7.30, line: "daily", at: [[1770, 1817, 4]] },
+  mansfield:  { n: "Mansfield", r: "Ohio", lat: 40.76, lon: -82.52, line: "daily", at: [[1830, 1859, 4]] },
+  gallatin:   { n: "Pond Settlement and Ridgway", r: "Illinois", lat: 37.80, lon: -88.26, line: "daily", at: [[1817, 1858, 7], [1859, 1915, 14], [1885, 1961, 18], [1915, 1980, 8], [1980, 2026, 4]] },
+  wegfurt:    { n: "Wegfurt, in the Rhön", r: "Bavaria", lat: 50.41, lon: 10.11, line: "zirkelbach", at: [[1760, 1837, 7]] },
+  linzenich:  { n: "Linzenich", r: "Rhineland", lat: 50.70, lon: 6.60, line: "zirkelbach", at: [[1780, 1840, 5]] },
+  hesse:      { n: "Hesse-Darmstadt", r: "", lat: 49.87, lon: 8.65, line: "vogt", at: [[1790, 1852, 5]] },
+  stjames:    { n: "St. James and St. Wendel", r: "Indiana", lat: 38.19, lon: -87.57, line: "zirkelbach", at: [[1838, 1885, 18], [1885, 1917, 8], [1917, 1960, 3]] },
+  evansville: { n: "Evansville and Knight Township", r: "Indiana", lat: 37.97, lon: -87.55, line: "all", at: [[1852, 1884, 7], [1884, 1930, 16], [1930, 1960, 24], [1960, 1990, 34], [1990, 2026, 44]] },
+  madison:    { n: "Madison and Anderson", r: "Indiana", lat: 39.4, lon: -85.5, line: "zirkelbach", at: [[1920, 1965, 3]] },
+  stlouis:    { n: "St. Louis", r: "Missouri", lat: 38.63, lon: -90.20, line: "zirkelbach", at: [[1900, 1995, 3]] },
+  albany:     { n: "Albany", r: "Georgia", lat: 31.58, lon: -84.16, line: "zirkelbach", at: [[1966, 2012, 4]] },
+  peoria:     { n: "Peoria", r: "Arizona", lat: 33.58, lon: -112.24, line: "zirkelbach", at: [[1998, 2013, 2]] },
+  newburgh:   { n: "Newburgh", r: "Indiana", lat: 37.94, lon: -87.40, line: "zirkelbach", at: [[1985, 2026, 6]] }
 };
+/* who moved where, and when; `dur` is how many years the drawn arc takes */
+const ROUTES = [
+  { from: "bristol", to: "charles", y: 1670, dur: 1, line: "wathen", who: "John Wathen, under a three-year indenture", s: [14] },
+  { from: "charles", to: "pottinger", y: 1790, dur: 6, line: "wathen", who: "Wathens with the Maryland Catholic migration", s: [12, 36] },
+  { from: "pottinger", to: "union", y: 1814, dur: 3, line: "wathen", who: "Thomas Wathen and Ann Simms, 'first to Ky.'", s: [10, 12] },
+  { from: "laois", to: "gallatin", y: 1817, dur: 2, line: "daily", who: "William Daily, nine weeks under sail", s: [1] },
+  { from: "wegfurt", to: "stjames", y: 1837, dur: 2, line: "zirkelbach", who: "Andrew Zirkelbach, aged about ten, with his parents", s: [2] },
+  { from: "linzenich", to: "stjames", y: 1840, dur: 2, line: "zirkelbach", who: "Katherine Lintzenich with her parents", s: [2, 61] },
+  { from: "hesse", to: "evansville", y: 1852, dur: 1, line: "vogt", who: "John Philip and Hettie Vogt with two-year-old Charles", s: [7] },
+  { from: "mansfield", to: "gallatin", y: 1857, dur: 2, line: "daily", who: "Eleanora Stout, married there by 1859", s: [1] },
+  { from: "union", to: "evansville", y: 1884, dur: 1, line: "wathen", who: "Thomas Raphael Wathen and his three sons", s: [10] },
+  { from: "stjames", to: "gallatin", y: 1885, dur: 1, line: "zirkelbach", who: "William J. and much of the Zirkelbach family", s: [2] },
+  { from: "gallatin", to: "madison", y: 1900, dur: 2, line: "zirkelbach", who: "Frank Joseph Zirkelbach and Ella Croghan", s: [65] },
+  { from: "evansville", to: "stlouis", y: 1900, dur: 2, line: "zirkelbach", who: "Mary M. Zirkelbach Kohl", s: [65] },
+  { from: "gallatin", to: "evansville", y: 1904, dur: 1, line: "zirkelbach", who: "Pete and Carrie Zirkelbach, newly married", s: [1, 2] },
+  { from: "evansville", to: "albany", y: 1966, dur: 1, line: "zirkelbach", who: "Don and Sylvia Zirkelbach (placement unproven)", s: [57] },
+  { from: "evansville", to: "newburgh", y: 1985, dur: 1, line: "zirkelbach", who: "the next generation, across the Warrick line", s: [61] },
+  { from: "evansville", to: "peoria", y: 1998, dur: 1, line: "zirkelbach", who: "Jeryl and Gail Zirkelbach, retired", s: [62] }
+];
+const YEAR_MIN = 1660, YEAR_MAX = 2026;
+/* service spans for the lawmen chart (end null = not public) */
+const SERVICE = [
+  { who: "Peter Vogt", from: 1885, to: 1926, line: "vogt", note: "Evansville police, 41 years" },
+  { who: "Charles Vogt", from: 1878, to: 1900, line: "vogt", note: "Constable and justice of the peace, Knight Township (terms approximate)", approx: true },
+  { who: "Pete Zirkelbach", from: 1924, to: 1934, line: "zirkelbach", note: "Evansville police, to his death" },
+  { who: "Donald H. Zirkelbach", from: 1934, to: 1955, line: "zirkelbach", note: "Evansville police; lieutenant from 1948" },
+  { who: "John C. Zirkelbach", from: 1973, to: null, line: "zirkelbach", note: "Evansville police from 1973" },
+  { who: "Adam Von Zirkelbach", from: 1995, to: null, line: "zirkelbach", note: "Evansville police from 1995; then federal law enforcement" }
+];
 
 /* ---------------- Lawmen ---------------- */
 const LAWMEN = [
