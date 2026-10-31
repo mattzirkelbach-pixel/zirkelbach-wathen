@@ -177,6 +177,7 @@ section + section { border-top: 1px solid var(--rule); }
   cursor: grab;
 }
 .tree-frame.is-dragging { cursor: grabbing; }
+@media (max-width: 640px) { .tree-frame { height: 52vh; min-height: 360px; } .tree-tools .hint { margin-left: 0; } }
 .tree-frame svg { width: 100%; height: 100%; display: block; }
 .tree-frame .node rect.box { fill: var(--card); stroke: var(--lc); stroke-width: 1.2; }
 .tree-frame .node rect.bar { fill: var(--lc); }
@@ -422,7 +423,7 @@ footer p + p { margin-top: 6px; }
         <button class="btn" id="tree-home" type="button">Donald and Cleo</button>
         <button class="btn icon" id="tree-in" type="button" aria-label="Zoom in">+</button>
         <button class="btn icon" id="tree-out" type="button" aria-label="Zoom out">−</button>
-        <span class="hint">Drag to move, pinch or Ctrl-scroll to zoom.</span>
+        <span class="hint">Drag to move; pinch or Ctrl-scroll to zoom. Everyone is also listed under People.</span>
       </div>
       <div class="tree-frame" id="tree-frame">
         <svg id="tree-svg" aria-label="Family tree" role="group"></svg>
@@ -1494,7 +1495,7 @@ const SOURCES = [
 
     setupPanZoom();
     $('#tree-fit').addEventListener('click', fitTree);
-    $('#tree-home').addEventListener('click', function () { focusCouple('dc', 1.1, 60); });
+    $('#tree-home').addEventListener('click', function () { if (narrow()) focusCouple('dc', 1, 70); else focusCouple('dc', 1.1); });
     $('#tree-in').addEventListener('click', function () { zoomAt(1.25, tree.frame.clientWidth / 2, tree.frame.clientHeight / 2); });
     $('#tree-out').addEventListener('click', function () { zoomAt(0.8, tree.frame.clientWidth / 2, tree.frame.clientHeight / 2); });
     $$('.tree-tools .chip').forEach(function (chip) {
@@ -1509,7 +1510,7 @@ const SOURCES = [
         });
       });
     });
-    if (tree.frame.clientWidth >= 900) fitTree(); else focusCouple('dc', 1, 90);
+    if (narrow()) focusCouple('dc', 1, 70); else fitTree();
   }
 
   function applyView() {
@@ -1529,17 +1530,21 @@ const SOURCES = [
     void fw; void fh; void base;
     applyView();
   }
-  function focusCouple(id, cssPerUnit, bias) {
-    var c = C[id]; bias = bias || 0;
+  function focusCouple(id, cssPerUnit, topMargin) {
+    /* centres the couple horizontally; vertically centres it, or, when topMargin is given,
+       places the couple that many units below the frame's top edge so nothing unrelated shows above it */
+    var c = C[id];
     var base = frameScale();
     var k = Math.min(8, Math.max(0.3, cssPerUnit / base)); /* so that one tree unit is cssPerUnit screen pixels */
     var fw = tree.frame.clientWidth / base, fh = tree.frame.clientHeight / base; /* frame size in user units at k=1 */
     var offX = (fw - W) / 2, offY = (fh - HGT) / 2; /* meet-centering offsets, in user units */
     tree.view.k = k;
     tree.view.x = fw / 2 - offX - c.x * k;
-    tree.view.y = fh / 2 - offY - (c.y + c.h / 2 - bias) * k;
+    if (topMargin != null) tree.view.y = -offY - (c.y - topMargin) * k;
+    else tree.view.y = fh / 2 - offY - (c.y + c.h / 2) * k;
     applyView();
   }
+  function narrow() { return tree.frame.clientWidth < 900; }
   function zoomAt(f, px, py) {
     /* px, py in CSS pixels relative to the frame; convert to user units */
     var base = frameScale();
@@ -1614,7 +1619,7 @@ const SOURCES = [
     closePanel();
     $('#tree').scrollIntoView({ block: 'center' });
     setTimeout(function () {
-      focusCouple(cid, 1.15);
+      if (narrow()) focusCouple(cid, 1, 70); else focusCouple(cid, 1.15);
       var node = tree.nodes[cid];
       node.classList.add('is-active');
       setTimeout(function () { node.classList.remove('is-active'); }, 2600);
