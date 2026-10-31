@@ -37,11 +37,11 @@ setTimeout(() => {
     assert(document.querySelectorAll('#jmap .place').length === 12, 'journey places');
     assert(document.querySelectorAll('#law-body tr').length === 8, 'lawmen rows');
     assert(document.querySelectorAll('#findings .finding').length === 16, 'findings: ' + document.querySelectorAll('#findings .finding').length);
-    assert(document.querySelectorAll('#disagree-body tr').length === 13, 'disagreements');
+    assert(document.querySelectorAll('#disagree-body tr').length === 14, 'disagreements');
     assert(document.querySelectorAll('#leads li').length === 13, 'leads');
-    assert(document.querySelectorAll('#sources-list li').length === 60, 'sources: ' + document.querySelectorAll('#sources-list li').length);
-    assert(document.querySelectorAll('#descendants li').length >= 12, 'descendant nodes: ' + document.querySelectorAll('#descendants li').length);
-    assert(document.querySelectorAll('#unplaced li').length === 7, 'unplaced');
+    assert(document.querySelectorAll('#sources-list li').length === 63, 'sources: ' + document.querySelectorAll('#sources-list li').length);
+    assert(document.querySelectorAll('#descendants li').length >= 19, 'descendant nodes: ' + document.querySelectorAll('#descendants li').length);
+    assert(document.querySelectorAll('#unplaced li').length === 6, 'unplaced');
     assert(document.querySelectorAll('#changelog li').length >= 1, 'changelog');
     assert(document.querySelectorAll('#c-about option').length > 40, 'about options: ' + document.querySelectorAll('#c-about option').length);
     // menu opens and closes
@@ -72,7 +72,7 @@ setTimeout(() => {
     const panel = document.getElementById('panel');
     assert(panel.hidden === false, 'panel opened');
     assert(/Peter Frank Zirkelbach/.test(document.getElementById('panel-name').textContent), 'panel name');
-    assert(document.querySelectorAll('#panel-body .found li').length === 6, 'pete findings: ' + document.querySelectorAll('#panel-body .found li').length);
+    assert(document.querySelectorAll('#panel-body .found li').length === 7, 'pete findings: ' + document.querySelectorAll('#panel-body .found li').length);
     assert(window.location.hash === '#person-pete', 'hash set: ' + window.location.hash);
     assert(panel.classList.contains('line-zirkelbach'), 'panel line class');
 

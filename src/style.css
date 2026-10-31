@@ -414,3 +414,14 @@ footer p + p { margin-top: 6px; }
 .changelog .d { color: var(--ink-2); font-variant-numeric: tabular-nums; }
 @media (max-width: 560px) { .changelog li { grid-template-columns: 1fr; gap: 2px; } }
 .panel-actions .btn.suggest { border-color: var(--c-d); color: var(--c-d); }
+
+.fold { max-width: 900px; margin-top: 36px; border: 1px solid var(--rule); border-radius: 10px; background: var(--card); }
+.fold summary { cursor: pointer; padding: 14px 18px; list-style: none; display: flex; align-items: baseline; gap: 10px; }
+.fold summary::-webkit-details-marker { display: none; }
+.fold summary::before { content: "▸"; color: var(--ink-3); transition: transform .2s; }
+.fold[open] summary::before { transform: rotate(90deg); }
+.fold-t { font-family: var(--font-display); font-size: 1.12rem; }
+.fold-n { color: var(--ink-3); font-size: 0.9rem; }
+.fold-p { padding: 0 18px 12px; color: var(--ink-2); font-size: 0.95rem; max-width: 70ch; }
+.fold .unplaced { padding: 0 18px 18px; }
+.uactions { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }

@@ -626,7 +626,7 @@
     var row = h('div', { class: 'dnode' }, h('span', { class: 'nm', text: n.name }));
     if (n.dates) row.appendChild(h('span', { class: 'dt', text: n.dates }));
     if (n.spouse) row.appendChild(h('span', { class: 'sp', text: 'married ' + n.spouse }));
-    if (n.open) row.appendChild(h('span', { class: 'wait', text: 'waiting on the family' }));
+    if (n.open) row.appendChild(h('span', { class: 'wait', text: 'no public record yet' }));
     if (depth > 0) row.appendChild(h('button', { class: 'add', type: 'button', text: '+ add to this branch', onclick: function () { openForm({ aboutLabel: n.name, rel: '' }); } }));
     if (n.note) row.appendChild(h('span', { class: 'nt' }, n.note, ' ', srcLinks(n.s, '')));
     else if (n.s && n.s.length) row.appendChild(h('span', { class: 'src' }, srcLinks(n.s, '')));
@@ -637,9 +637,12 @@
   function renderDescendants() {
     $('#descendants').appendChild(h('ul', {}, descNode(DESCENDANTS, 0)));
     var ul = $('#unplaced');
+    $('#unplaced-n').textContent = UNPLACED.length + (UNPLACED.length === 1 ? ' record' : ' records');
     UNPLACED.forEach(function (u) {
       ul.appendChild(h('li', {}, h('b', { text: u.name }), h('span', { text: u.t }), ' ', srcLinks(u.s, ''),
-        ' ', h('button', { class: 'add', type: 'button', text: 'This is my family', onclick: function () { openForm({ aboutLabel: u.name }); } })));
+        h('div', { class: 'uactions' },
+          h('button', { class: 'add', type: 'button', text: 'Part of our family', onclick: function () { openForm({ aboutLabel: u.name, preset: 'Part of our family: ' + u.name + '. How they connect: ' }); } }),
+          h('button', { class: 'add', type: 'button', text: 'Not related', onclick: function () { openForm({ aboutLabel: u.name, preset: 'Not related to this family: ' + u.name + '. How I know: ' }); } }))));
     });
     var cl = $('#changelog');
     CHANGELOG.forEach(function (c) { cl.appendChild(h('li', {}, h('span', { class: 'd', text: c.d }), h('span', { text: c.t }))); });
@@ -669,7 +672,7 @@
     if (pre.about) sel.value = pre.about;
     else if (pre.aboutLabel) {
       var opt = Array.prototype.find.call(sel.options, function (o) { return o.value === 'desc:' + pre.aboutLabel; });
-      if (opt) sel.value = opt.value; else { sel.value = ''; var note = $('#c-note'); if (!note.value) note.value = 'About ' + pre.aboutLabel + ': '; }
+      if (opt) sel.value = opt.value; else { sel.value = ''; var note = $('#c-note'); if (pre.preset) note.value = pre.preset; else if (!note.value) note.value = 'About ' + pre.aboutLabel + ': '; }
     }
     $('#contribute').scrollIntoView({ block: 'start' });
     setTimeout(function () { $(pre.about || pre.aboutLabel ? '#c-note' : '#c-name').focus(); }, 350);

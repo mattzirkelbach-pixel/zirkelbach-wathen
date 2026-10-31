@@ -36,11 +36,12 @@ const PEOPLE = [
       { k: "record", t: "The radio he trained on was new: one-way receivers were tested in twelve cars in May 1931, a 50-watt transmitter went in at headquarters in 1934, two-way sets were field-tested in eleven cars on 8 January 1935 under the experimental call letters W9XEH, and on 21 May 1935 the department was linked to the state police network through the Jasper post.", s: [5] },
       { k: "record", t: "The same history says the Zirkelbachs are the only family in the department's history with more than three generations on the force.", s: [5] },
       { k: "published", t: "Wright Motors was Bob Wright Motors, Inc., a Pontiac and Cadillac dealer at 109 S.E. Third Street in the 1940s; a Willard Library photograph shows its used-car lot at Sixth and Walnut in the early 1950s.", s: [25, 26] },
-      { k: "published", t: "The 1925 state police pension plan paid half pay after twenty years, which fits a 1934–55 career.", s: [5] }
+      { k: "published", t: "The 1925 state police pension plan paid half pay after twenty years, which fits a 1934–55 career.", s: [5] },
+      { k: "published", t: "His Find a Grave memorial confirms his death in Evansville on 16 November 1997 and burial at Oak Hill beside Cleo; their infant son Donald Jr. is also at Oak Hill.", s: [61] }
     ],
     parents: ["pete", "carrie"], spouse: "cleo", married: "5 April 1930",
     children: "Donald Jr. (born and died 3 November 1930), Jeryl Henry, Thomas Joseph, John Charles, James Eric and Donna Maria",
-    siblings: "Dorothy, Eleanor (Elnora), Bonita, Bernadine and Veronica"
+    siblings: "Dorothy (Dorothy Emilia), Eleanor (1905–1999, Mrs. Harold J. Grimmeissen), Bonita, Bernadine and Veronica (1916–2008, Mrs. Osha)"
   },
   { id: "cleo", line: "wathen", gen: 0, name: "Cleo Margaret Wathen", label: "Cleo M. Wathen", dates: "1911–2007",
     born: "21 July 1911", died: "24 February 2007", buried: "",
@@ -73,7 +74,8 @@ const PEOPLE = [
       { k: "published", t: "Waltonboro was the post-office name (1877–87) of the Irish Catholic Pond Settlement midway between Shawneetown and New Haven; the office reopened in 1890 as Doherty. The parish there was St. Patrick's, whose registers for 1842–1956 survive on microfilm, so the 1903 wedding was almost certainly at St. Patrick's rather than in Ridgway.", s: [6, 16, 49] },
       { k: "published", t: "His niece Celia Zirkelbach married Peter J. Valter near Ridgway in 1906, a reminder that his brothers were farming there when he met Carrie.", s: [15] },
       { k: "published", t: "Prohibition opened with a 1920 federal investigation of the Evansville police; the chief was convicted of conspiring to run whiskey from Henderson, Kentucky. A former saloonkeeper joined a department still under that cloud.", s: [5] },
-      { k: "unverified", t: "A Find a Grave memorial (no. 114292310) carries the years 1876–1934; the page could not be opened to check the stone against the family's 1875.", s: [34] }
+      { k: "conflict", t: "His Find a Grave memorial heads with 16 November 1876, born in Evansville; the death-record transcription on the same page gives 16 November 1875 in Vanderburgh County, matching the family. The 1880 census age of 4 fits either.", s: [61] },
+      { k: "published", t: "His memorial links his daughters Eleanor (Mrs. Harold Grimmeissen, 1905–1999) and Veronica (Mrs. Osha, 1916–2008), and names a daughter Dorothy Emilia.", s: [61] }
     ],
     parents: ["andrew", "katherine"], spouse: "carrie", married: "27 May 1903, Waltonboro (Pond Settlement), Gallatin County, Illinois",
     children: "Dorothy, Eleanor (Elnora), Bonita, Bernadine, Veronica and Donald; a 2009 family register says there were seven",
@@ -87,7 +89,8 @@ const PEOPLE = [
     ],
     found: [
       { k: "published", t: "The 1905 sketch of her father names her as Carrie, wife of Peter Zirkelbach of Evansville. Her daughter Eleanor carries her grandmother Eleanora's name.", s: [1] },
-      { k: "published", t: "The same sketch counts twelve births in the family, including a pair of twins who died in infancy, which matches the family's 'about a dozen'.", s: [1] }
+      { k: "published", t: "The same sketch counts twelve births in the family, including a pair of twins who died in infancy, which matches the family's 'about a dozen'.", s: [1] },
+      { k: "conflict", t: "Her Find a Grave memorial at St. Joseph Catholic Cemetery gives 1878–1958, against the family's 26 November 1877 – 16 April 1956. The cemetery office or her death certificate would settle it.", s: [61] }
     ],
     parents: ["john-daily", "eleanora"], spouse: "pete", married: "27 May 1903",
     siblings: "William, Henry (died 1898), Aaron (died at 23), Mary A. (Mrs. John Frey), John Jr. (married Eunice Harrelson), Sarah (Mrs. Leonard Frey), Thomas (a lawyer in Shawneetown) and Charles, plus three who died as babies"
@@ -132,7 +135,9 @@ const PEOPLE = [
     ],
     found: [
       { k: "published", t: "The 1905 sketch of his son William J. gives his birth as 24 June 1827 in Bavaria, arrival at about ten, marriage in Vanderburgh County, thirty-five years on the same farm near St. James, Democratic politics, and children all raised Catholic. It prints Katherine's maiden name as 'Leutzhuick', a garble of Lintzenich.", s: [2] },
-      { k: "conflict", t: "Birth year: the family says 1831, the 1905 book 1827. Day and month agree.", s: [2] },
+      { k: "conflict", t: "Birth year: the family and his death record say 1831; the 1905 book says 1827. Day and month agree, and the 1880 census age of 49 fits 1831.", s: [2, 61] },
+      { k: "record", t: "His Indiana death record gives his birth as 24 June 1831 in Germany, settling the year in the family's favor, and his father as Andrew. He is buried in St. Joseph Catholic Cemetery, section 11, lot 221, grave 3, without a marker, beside Katherine.", s: [61] },
+      { k: "record", t: "The 1880 census lists the household as A. (49), Mary K. (47), Andrew (20), Margaret (18), Anna B. (16), Christina (14), George (12), Frank (7), Peter (4) and Mage (2).", s: [61] },
       { k: "record", t: "St. James burial registers record two of his children who died young: Matthew, buried 24 February 1872, and an infant entered as 'Guilelman' (William or Wilhelmina), died 10 July 1871 at fifteen months.", s: [3] },
       { k: "record", t: "The 1850 census of Johnson Township, Gibson County, has no Zirkelbach household. The 1905 book says the family settled in Vanderburgh County, so the 1850 entry is probably just across the county line.", s: [42, 2] },
       { k: "published", t: "The hamlet of St. James lies a mile south of Haubstadt and a quarter mile north of the Vanderburgh line, a stop on the railroad. Mass was first said there in 1836, a log church was blessed in July 1847, and the brick church's cornerstone was laid on 25 July 1855.", s: [22] }
@@ -141,8 +146,8 @@ const PEOPLE = [
     children: "William J. (born 1854), Andrew, George, Frank, Lena, Regina (1856–1917), Maria Catharina (born 1858), Mary M., Maggie, Barbara, Mena, Mathias, Eva Christina (born 1866) and Peter Frank (1875–1934)",
     siblings: "Anna Maria (married Valentine Pfister), Regina Barbara (married Henry Eberhard, 1846), Eva (married Jacob Meny, 1851), Margaret (married Francis W. J. Lintzenich, 1857; died 1858) and John A. (1836–1914)"
   },
-  { id: "katherine", sub: "from the Rhineland", line: "zirkelbach", gen: 2, name: "Katherine Lintzenich", label: "Katherine Lintzenich", dates: "",
-    born: "Linzenich, Rhineland (Prussia)", died: "", buried: "",
+  { id: "katherine", line: "zirkelbach", gen: 2, name: "Katherine Lintzenich", label: "Katherine Lintzenich", dates: "1834–1917",
+    born: "24 February 1834, Germany (the Prussian Rhineland)", died: "4 March 1917, Evansville", buried: "St. Joseph Catholic Cemetery, Evansville, beside Andrew (section 11, lot 221, grave 4; no marker)",
     role: "Maria Catherina in the church records; married at St. Wendel",
     family: [
       "Came from Prussia with her parents about the same time as the Zirkelbachs. She and Andrew married at St. Wendel. Her Lintzenich relatives farmed just south of the Zirkelbach farm."
@@ -151,7 +156,7 @@ const PEOPLE = [
       { k: "published", t: "Lintzenich is a place name: Linzenich is a village of Zülpich in the Rhineland, and that left-bank territory passed to Prussia in 1815, which is why the family remembered her as Prussian.", s: [21, 40] },
       { k: "published", t: "St. Wendel was founded by Marcus and Wendel Wassmer, Baden-born coopers who came by way of Toronto in 1837. About twenty families built a log church in Christmas week 1841, after Mass had been said in Martin Kohl's home. She and Andrew married in a parish barely a decade old.", s: [23] },
       { k: "record", t: "St. James registers list Lintzenich burials from 1858 to 1885, among them William J. Lintzenich (26 December 1831 – 10 March 1885), the men and children of the farm south of the Zirkelbachs.", s: [3] },
-      { k: "unverified", t: "Her parents' names and her own dates have not been found. The St. Wendel marriage register, held by the Diocese of Evansville, would give them.", s: [] }
+      { k: "record", t: "Her Indiana death record, as transcribed on her memorial, gives her as Mary Catherine, born 24 February 1834 in Germany, died 4 March 1917 in Evansville, daughter of Christian and Mary Lintzenich. She died six days before Andrew; they lie side by side in unmarked graves 3 and 4 of lot 221.", s: [61] }
     ],
     parents: ["lintzenich-parents"], spouse: "andrew"
   },
@@ -267,15 +272,15 @@ const PEOPLE = [
     ],
     spouse: "andrew-sr", married: "about 1820"
   },
-  { id: "lintzenich-parents", sub: "names not yet found", line: "zirkelbach", gen: 3, name: "The Lintzenich parents", label: "The Lintzenich parents", dates: "",
+  { id: "lintzenich-parents", line: "zirkelbach", gen: 3, sub: "from Katherine's death record", name: "Christian and Mary Lintzenich", label: "Christian & Mary Lintzenich", dates: "",
     born: "Linzenich, Rhineland (Prussia)", died: "", buried: "",
-    role: "Names not yet found",
+    role: "Katherine's parents, named on her 1917 death record",
     family: [
-      "Katherine's parents, who came from Prussia about 1840. Their names have not yet been found."
+      "Katherine's parents, who came from Prussia about 1840. Their names were not in the family account."
     ],
     found: [
       { k: "published", t: "Linzenich is a village of Zülpich in the Euskirchen district of the Rhineland, Prussian from 1815, and the surname is taken from it.", s: [21, 40] },
-      { k: "unverified", t: "The St. Wendel marriage register and the 1850 census of Vanderburgh County are the places to find their names.", s: [] }
+      { k: "record", t: "Katherine's 1917 Indiana death record names her father as Christian Lintzenich and her mother as Mary. A Christian Lintzenich is also among the St. James burials of 1869.", s: [61, 3] }
     ],
     children: "Katherine, and the Lintzenichs who farmed south of the Zirkelbach place"
   },
@@ -450,8 +455,8 @@ const PEOPLE = [
     found: [{ k: "unverified", t: "A Find a Grave memorial titled 1856–1917 was located but not opened; she died the same year as her father. The 1905 book lists her as Rachel.", s: [34, 2] }],
     parents: ["andrew", "katherine"]
   },
-  { id: "william-j", line: "zirkelbach", gen: 1, side: true, name: "William J. Zirkelbach", label: "William J. Zirkelbach", dates: "born 1854",
-    born: "14 November 1854, Vanderburgh County", died: "", buried: "", role: "Andrew's eldest son; to Ridgway in 1885",
+  { id: "william-j", line: "zirkelbach", gen: 1, side: true, name: "William J. Zirkelbach", label: "William J. Zirkelbach", dates: "1854–1940",
+    born: "14 November 1854, Vanderburgh County", died: "1940", buried: "Ridgway, Gallatin County, Illinois", role: "Andrew's eldest son; to Ridgway in 1885",
     family: ["Andrew's eldest son, who moved to Ridgway, Illinois, in 1885."],
     found: [{ k: "published", t: "His own sketch in the 1905 Memoirs is the source for the family's Zirkelbach account. He married Anna K. Wenzel of Vanderburgh County, moved to a farm near Ridgway in 1885, kept a store in town for a year, and in 1901 bought eighty acres three-quarters of a mile west of Ridgway, where he bred Aberdeen and Polled Angus cattle. His children were Andrew, George, Cecilia, Katherine, Josie, William M., Eleanora and Rudolph, and one who died in infancy.", s: [2] }],
     parents: ["andrew", "katherine"]
@@ -471,6 +476,16 @@ const PEOPLE = [
     ],
     parents: ["john-philip-vogt", "hettie"]
   },
+  { id: "eleanor-g", line: "zirkelbach", gen: -1, side: true, name: "Eleanor Zirkelbach Grimmeissen", label: "Eleanor Zirkelbach", dates: "1905–1999",
+    born: "23 April 1905, Vanderburgh County", died: "27 February 1999, Evansville", buried: "Oak Hill Cemetery, Evansville", role: "Donald's eldest sister; Carrie lived with her late in life",
+    family: ["Pete and Carrie's daughter Eleanor (also written Elnora). Carrie lived with her and her family late in life."],
+    found: [{ k: "published", t: "Her Find a Grave memorial gives her birth and death dates, burial at Oak Hill, and her husband, Harold Julius Grimmeissen (1893–1974).", s: [61] }],
+    parents: ["pete", "carrie"] },
+  { id: "veronica-o", line: "zirkelbach", gen: -1, side: true, name: "Veronica J. Zirkelbach Osha", label: "Veronica Zirkelbach", dates: "1916–2008",
+    born: "1916", died: "2008", buried: "", role: "Donald's youngest sister",
+    family: ["Pete and Carrie's daughter Veronica."],
+    found: [{ k: "published", t: "Linked as Pete and Carrie's daughter on their Find a Grave memorials, with the married name Osha.", s: [61] }],
+    parents: ["pete", "carrie"] },
   { id: "donald-jr", line: "zirkelbach", gen: -1, side: true, name: "Donald Zirkelbach Jr.", label: "Donald Jr.", dates: "1930",
     born: "3 November 1930", died: "3 November 1930", buried: "", role: "Donald and Cleo's first child",
     family: ["Donald and Cleo's first child, born and died on 3 November 1930."],
@@ -667,10 +682,11 @@ const FINDINGS = [
 
 /* Where the account and the records part ways */
 const DISAGREEMENTS = [
-  { who: "Andrew Zirkelbach", fam: "Born 24 June 1831", rec: "Born 24 June 1827 (1905 Memoirs)", s: [2] },
+  { who: "Andrew Zirkelbach", fam: "Born 24 June 1831", rec: "1827 in the 1905 Memoirs; his death record and the 1880 census support 1831", s: [2, 61] },
   { who: "Andrew Zirkelbach the elder", fam: "Died about 1870", rec: "Farmed until his death at 75, so about 1877 (1905 Memoirs); no St. James stone or register entry found", s: [2, 3, 4] },
   { who: "Pete Zirkelbach", fam: "Joined the police in 1920", rec: "Appointed 22 October 1924 (EPD history)", s: [5] },
-  { who: "Pete Zirkelbach", fam: "Born 16 November 1875", rec: "Find a Grave memorial titled 1876 (not opened)", s: [34] },
+  { who: "Pete Zirkelbach", fam: "Born 16 November 1875", rec: "Memorial heads 1876; the death-record transcription on it says 1875", s: [61] },
+  { who: "Carrie Daily Zirkelbach", fam: "26 November 1877 – 16 April 1956", rec: "1878–1958 (Find a Grave memorial, St. Joseph Catholic Cemetery)", s: [61] },
   { who: "Polly Waller Wathen", fam: "Died at Uniontown before the family moved, about 1884", rec: "Died after 1880 in Evansville; buried with Thomas at St. Joseph's (Wathen Anthology)", s: [10] },
   { who: "Joseph Waller Wathen", fam: "Born 3 September 1874", rec: "Born 1873 (Reliques of the Rives)", s: [11] },
   { who: "Joseph Burwell Waller", fam: "Middle name Burnell", rec: "Burwell (Reliques of the Rives)", s: [11] },
@@ -707,35 +723,39 @@ const DESCENDANTS = {
   name: "Donald H. and Cleo M. Zirkelbach", dates: "married 5 April 1930",
   children: [
     { name: "Donald Zirkelbach Jr.", dates: "3 November 1930", note: "Born and died the same day.", s: [51] },
-    { name: "Jeryl Henry “Jerry” Zirkelbach", dates: "died 2013", spouse: "Gail (Forston)", note: "His 2013 obituary ran in the Arizona Republic and could not be opened; his family is known from his son Jay's obituary.", s: [52, 53], open: true,
+    { name: "Jeryl Henry “Jerry” Zirkelbach", dates: "1933 – 13 September 2013", spouse: "Betty Gail Forston, 1 November 1952", note: "Air Force veteran; engineering degree from the University of Evansville; retired as vice president of sales and marketing at Cresline Plastics, then moved to Peoria, Arizona, where he died. Married sixty years. In 2013 he left twelve grandchildren and three great-grandchildren.", s: [62, 61],
       children: [
-        { name: "Jay H. Zirkelbach", dates: "9 February 1963 – 22 August 2023", spouse: "Linda (Wingert)", note: "Buried at St. Joseph Cemetery, Evansville, after services at Ziemer Funeral Home; four grandchildren.", s: [52],
-          children: [ { name: "Chadwick Zirkelbach", spouse: "Brooke" }, { name: "Ashley Sapp", spouse: "Jeremy" } ] },
-        { name: "Mike Zirkelbach", dates: "deceased", s: [52] },
-        { name: "Chris Zirkelbach", s: [52] },
-        { name: "Lucinda Lambros", s: [52] }
+        { name: "Twin daughters", dates: "died 30 January 1962", note: "Buried at St. Joseph Catholic Cemetery, Evansville.", s: [61] },
+        { name: "Michael D. “Mike” Zirkelbach", dates: "22 March 1961 – 26 August 2008", note: "Born in Evansville, died in Newburgh; buried at St. Joseph Catholic Cemetery.", s: [61, 62] },
+        { name: "Jay H. Zirkelbach", dates: "9 February 1963 – 22 August 2023", spouse: "Linda (Wingert)", note: "Buried at St. Joseph Catholic Cemetery, Evansville, after services at Ziemer Funeral Home.", s: [52],
+          children: [
+            { name: "Chadwick Zirkelbach", spouse: "Brooke", children: [ { name: "Sadie Zirkelbach" } ] },
+            { name: "Ashley Sapp", spouse: "Jeremy", children: [ { name: "Haley Sapp" }, { name: "Jayden Sapp" }, { name: "Kayla Sapp" } ] }
+          ] },
+        { name: "Chris Zirkelbach", s: [62] },
+        { name: "Lucinda Lambros", s: [62] }
       ] },
-    { name: "Thomas Joseph Zirkelbach", open: true },
-    { name: "John Charles Zirkelbach", note: "Evansville police from 12 March 1973.", s: [5], open: true,
+    { name: "Thomas Joseph “Tom” Zirkelbach", note: "Living in 2013, per Jeryl's obituary.", s: [62], open: true },
+    { name: "John Charles Zirkelbach", note: "Evansville police from 12 March 1973; living in 2013, per Jeryl's obituary.", s: [5, 62], open: true,
       children: [ { name: "Adam Von Zirkelbach", note: "Evansville police from 11 September 1995, the fourth generation; later federal law enforcement.", s: [5] } ] },
-    { name: "James Eric Zirkelbach", note: "Air Force military police.", s: [50], open: true },
-    { name: "Donna Maria Zirkelbach", spouse: "William H. Woehler, Evansville police", s: [50], open: true }
+    { name: "James Eric Zirkelbach", note: "Air Force military police; living in 2013, per Jeryl's obituary.", s: [50, 62], open: true },
+    { name: "Donna Maria Zirkelbach", spouse: "William H. Woehler, Evansville police", note: "Living in 2013, per Jeryl's obituary.", s: [50, 62], open: true }
   ]
 };
 
 /* Zirkelbachs in Evansville public records who are not yet placed on this tree */
 const UNPLACED = [
-  { name: "Philip E. Zirkelbach household, Evansville, 1950", t: "The 1950 census lists Philip E. with Margaret M., Kathleen A., Mary I. and Joseph. Margaret Mary (Anslinger) Zirkelbach (1921–2016) was a lifelong member of St. Anthony's. Pete and Carrie's register counts seven children against the six named; Philip may be the seventh, or a cousin.", s: [54, 55] },
-  { name: "Lucille (Drone) Zirkelbach, 1919–2004", t: "Her Find a Grave memorial sits in the same batch as Pete's, which suggests a daughter-in-law buried nearby.", s: [56] },
-  { name: "Sylvia Dean (Hagan) Zirkelbach, 1937–2008", t: "Courier & Press obituary, 2008; the page could not be opened.", s: [57] },
-  { name: "Chester Raymond Zirkelbach, 1916–1984", t: "Find a Grave memorial; relationship unknown.", s: [56] },
-  { name: "Mark Edward Zirkelbach, 1957–2026", t: "Born in Evansville, lived and worked in Southern California; his obituary names a parent Elmer, so probably another Zirkelbach line.", s: [58] },
-  { name: "Julie A. (Smith) Zirkelbach, 1976–2022", t: "Wife of Gabe Zirkelbach; the obituary names a mother-in-law Billie Jo and siblings-in-law Bart, Trish Smithwick and Megan.", s: [59] },
-  { name: "Janet Gail “Jan” (Weikel) Zirkelbach (2026), Cheryl Christina Zirkelbach (2025)", t: "Recent Browning Funeral Home obituaries, not yet opened.", s: [60] }
+  { name: "Philip Edward Zirkelbach, 1915–2010", t: "Born 7 March 1915 in Gallatin County, Illinois; died in Evansville. Army veteran; 21 years at Hoosier Cardinal and 25 at Sterling Brewery; St. Anthony's parish. Married Margaret M. Anslinger (1921–2016). His Gallatin birth points to Andrew's Ridgway grandchildren rather than Pete's family.", s: [63, 55] },
+  { name: "Elmer Zirkelbach, 1913–1999", t: "Married Lucille Drone (1919–2004). Children Mary Joyce Calhoun (1941–2019), Janet L. Hamilton (1943–2016), Deborah Joan Blake (1950–2021) and Mark Edward (1957–2026). Buried at St. Joseph Catholic Cemetery.", s: [63, 58] },
+  { name: "George Vincent Zirkelbach, 1879–1959", t: "Married Rosa M. Doerr (1883–1949). Their son Albert Andrew (1903–1964) was born in Gallatin County; daughters Celia Himes, Anna Marie Zeggling, Margaret Baumgart and Viola Meredith. Very likely a grandson of Andrew through one of the Ridgway sons.", s: [63] },
+  { name: "Richard W. Zirkelbach and Billie Joanne McBride", t: "Parents of an infant son, Abe W. (1969). Julie A. Zirkelbach's 2022 obituary names Billie Jo as mother-in-law, with Gabe, Bart and Megan Zirkelbach.", s: [63, 59] },
+  { name: "Don R. and Sylvia (Hagan) Zirkelbach, Albany, Georgia", t: "Sylvia, an Evansville native, died in 2008 after 53 years of marriage; Don Raphael Zirkelbach (1936–2012) is buried at Andersonville National Cemetery. Children John and Ellen; a daughter Rebecca died before her.", s: [57] },
+  { name: "Janet Gail “Jan” (Weikel) Zirkelbach (2026), Cheryl Christina Zirkelbach (2025)", t: "Recent Browning Funeral Home obituaries, not yet read.", s: [60] }
 ];
 
 /* Updates from the family, newest first */
 const CHANGELOG = [
+  { d: "31 October 2026", t: "Records pass: Katherine Lintzenich's dates and parents (Christian and Mary) from her death record; Andrew's grave and 1880 household; Pete's daughters Eleanor Grimmeissen and Veronica Osha; Jeryl's full branch from his 2013 obituary, including the twins (1962) and Mike (1961–2008); Gallatin County Zirkelbachs sorted for the family to confirm or rule out." },
   { d: "31 October 2026", t: "Site published. Donald and Cleo's family opened downward; Jeryl's branch added from Jay H. Zirkelbach's 2023 obituary; the form for additions and corrections went live." }
 ];
 
@@ -796,12 +816,15 @@ const SOURCES = [
   { n: 50, t: "The family folder: Cleo Wathen Zirkelbach's 1988 account, the family charts, the law-enforcement list, a 2009 register of Andrew Zirkelbach's descendants, a 2006 register of the Vogt family's descendants, and a 1999 Wathen family history, as compiled in the family tree of 30 October 2026", u: "", k: "family" },
   { n: 51, t: "Donald Zirkelbach Jr. (1930–1930), Find a Grave memorial 137716244 (title only)", u: "https://www.findagrave.com/memorial/137716244/donald-zirkelbach", k: "unverified" },
   { n: 52, t: "Jay H. Zirkelbach obituary (1963–2023), Ziemer Funeral Home, via Echovita", u: "https://www.echovita.com/us/obituaries/in/evansville/jay-h-zirkelbach-16836939", k: "published" },
-  { n: 53, t: "Jeryl Zirkelbach obituary (2013), Arizona Republic via Legacy.com (listing only; page not opened)", u: "https://www.legacy.com/us/obituaries/azcentral/name/jeryl-zirkelbach-obituary?id=19215400", k: "unverified" },
+  { n: 53, t: "Jeryl Zirkelbach obituary (2013), Arizona Republic via Legacy.com (see 62)", u: "https://www.legacy.com/us/obituaries/azcentral/name/jeryl-zirkelbach-obituary?id=19215400", k: "unverified" },
   { n: 54, t: "1950 United States census name index, Zirkelbach, Indiana (National Archives)", u: "https://1950census.archives.gov/search/?name=Zirkelbach&state=IN", k: "record" },
   { n: 55, t: "Margaret M. Zirkelbach obituary (1921–2016), Pierre Funeral Home", u: "https://www.pierrefuneralhome.com/obituaries/Margaret-Zirkelbach/", k: "published" },
   { n: 56, t: "Find a Grave memorials (titles only): Lucille Drone Zirkelbach 114292152; Chester Raymond Zirkelbach 96137857", u: "https://www.findagrave.com/memorial/114292152/lucille-zirkelbach", k: "unverified" },
-  { n: 57, t: "Sylvia Zirkelbach obituary (2008), Courier & Press via Legacy.com (listing only)", u: "https://www.legacy.com/us/obituaries/courierpress/name/sylvia-zirkelbach-obituary?id=24892145", k: "unverified" },
+  { n: 57, t: "Sylvia Dean Zirkelbach obituary (2008), Courier & Press via Legacy.com", u: "https://www.legacy.com/us/obituaries/courierpress/name/sylvia-zirkelbach-obituary?id=24892145", k: "published" },
   { n: 58, t: "Mark Edward Zirkelbach obituary (1957–2026), Pierre Funeral Home", u: "https://www.pierrefuneralhome.com/obituaries/mark-zirkelbach/", k: "published" },
   { n: 59, t: "Julie A. Zirkelbach obituary (1976–2022), Pierre Funeral Home, via Echovita", u: "https://www.echovita.com/us/obituaries/in/evansville/julie-a-zirkelbach-15230975", k: "published" },
   { n: 60, t: "Browning Funeral Home obituaries via Legacy.com: Janet Gail Zirkelbach (2026); Cheryl Christina Zirkelbach (2025) (listings only)", u: "https://www.legacy.com/us/obituaries/name/janet-zirkelbach-obituary?id=61336437", k: "unverified" },
+  { n: 61, t: "Find a Grave memorials read 31 October 2026, with the death-record and census transcriptions posted on them: Andrew Zirkelbach 207292650; Mary Catherine Lintzenich Zirkelbach 207292716; Peter F. Zirkelbach 114292310; Carolyn Daily Zirkelbach 119491882; Eleanor Zirkelbach Grimmeissen 114539375; Donald H. Zirkelbach 115787372; Cleo Margaret Wathen Zirkelbach 115787385; Donald Jr. 137716244; Jeryl H. Zirkelbach 243906276; twin daughters 114997129; Michael D. Zirkelbach 115410715", u: "https://www.findagrave.com/memorial/207292716/mary_catherine-zirkelbach", k: "published" },
+  { n: 62, t: "Jeryl Henry “Jerry” Zirkelbach obituary, The Arizona Republic, September 2013", u: "https://www.legacy.com/us/obituaries/azcentral/name/jeryl-zirkelbach-obituary?id=19215400", k: "published" },
+  { n: 63, t: "Find a Grave, St. Joseph Catholic Cemetery, Evansville: Philip Edward Zirkelbach 114292211; Elmer Zirkelbach 114292094; Albert Andrew Zirkelbach 143288289; Abe W. Zirkelbach 115586159", u: "https://www.findagrave.com/cemetery/86698/memorial-search?lastname=Zirkelbach", k: "published" }
 ];
