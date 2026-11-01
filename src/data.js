@@ -16,19 +16,19 @@
 ------------------------------------------------------------------- */
 
 const LINES = {
-  zirkelbach: { key: "z", name: "Zirkelbach", mark: "mark-zirkelbach",
+  zirkelbach: { key: "z", name: "Zirkelbach", mark: "mark-zirkelbach", arms: "arms-bischofsheim", armsCap: "Arms of Bischofsheim in der Rhön, the town Wegfurt belongs to: a silver wall and towers on red, a mitred bishop beneath. No arms are recorded for the family.", armsKind: "place",
     meaning: "From Zirkenbach, a hamlet of Fulda recorded in the twelfth century as Cirkumbach. In German the parts read Zirkel, a compass, and Bach, a brook.",
     blurb: "German Catholic farmers from the Bavarian Rhön. Andrew Zirkelbach came as a boy about 1837 with his parents, a baker turned farmer, and worked 160 acres near St. James church for thirty-five years. His wife Katherine Lintzenich came from the Prussian Rhineland.",
     from: "Wegfurt, in the Rhön", to: "St. James, Indiana", when: "about 1837–40" },
-  daily:      { key: "d", name: "Daily", mark: "mark-daily",
+  daily:      { key: "d", name: "Daily", mark: "mark-daily", arms: "arms-daly", armsCap: "Arms of the O'Daly sept, as Burke's General Armory records them: per fess argent and or, a lion rampant per fess sable and gules, two red hands in chief. Crest, a greyhound before an oak; motto Deo fidelis et regi.", armsKind: "sept",
     meaning: "Ó Dálaigh, descendant of Dálach, from dáil, an assembly. The family were Ireland's hereditary poets; Cú Connacht Ó Dálaigh, who died in 1139, was called the first ollamh of poetry in all Ireland.",
     blurb: "Irish Catholic farmers in Illinois. William Daily crossed from Queen's County about 1817, nine weeks under sail, and reached Gallatin County with ten dollars. He died in 1858 owning a thousand acres. His granddaughter Carrie married Pete Zirkelbach.",
     from: "Queen's County, Ireland", to: "Gallatin County, Illinois", when: "1816–19" },
-  wathen:     { key: "w", name: "Wathen", mark: "mark-wathen",
+  wathen:     { key: "w", name: "Wathen", mark: "mark-wathen", arms: null, armsCap: "Burke's General Armory records no Wathen arms; the crests sold under the name are inventions. The wheel is John Wathen's own trade, wheelwright, from his 1670 indenture.", armsKind: "none",
     meaning: "An English place-name surname: Watendlath in Cumberland, Old Norse for lake's end, or Watton in Yorkshire, the wet hill. John Wathen, the immigrant, was a carpenter and wheelwright.",
     blurb: "Maryland Catholics by way of Kentucky. John Wathen signed a three-year indenture in Bristol in 1670 and died a landowner in Charles County in 1705. His descendants moved to Kentucky with the Catholic migration and to Knight Township about 1884.",
     from: "Bristol, England", to: "Charles County, Maryland", when: "1670" },
-  vogt:       { key: "v", name: "Vogt", mark: "mark-vogt",
+  vogt:       { key: "v", name: "Vogt", mark: "mark-vogt", arms: "arms-hessen", armsCap: "The Hessian lion, arms of the Grand Duchy of Hesse-Darmstadt they left in 1852: on blue, a lion barred silver and red, crowned gold. Many unrelated Vogt families bore arms; none is tied to this one.", armsKind: "place",
     meaning: "German for a steward or bailiff, from the Latin advocatus, one called to speak for others. Charles Vogt was Knight Township's constable and justice of the peace.",
     blurb: "German farmers from Bavaria and Hesse-Darmstadt who crossed in 1852, in the hungry years after the potato failures, and settled in Knight Township east of Evansville, near the farm the Wathens later bought.",
     from: "Hesse-Darmstadt", to: "Knight Township, Indiana", when: "1852" }
@@ -861,5 +861,8 @@ const SOURCES = [
   { n: 62, t: "Jeryl Henry “Jerry” Zirkelbach obituary, The Arizona Republic, September 2013", u: "https://www.legacy.com/us/obituaries/azcentral/name/jeryl-zirkelbach-obituary?id=19215400", k: "published" },
   { n: 63, t: "Find a Grave, St. Joseph Catholic Cemetery, Evansville: Philip Edward Zirkelbach 114292211; Elmer Zirkelbach 114292094; Albert Andrew Zirkelbach 143288289; Abe W. Zirkelbach 115586159", u: "https://www.findagrave.com/cemetery/86698/memorial-search?lastname=Zirkelbach", k: "published" },
   { n: 64, t: "Richard “Zeke” Zirkelbach obituary (1945–2013), Courier & Press via Legacy.com", u: "https://www.legacy.com/us/obituaries/courierpress/name/richard-zirkelbach-obituary?id=20789672", k: "published" },
-  { n: 65, t: "Find a Grave memorials of Andrew Zirkelbach's children: Regina Ziegler 118871163; Margaret Ottman 114189366; Barbara Bauer 64748236; George J. 49874773; Frank Joseph 96138007; Mary M. Kohl 47884683; William J. 64748587; Andrew H. 64748577", u: "https://www.findagrave.com/memorial/207292650/andrew-zirkelbach", k: "published" }
+  { n: 65, t: "Find a Grave memorials of Andrew Zirkelbach's children: Regina Ziegler 118871163; Margaret Ottman 114189366; Barbara Bauer 64748236; George J. 49874773; Frank Joseph 96138007; Mary M. Kohl 47884683; William J. 64748587; Andrew H. 64748577", u: "https://www.findagrave.com/memorial/207292650/andrew-zirkelbach", k: "published" },
+  { n: 66, t: "Sir Bernard Burke, The General Armory of England, Scotland, Ireland, and Wales (1884 ed.), entries for O'Daly (Chiefs of Corca Adhamh, co. Westmeath; Finnvara; Killymore; Killeleigh); no entry for Wathen", u: "https://archive.org/details/generalarmoryofe00burk", k: "published" },
+  { n: 67, t: "Heraldry of the World: Bischofsheim an der Rhön (town arms; seal from the fourteenth century)", u: "https://heraldry-wiki.com/wiki/Bischofsheim_an_der_Rh%C3%B6n", k: "published" },
+  { n: 68, t: "The Hessian lion: arms of the Landgraves and Grand Dukes of Hesse (Wikipedia, Grand Duchy of Hesse)", u: "https://en.wikipedia.org/wiki/Grand_Duchy_of_Hesse", k: "published" }
 ];

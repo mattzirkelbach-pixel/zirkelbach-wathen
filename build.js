@@ -7,7 +7,7 @@ const src = (f) => fs.readFileSync(path.join(__dirname, 'src', f), 'utf8');
 
 const css = src('style.css');
 const body = src('body.html');
-const data = src('data.js') + '\n' + src('landdots.js');
+const data = src('data.js') + '\n' + src('landdots.js') + '\n' + src('landlines.js');
 const app = src('app.js');
 
 const fonts = '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">';

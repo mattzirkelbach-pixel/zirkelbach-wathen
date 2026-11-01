@@ -167,7 +167,11 @@ p { margin: 0; }
 .plate { position: relative; background: var(--card); border: 1px solid var(--rule); border-radius: 14px; padding: 22px 22px 20px; display: grid; gap: 10px; align-content: start; overflow: hidden; }
 .plate::after { content: ""; position: absolute; right: -28px; top: -28px; width: 120px; height: 120px; border-radius: 50%; background: var(--lt); opacity: 0.55; }
 .plate > * { position: relative; }
-.plate .mark { width: 54px; height: 54px; color: var(--lc); stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.plate-top { display: flex; align-items: center; gap: 16px; }
+.plate .arms { width: 72px; height: 84px; flex: none; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.18)); }
+.plate .arms.mark-only { color: var(--lc); stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; fill: none; filter: none; width: 60px; height: 60px; padding: 6px 0; }
+.plate .arms-kind { display: block; font-size: 0.82rem; color: var(--ink-3); margin-top: 2px; }
+.plate .arms-cap { font-size: 0.86rem; color: var(--ink-3); border-top: 1px dashed var(--rule); padding-top: 8px; }
 .plate h3 { font-size: 1.5rem; }
 .plate .meaning { font-family: var(--font-display); font-style: italic; color: var(--ink-2); font-size: 1rem; line-height: 1.4; }
 .plate p { color: var(--ink-2); font-size: 0.95rem; }
@@ -185,7 +189,8 @@ p { margin: 0; }
 .year-read { display: flex; align-items: baseline; gap: 12px; }
 .year { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
 .year-sub { color: var(--ink-2); font-size: 0.95rem; max-width: 26ch; }
-.stage-ctl { display: flex; gap: 8px; }
+.stage-ctl { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.ctl-gap { width: 6px; }
 #globe-main { width: 100%; aspect-ratio: 1; height: auto; display: block; touch-action: pan-y; cursor: grab; max-height: 60vh; margin: 0 auto; }
 #globe-main:active { cursor: grabbing; }
 @media (max-width: 900px) { #globe-main { max-height: 38vh; } .year-sub { display: none; } }
@@ -472,4 +477,12 @@ footer p + p { margin-top: 6px; }
   .tree-frame { height: auto; }
   body { font-size: 12px; }
   .chapter { padding-block: 24px; break-inside: avoid; }
+}
+@media (max-width: 640px) {
+  .stage-top { align-items: center; }
+  .year { font-size: 1.9rem; }
+  .stage-ctl { flex-wrap: nowrap; gap: 4px; }
+  .stage-ctl .btn { padding: 6px 8px; font-size: 0.88rem; }
+  .stage-ctl .btn.icon { width: 32px; padding: 6px 0; }
+  .ctl-gap { width: 2px; }
 }

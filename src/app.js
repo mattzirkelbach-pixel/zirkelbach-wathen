@@ -65,13 +65,19 @@
     var box = $('#families');
     Object.keys(LINES).forEach(function (key) {
       var L = LINES[key];
-      var svg = document.createElementNS(SVGNS, 'svg'); svg.setAttribute('class', 'mark'); svg.setAttribute('aria-hidden', 'true');
-      var use = document.createElementNS(SVGNS, 'use'); use.setAttribute('href', '#' + L.mark); svg.appendChild(use);
+      var device;
+      if (L.arms) {
+        device = document.createElementNS(SVGNS, 'svg'); device.setAttribute('class', 'arms'); device.setAttribute('role', 'img'); device.setAttribute('aria-label', L.armsCap);
+        var u = document.createElementNS(SVGNS, 'use'); u.setAttribute('href', '#' + L.arms); device.appendChild(u);
+      } else {
+        device = document.createElementNS(SVGNS, 'svg'); device.setAttribute('class', 'arms mark-only'); device.setAttribute('role', 'img'); device.setAttribute('aria-label', L.armsCap);
+        var u2 = document.createElementNS(SVGNS, 'use'); u2.setAttribute('href', '#' + L.mark); device.appendChild(u2);
+      }
       box.appendChild(h('article', { class: 'plate ' + lineClass(key) },
-        svg,
-        h('h3', { text: L.name }),
+        h('div', { class: 'plate-top' }, device, h('div', { class: 'plate-title' }, h('h3', { text: L.name }), h('span', { class: 'arms-kind', text: L.armsKind === 'sept' ? 'Arms of the name' : L.armsKind === 'place' ? 'Arms of the place they left' : 'No arms recorded' }))),
         h('p', { class: 'meaning', text: L.meaning }),
         h('p', { text: L.blurb }),
+        h('p', { class: 'arms-cap', text: L.armsCap }),
         h('div', { class: 'route' }, h('b', { text: L.from }), h('span', { class: 'arrow', text: '→' }), h('b', { text: L.to }), h('span', { text: L.when }))));
     });
   }
@@ -932,8 +938,9 @@
       if (!TIME.playing) return;
       if (!last) last = ts;
       var dt = Math.min(100, ts - last); last = ts;
-      /* slower through the busy nineteenth century, faster through the quiet stretches */
-      var y = TIME.year, speed = (y >= 1800 && y <= 1935) ? 9 : 22; /* years per second */
+      /* fast through the quiet stretches, lingering while a crossing draws */
+      var y = TIME.year, crossing = ROUTES.some(function (r) { return y >= r.y && y <= r.y + Math.max(r.dur, 3); });
+      var speed = crossing ? 7 : y < 1785 ? 80 : y < 1860 ? 20 : y < 1940 ? 22 : 40; /* years per second */
       TIME.set(Math.min(YEAR_MAX, y + dt / 1000 * speed), 'play');
       if (TIME.year >= YEAR_MAX) { stop(); return; }
       raf = requestAnimationFrame(step);
@@ -972,22 +979,43 @@
   }
 
   /* ======================= globe ======================= */
-  var DOTS = null;
-  function decodeDots() {
-    if (DOTS) return DOTS;
-    var bin = atob(LAND_DOTS_B64), n = bin.length / 2, i16 = new Int16Array(n);
-    for (var i = 0; i < n; i++) { var lo = bin.charCodeAt(2 * i), hi = bin.charCodeAt(2 * i + 1); var v = lo | (hi << 8); i16[i] = v > 32767 ? v - 65536 : v; }
-    var m = n / 2, xs = new Float32Array(m), ys = new Float32Array(m), zs = new Float32Array(m);
+  var DOTS = null, DENSE = null, DENSE_B = null, GEO_LINES = null;
+  function unpackI16(b64) {
+    var bin = atob(b64), n = bin.length / 2, out = new Int16Array(n);
+    for (var i = 0; i < n; i++) { var v = bin.charCodeAt(2 * i) | (bin.charCodeAt(2 * i + 1) << 8); out[i] = v > 32767 ? v - 65536 : v; }
+    return out;
+  }
+  function toVecs(i16, scale) {
+    var m = i16.length / 2, xs = new Float32Array(m), ys = new Float32Array(m), zs = new Float32Array(m);
     for (var j = 0; j < m; j++) {
-      var lat = i16[2 * j] / 10 * Math.PI / 180, lon = i16[2 * j + 1] / 10 * Math.PI / 180, c = Math.cos(lat);
+      var lat = i16[2 * j] / scale * Math.PI / 180, lon = i16[2 * j + 1] / scale * Math.PI / 180, c = Math.cos(lat);
       xs[j] = c * Math.sin(lon); ys[j] = Math.sin(lat); zs[j] = c * Math.cos(lon);
     }
-    DOTS = { n: m, x: xs, y: ys, z: zs };
+    return { n: m, x: xs, y: ys, z: zs };
+  }
+  function toLines(i16) { /* array of Float32Array [x,y,z,...] */
+    var lines = [], cur = [];
+    for (var i = 0; i < i16.length; i += 2) {
+      if (i16[i] === 32767) { if (cur.length >= 6) lines.push(new Float32Array(cur)); cur = []; continue; }
+      var lat = i16[i] / 100 * Math.PI / 180, lon = i16[i + 1] / 100 * Math.PI / 180, c = Math.cos(lat);
+      cur.push(c * Math.sin(lon), Math.sin(lat), c * Math.cos(lon));
+    }
+    if (cur.length >= 6) lines.push(new Float32Array(cur));
+    return lines;
+  }
+  function geo() {
+    if (!DOTS) {
+      DOTS = toVecs(unpackI16(LAND_DOTS_B64), 10);
+      DENSE = typeof DENSE_DOTS_B64 !== 'undefined' ? toVecs(unpackI16(DENSE_DOTS_B64), 100) : { n: 0 };
+      DENSE_B = typeof DENSE_B_DOTS_B64 !== 'undefined' ? toVecs(unpackI16(DENSE_B_DOTS_B64), 100) : { n: 0 };
+      GEO_LINES = typeof LINES_US_B64 !== 'undefined' ? { us: toLines(unpackI16(LINES_US_B64)), eu: toLines(unpackI16(LINES_EU_B64)), county: toLines(unpackI16(LINES_COUNTY_B64)) } : { us: [], eu: [], county: [] };
+    }
     return DOTS;
   }
   function vec(lat, lon) { var la = lat * Math.PI / 180, lo = lon * Math.PI / 180, c = Math.cos(la); return [c * Math.sin(lo), Math.sin(la), c * Math.cos(lo)]; }
+  function angleBetween(a, b) { return Math.acos(Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]))); }
   function slerp(a, b, t) {
-    var d = Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2])), om = Math.acos(d);
+    var om = angleBetween(a, b);
     if (om < 1e-6) return a.slice();
     var sa = Math.sin((1 - t) * om) / Math.sin(om), sb = Math.sin(t * om) / Math.sin(om);
     return [a[0] * sa + b[0] * sb, a[1] * sa + b[1] * sb, a[2] * sa + b[2] * sb];
@@ -995,19 +1023,19 @@
   function cssColor(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
   function lineHex(line) { return cssColor(line === 'daily' ? '--c-d' : line === 'wathen' ? '--c-w' : line === 'vogt' ? '--c-v' : line === 'zirkelbach' ? '--c-z' : '--ink-2'); }
   function hexToRgb(hex) { var m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(hex); return m ? [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)] : [120, 120, 120]; }
+  function visDur(r) { return Math.max(r.dur, 3); }
 
   function Globe(canvas, opts) {
     var ctx = canvas.getContext && canvas.getContext('2d');
     if (!ctx) return null;
-    var dots = decodeDots();
-    var G = { canvas: canvas, ctx: ctx, lon: -40, lat: 28, targetLon: null, targetLat: null, idleAt: 0, dragging: false, year: YEAR_MAX, needs: true, visible: true, auto: opts.auto !== false, size: 0 };
+    var dots = geo();
+    var ZMAX = opts.zmax || 18, ZMIN = 1.05;
+    var G = { canvas: canvas, ctx: ctx, lon: -40, lat: 28, zoom: 1.15, tLon: null, tLat: null, tZoom: null, manualUntil: 0, idleAt: 0, dragging: false, year: YEAR_MAX, needs: true, visible: true, auto: opts.auto !== false, size: 0, ease: opts.ease || 0.08 };
     var routes = ROUTES.map(function (r) {
       var a = PLACES[r.from], b = PLACES[r.to], va = vec(a.lat, a.lon), vb = vec(b.lat, b.lon), pts = [];
-      var ang = Math.acos(Math.max(-1, Math.min(1, va[0] * vb[0] + va[1] * vb[1] + va[2] * vb[2])));
-      var lift = 0.02 + 0.10 * Math.min(1, ang / 1.2);
-      for (var i = 0; i <= 64; i++) { var tt = i / 64, v = slerp(va, vb, tt), k = 1 + lift * Math.sin(tt * Math.PI); pts.push([v[0] * k, v[1] * k, v[2] * k]); }
-      var mid = slerp(va, vb, 0.5), mlat = Math.asin(mid[1]) * 180 / Math.PI, mlon = Math.atan2(mid[0], mid[2]) * 180 / Math.PI;
-      return { r: r, pts: pts, mlat: mlat, mlon: mlon, rgb: hexToRgb(lineHex(r.line)) };
+      var ang = angleBetween(va, vb), lift = 0.012 + 0.09 * Math.min(1, ang / 1.2), N = ang > 0.3 ? 72 : 40;
+      for (var i = 0; i <= N; i++) { var tt = i / N, v = slerp(va, vb, tt), k = 1 + lift * Math.sin(tt * Math.PI); pts.push([v[0] * k, v[1] * k, v[2] * k]); }
+      return { r: r, va: va, vb: vb, pts: pts, rgb: hexToRgb(lineHex(r.line)) };
     });
     var places = Object.keys(PLACES).map(function (k) { var p = PLACES[k]; return { k: k, p: p, v: vec(p.lat, p.lon), rgb: hexToRgb(lineHex(p.line)) }; });
     function resize() {
@@ -1016,56 +1044,93 @@
       if (sz === G.size && canvas.width === Math.floor(sz * dpr)) return;
       G.size = sz; canvas.width = Math.floor(sz * dpr); canvas.height = Math.floor(sz * dpr); G.dpr = dpr; G.needs = true;
     }
-    function rot() {
-      var lo = G.lon * Math.PI / 180, la = G.lat * Math.PI / 180;
-      G.cl = Math.cos(lo); G.sl = Math.sin(lo); G.ca = Math.cos(la); G.sa = Math.sin(la);
-    }
-    function proj(x, y, z) { /* returns [sx, sy, depth] in unit sphere coords */
-      var x1 = x * G.cl - z * G.sl, z1 = x * G.sl + z * G.cl;
-      var y2 = y * G.ca - z1 * G.sa, z2 = y * G.sa + z1 * G.ca;
-      return [x1, y2, z2];
+    function rot() { var lo = G.lon * Math.PI / 180, la = G.lat * Math.PI / 180; G.cl = Math.cos(lo); G.sl = Math.sin(lo); G.ca = Math.cos(la); G.sa = Math.sin(la); }
+    function proj(x, y, z) { var x1 = x * G.cl - z * G.sl, z1 = x * G.sl + z * G.cl; return [x1, y * G.ca - z1 * G.sa, y * G.sa + z1 * G.ca]; }
+    /* where the camera should be for a given year: the recent crossings, and the family's home cluster */
+    function focusFor(y) {
+      var pts = [];
+      routes.forEach(function (rt) { if (y >= rt.r.y && y <= rt.r.y + visDur(rt.r) + 5) { pts.push({ v: rt.va, w: 3 }); pts.push({ v: rt.vb, w: 3 }); } });
+      var pres = places.map(function (pl) { return { pl: pl, w: presenceAt(pl.p, y) * (pl.p.lon < -30 ? 1.4 : 1) }; }).filter(function (o) { return o.w > 0; }).sort(function (a, b) { return b.w - a.w; });
+      if (pres.length) { var top = pres[0]; pres.forEach(function (o) { if (angleBetween(o.pl.v, top.pl.v) < 0.36) pts.push({ v: o.pl.v, w: o.w }); }); }
+      if (!pts.length) return { lat: 30, lon: -40, zoom: 1.15 };
+      var cx = 0, cy = 0, cz = 0; pts.forEach(function (o) { cx += o.v[0] * o.w; cy += o.v[1] * o.w; cz += o.v[2] * o.w; });
+      var L = Math.hypot(cx, cy, cz) || 1, c = [cx / L, cy / L, cz / L], th = 0;
+      pts.forEach(function (o) { th = Math.max(th, angleBetween(o.v, c)); });
+      var zoom = Math.max(ZMIN, Math.min(ZMAX, 0.78 / Math.max(Math.sin(th), 0.012)));
+      return { lat: Math.max(8, Math.min(58, Math.asin(c[1]) * 180 / Math.PI)), lon: Math.atan2(c[0], c[2]) * 180 / Math.PI, zoom: zoom };
     }
     function draw() {
       resize(); rot();
-      var S = canvas.width, cx = S / 2, cy = S / 2, R = S * 0.46, c = ctx, dotRGB = cssColor('--globe-dot') || '27, 32, 38', seaRGB = cssColor('--globe-sea') || '233, 234, 227', heatRGB = cssColor('--heat') || '214, 122, 38';
+      var S = canvas.width, cx = S / 2, cy = S / 2, R0 = S * 0.46, Z = G.zoom, R = R0 * Z, c = ctx;
+      var dotRGB = cssColor('--globe-dot') || '27, 32, 38', seaRGB = cssColor('--globe-sea') || '233, 234, 227', heatRGB = cssColor('--heat') || '214, 122, 38';
+      var y = G.year, lim = S * 0.52; /* cull radius from centre, in canvas px */
       c.clearRect(0, 0, S, S);
       /* sphere */
+      c.save(); c.beginPath(); c.arc(cx, cy, Math.min(R, S), 0, 6.2832); c.clip();
       var grd = c.createRadialGradient(cx - R * 0.35, cy - R * 0.4, R * 0.1, cx, cy, R);
       grd.addColorStop(0, 'rgba(' + seaRGB + ', 0.0)'); grd.addColorStop(1, 'rgba(' + seaRGB + ', 1)');
-      c.fillStyle = 'rgba(' + seaRGB + ', 0.55)'; c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.fill();
-      c.fillStyle = grd; c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.fill();
-      c.strokeStyle = 'rgba(' + dotRGB + ', 0.18)'; c.lineWidth = Math.max(1, S / 700); c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.stroke();
-      /* land dots, in four depth buckets so alpha changes stay cheap */
-      var r0 = Math.max(0.9, S / 420), buckets = [[], [], [], []];
-      for (var i = 0; i < dots.n; i++) {
-        var p = proj(dots.x[i], dots.y[i], dots.z[i]);
-        if (p[2] <= 0.02) continue;
-        buckets[p[2] > 0.75 ? 3 : p[2] > 0.5 ? 2 : p[2] > 0.25 ? 1 : 0].push(cx + p[0] * R, cy - p[1] * R);
+      c.fillStyle = 'rgba(' + seaRGB + ', 0.55)'; c.fillRect(0, 0, S, S);
+      c.fillStyle = grd; c.fillRect(0, 0, S, S);
+      c.restore();
+      if (R < S * 0.75) { c.strokeStyle = 'rgba(' + dotRGB + ', 0.18)'; c.lineWidth = Math.max(1, S / 700); c.beginPath(); c.arc(cx, cy, R, 0, 6.2832); c.stroke(); }
+      /* land dots */
+      var r0 = Math.max(0.9, S / 420) * Math.min(2.0, 1 + 0.12 * (Z - 1)), buckets = [[], [], [], []];
+      function pushDots(D, rr, frac) {
+        var step = frac >= 1 ? 1 : Math.max(1, Math.round(1 / Math.max(frac, 0.02)));
+        for (var i = 0; i < D.n; i += step) {
+          var p = proj(D.x[i], D.y[i], D.z[i]); if (p[2] <= 0.02) continue;
+          var sx = cx + p[0] * R, sy = cy - p[1] * R; if (sx < -lim || sx > S + lim || sy < -lim || sy > S + lim) continue;
+          buckets[p[2] > 0.75 ? 3 : p[2] > 0.5 ? 2 : p[2] > 0.25 ? 1 : 0].push(sx, sy, rr);
+        }
       }
+      pushDots(dots, r0, 1);
+      var denseA = Math.max(0, Math.min(1, (Z - 1.8) / 1.8)), denseB = Math.max(0, Math.min(1, (Z - 11) / 4));
+      if (denseA > 0 && DENSE.n) pushDots(DENSE, r0 * (0.6 + 0.3 * denseA), denseA);
+      if (denseB > 0 && DENSE_B.n) pushDots(DENSE_B, r0 * (0.5 + 0.35 * denseB), denseB);
       [0.18, 0.32, 0.5, 0.68].forEach(function (a, bi) {
-        var b = buckets[bi]; c.fillStyle = 'rgba(' + dotRGB + ', ' + a + ')'; c.beginPath();
-        var rr = r0 * (0.75 + bi * 0.1);
-        for (var k = 0; k < b.length; k += 2) { c.moveTo(b[k] + rr, b[k + 1]); c.arc(b[k], b[k + 1], rr, 0, 6.2832); }
+        var b = buckets[bi]; if (!b.length) return; c.fillStyle = 'rgba(' + dotRGB + ', ' + a + ')'; c.beginPath();
+        for (var k = 0; k < b.length; k += 3) { var rr = b[k + 2] * (0.75 + bi * 0.1); c.moveTo(b[k] + rr, b[k + 1]); c.arc(b[k], b[k + 1], rr, 0, 6.2832); }
         c.fill();
       });
-      var y = G.year;
+      /* close-range lines: coasts and borders, then counties */
+      function drawLines(set, alpha, width) {
+        if (!set.length || alpha <= 0) return;
+        c.strokeStyle = 'rgba(' + dotRGB + ', ' + alpha + ')'; c.lineWidth = width; c.lineJoin = 'round'; c.beginPath();
+        for (var li = 0; li < set.length; li++) {
+          var L = set[li], pen = false;
+          for (var i = 0; i < L.length; i += 3) {
+            var p = proj(L[i], L[i + 1], L[i + 2]);
+            if (p[2] <= 0) { pen = false; continue; }
+            var sx = cx + p[0] * R, sy = cy - p[1] * R;
+            if (sx < -lim || sx > S + lim || sy < -lim || sy > S + lim) { pen = false; continue; }
+            if (!pen) { c.moveTo(sx, sy); pen = true; } else c.lineTo(sx, sy);
+          }
+        }
+        c.stroke();
+      }
+      var la = Math.max(0, Math.min(1, (Z - 2.2) / 2.5));
+      if (la > 0) { drawLines(GEO_LINES.us, 0.38 * la, Math.max(0.8, S / 900)); drawLines(GEO_LINES.eu, 0.38 * la, Math.max(0.8, S / 900)); }
+      var ca = Math.max(0, Math.min(1, (Z - 7) / 5));
+      if (ca > 0) drawLines(GEO_LINES.county, 0.22 * ca, Math.max(0.6, S / 1300));
       /* glows: presence at this year */
+      var gz = Math.pow(Z, 0.3), gdim = 1 / (1 + 0.035 * (Z - 1));
       places.forEach(function (pl) {
         var w = presenceAt(pl.p, y); if (!w) return;
         var p = proj(pl.v[0], pl.v[1], pl.v[2]); if (p[2] <= 0) return;
-        var sx = cx + p[0] * R, sy = cy - p[1] * R, rad = R * (0.04 + 0.03 * Math.sqrt(w)) * (0.6 + 0.4 * p[2]);
-        var a0 = Math.min(0.7, 0.22 + 0.07 * Math.sqrt(w)) * p[2];
+        var sx = cx + p[0] * R, sy = cy - p[1] * R; if (sx < -lim || sx > S + lim || sy < -lim || sy > S + lim) return;
+        var rad = Math.min(S * 0.15, R0 * (0.04 + 0.03 * Math.sqrt(w)) * gz) * (0.6 + 0.4 * p[2]);
+        var a0 = Math.min(0.7, 0.22 + 0.07 * Math.sqrt(w)) * p[2] * gdim;
         var g = c.createRadialGradient(sx, sy, 0, sx, sy, rad);
         g.addColorStop(0, 'rgba(' + heatRGB + ', ' + a0 + ')'); g.addColorStop(0.45, 'rgba(' + heatRGB + ', ' + (a0 * 0.45) + ')'); g.addColorStop(1, 'rgba(' + heatRGB + ', 0)');
         c.fillStyle = g; c.beginPath(); c.arc(sx, sy, rad, 0, 6.2832); c.fill();
-        c.fillStyle = 'rgba(' + pl.rgb.join(',') + ', ' + (0.9 * p[2]) + ')'; c.beginPath(); c.arc(sx, sy, Math.max(1.5, S / 260), 0, 6.2832); c.fill();
+        c.fillStyle = 'rgba(' + pl.rgb.join(',') + ', ' + (0.9 * p[2]) + ')'; c.beginPath(); c.arc(sx, sy, Math.max(1.6, S / 260) * Math.min(1.6, Math.pow(Z, 0.2)), 0, 6.2832); c.fill();
       });
       /* routes */
       c.lineCap = 'round'; c.lineJoin = 'round';
       routes.forEach(function (rt) {
-        var r = rt.r, prog = (y - r.y) / r.dur; if (prog <= 0) return; prog = Math.min(1, prog);
+        var r = rt.r, prog = (y - r.y) / visDur(r); if (prog <= 0) return; prog = Math.min(1, prog);
         var done = prog >= 1, n = Math.floor(prog * (rt.pts.length - 1)), col = rt.rgb.join(',');
-        c.strokeStyle = 'rgba(' + col + ', ' + (done ? 0.5 : 0.95) + ')'; c.lineWidth = Math.max(1.2, S / (done ? 520 : 380));
+        c.strokeStyle = 'rgba(' + col + ', ' + (done ? 0.55 : 0.95) + ')'; c.lineWidth = Math.max(1.2, S / (done ? 500 : 360));
         c.beginPath(); var pen = false;
         for (var i = 0; i <= n; i++) {
           var q = rt.pts[i], p = proj(q[0], q[1], q[2]);
@@ -1074,87 +1139,114 @@
           if (!pen) { c.moveTo(sx, sy); pen = true; } else c.lineTo(sx, sy);
         }
         c.stroke();
-        if (!done && n > 0) { var hq = rt.pts[n], hp = proj(hq[0], hq[1], hq[2]); if (hp[2] > -0.05) { c.fillStyle = 'rgba(' + col + ', 1)'; c.beginPath(); c.arc(cx + hp[0] * R, cy - hp[1] * R, Math.max(2, S / 160), 0, 6.2832); c.fill(); } }
+        if (!done && n > 0) { var hq = rt.pts[n], hp = proj(hq[0], hq[1], hq[2]); if (hp[2] > -0.05) { c.fillStyle = 'rgba(' + col + ', 1)'; c.beginPath(); c.arc(cx + hp[0] * R, cy - hp[1] * R, Math.max(2.2, S / 150), 0, 6.2832); c.fill(); } }
       });
-      /* labels: a few of the most populated visible places */
+      /* labels */
       if (opts.labels !== false) {
-        var vis = places.map(function (pl) { var w = presenceAt(pl.p, y); var p = proj(pl.v[0], pl.v[1], pl.v[2]); return { pl: pl, w: w, p: p }; }).filter(function (o) { return o.w > 0 && o.p[2] > 0.25; }).sort(function (a, b) { return b.w - a.w; }).slice(0, S > 700 ? 6 : 4);
-        c.font = Math.round(Math.max(10, S / 52)) + 'px ' + (cssColor('--font-ui') || 'system-ui');
-        c.textBaseline = 'middle';
+        var vis = places.map(function (pl) { var w = presenceAt(pl.p, y); var p = proj(pl.v[0], pl.v[1], pl.v[2]); return { pl: pl, w: w, p: p, sx: cx + p[0] * R, sy: cy - p[1] * R }; })
+          .filter(function (o) { return o.w > 0 && o.p[2] > 0.2 && o.sx > 0 && o.sx < S && o.sy > 0 && o.sy < S; }).sort(function (a, b) { return b.w - a.w; }).slice(0, Z > 6 ? 10 : S > 700 ? 6 : 4);
+        c.font = Math.round(Math.max(10.5, S / 50)) + 'px ' + (cssColor('--font-ui') || 'system-ui'); c.textBaseline = 'middle';
         var used = [];
         vis.forEach(function (o) {
-          var sx = cx + o.p[0] * R + S / 90, sy = cy - o.p[1] * R;
-          if (used.some(function (u) { return Math.abs(u[1] - sy) < S / 40 && Math.abs(u[0] - sx) < S / 6; })) return;
+          var sx = o.sx + S / 80, sy = o.sy;
+          if (used.some(function (u) { return Math.abs(u[1] - sy) < S / 36 && Math.abs(u[0] - sx) < S / 5; })) return;
           used.push([sx, sy]);
-          var label = o.pl.p.n.split(',')[0].replace(' and Knight Township', '').replace(' and Ridgway', '').replace(' and St. Wendel', '');
+          var label = Z > 6 ? o.pl.p.n.split(',')[0] : o.pl.p.n.split(',')[0].replace(' and Knight Township', '').replace(' and Ridgway', '').replace(' and St. Wendel', '');
           c.lineWidth = 3; c.strokeStyle = 'rgba(' + seaRGB + ', 0.85)'; c.strokeText(label, sx, sy);
-          c.fillStyle = 'rgba(' + dotRGB + ', ' + (0.55 + 0.4 * o.p[2]) + ')'; c.fillText(label, sx, sy);
+          c.fillStyle = 'rgba(' + dotRGB + ', ' + (0.6 + 0.4 * o.p[2]) + ')'; c.fillText(label, sx, sy);
         });
       }
       G.needs = false;
     }
     function tick(ts) {
       if (!G.visible) { G.raf = null; return; }
-      var moving = false;
-      if (!G.dragging) {
-        if (G.targetLon != null) {
-          var dl = ((G.targetLon - G.lon + 540) % 360) - 180, da = G.targetLat - G.lat;
-          if (Math.abs(dl) > 0.05 || Math.abs(da) > 0.05) { G.lon += dl * 0.06; G.lat += da * 0.06; moving = true; } else { G.targetLon = null; }
-        } else if (G.auto && !reducedMotion && ts - G.idleAt > 4000) { G.lon += 0.035; moving = true; }
+      var moving = false, k = G.ease;
+      if (!G.dragging && ts > G.manualUntil) {
+        if (G.tLon != null) {
+          var dl = ((G.tLon - G.lon + 540) % 360) - 180, da = G.tLat - G.lat, dz = Math.log(G.tZoom / G.zoom);
+          if (Math.abs(dl) > 0.03 || Math.abs(da) > 0.03 || Math.abs(dz) > 0.004) { G.lon += dl * k; G.lat += da * k; G.zoom *= Math.exp(dz * k); moving = true; }
+        } else if (G.auto && !reducedMotion && ts - G.idleAt > 4000) { G.lon += 0.035 / Math.sqrt(G.zoom); moving = true; }
       }
       if (moving || G.needs) draw();
       G.raf = requestAnimationFrame(tick);
     }
+    /* pointer: drag turns, pinch zooms, a tap on a place looks at it */
+    var ptrs = {}, last = null, pinch0 = null, moved = 0;
     function pt(e) { var r = canvas.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
-    var last = null;
-    canvas.addEventListener('pointerdown', function (e) { if (e.button) return; G.dragging = true; last = pt(e); G.targetLon = null; try { canvas.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ } });
+    function manual() { G.manualUntil = performance.now() + (opts.manualHold || 9000); G.idleAt = performance.now(); G.needs = true; }
+    function zoomBy(f, px, py) {
+      var nz = Math.max(ZMIN, Math.min(ZMAX * 1.6, G.zoom * f));
+      if (px != null) { /* keep the point under the cursor fixed, approximately */
+        var S = G.size, dx = (px - S / 2) / (S * 0.46), dy = (py - S / 2) / (S * 0.46), k = 180 / Math.PI;
+        G.lon += dx * (1 / G.zoom - 1 / nz) * k; G.lat = Math.max(-80, Math.min(80, G.lat - dy * (1 / G.zoom - 1 / nz) * k));
+      }
+      G.zoom = nz; manual();
+    }
+    canvas.addEventListener('pointerdown', function (e) { if (e.button) return; ptrs[e.pointerId] = pt(e); var ids = Object.keys(ptrs); if (ids.length === 1) { G.dragging = true; last = ptrs[e.pointerId]; moved = 0; } else if (ids.length === 2) { var a = ptrs[ids[0]], b = ptrs[ids[1]]; pinch0 = { d: Math.hypot(a[0] - b[0], a[1] - b[1]) || 1, z: G.zoom }; } try { canvas.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ } });
     canvas.addEventListener('pointermove', function (e) {
-      if (!G.dragging || !last) return; var p = pt(e), k = 180 / Math.max(200, G.size);
-      G.lon += (p[0] - last[0]) * k * 0.9; G.lat = Math.max(-80, Math.min(80, G.lat + (p[1] - last[1]) * k * 0.9)); last = p; G.needs = true; G.idleAt = performance.now();
+      if (!ptrs[e.pointerId]) return; var p = pt(e); ptrs[e.pointerId] = p; var ids = Object.keys(ptrs);
+      if (ids.length >= 2 && pinch0) { var a = ptrs[ids[0]], b = ptrs[ids[1]], d = Math.hypot(a[0] - b[0], a[1] - b[1]) || 1; G.zoom = Math.max(ZMIN, Math.min(ZMAX * 1.6, pinch0.z * d / pinch0.d)); manual(); moved = 99; return; }
+      if (!G.dragging || !last) return;
+      var k = 180 / Math.max(200, G.size) / G.zoom;
+      moved += Math.abs(p[0] - last[0]) + Math.abs(p[1] - last[1]);
+      G.lon += (p[0] - last[0]) * k * 0.9; G.lat = Math.max(-80, Math.min(80, G.lat + (p[1] - last[1]) * k * 0.9)); last = p; manual();
     });
-    function up() { G.dragging = false; last = null; G.idleAt = performance.now(); }
+    function up(e) {
+      if (ptrs[e.pointerId] && moved < 5 && opts.tapFocus) {
+        var p = ptrs[e.pointerId], S = G.size, R = S * 0.46 * G.zoom, best = null;
+        places.forEach(function (pl) { var q = proj(pl.v[0], pl.v[1], pl.v[2]); if (q[2] <= 0) return; var d = Math.hypot(S / 2 + q[0] * R - p[0], S / 2 - q[1] * R - p[1]); if (d < 18 && (!best || d < best.d)) best = { d: d, pl: pl }; });
+        if (best) { G.tLat = best.pl.p.lat; G.tLon = best.pl.p.lon; G.tZoom = Math.max(G.zoom, 12); G.manualUntil = performance.now() + 14000; var w = presenceAt(best.pl.p, G.year); toast(best.pl.p.n + (best.pl.p.r ? ', ' + best.pl.p.r : '') + (w ? ': about ' + w + ' of the family in ' + G.year : ': no one here in ' + G.year)); }
+      }
+      delete ptrs[e.pointerId]; var ids = Object.keys(ptrs);
+      if (ids.length < 2) pinch0 = null;
+      if (!ids.length) { G.dragging = false; last = null; G.idleAt = performance.now(); } else { last = ptrs[ids[0]]; }
+    }
     canvas.addEventListener('pointerup', up); canvas.addEventListener('pointercancel', up);
-    canvas.addEventListener('keydown', function (e) { var d = { ArrowLeft: [-8, 0], ArrowRight: [8, 0], ArrowUp: [0, 6], ArrowDown: [0, -6] }[e.key]; if (!d) return; e.preventDefault(); G.lon += d[0]; G.lat = Math.max(-80, Math.min(80, G.lat + d[1])); G.needs = true; G.idleAt = performance.now(); });
+    if (opts.wheel) canvas.addEventListener('wheel', function (e) { if (!(e.ctrlKey || e.metaKey)) return; e.preventDefault(); var p = pt(e); zoomBy(e.deltaY < 0 ? 1.18 : 0.85, p[0], p[1]); }, { passive: false });
+    if (opts.wheel) canvas.addEventListener('dblclick', function (e) { var p = pt(e); zoomBy(1.8, p[0], p[1]); });
+    canvas.addEventListener('keydown', function (e) {
+      var d = { ArrowLeft: [-8, 0], ArrowRight: [8, 0], ArrowUp: [0, 6], ArrowDown: [0, -6] }[e.key];
+      if (e.key === '+' || e.key === '=') { e.preventDefault(); zoomBy(1.3); return; }
+      if (e.key === '-' || e.key === '_') { e.preventDefault(); zoomBy(0.77); return; }
+      if (!d) return; e.preventDefault(); G.lon += d[0] / G.zoom; G.lat = Math.max(-80, Math.min(80, G.lat + d[1] / G.zoom)); manual();
+    });
     canvas.tabIndex = 0;
     if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { G.visible = en[0].isIntersecting; if (G.visible && !G.raf) G.raf = requestAnimationFrame(tick); }, { threshold: 0.05 }).observe(canvas);
     window.addEventListener('resize', function () { G.needs = true; });
     if (window.matchMedia) { var mq = window.matchMedia('(prefers-color-scheme: dark)'); if (mq.addEventListener) mq.addEventListener('change', function () { routes.forEach(function (rt) { rt.rgb = hexToRgb(lineHex(rt.r.line)); }); places.forEach(function (pl) { pl.rgb = hexToRgb(lineHex(pl.p.line)); }); G.needs = true; }); }
     G.setYear = function (y, follow) {
       G.year = y; G.needs = true;
-      if (follow) {
-        var active = routes.filter(function (rt) { return y >= rt.r.y && y <= rt.r.y + rt.r.dur + 2; });
-        if (active.length) { var a = active[active.length - 1]; G.targetLon = a.mlon; G.targetLat = Math.max(10, Math.min(55, a.mlat)); }
-        else if (y >= YEAR_MAX) { G.targetLon = -40; G.targetLat = 28; }
-        else {
-          var sx = 0, sy = 0, sz = 0, sw = 0;
-          places.forEach(function (pl) { var w = presenceAt(pl.p, y); if (!w) return; sx += pl.v[0] * w; sy += pl.v[1] * w; sz += pl.v[2] * w; sw += w; });
-          if (sw) { var L = Math.hypot(sx, sy, sz) || 1; G.targetLat = Math.max(10, Math.min(50, Math.asin(sy / L) * 180 / Math.PI)); G.targetLon = Math.atan2(sx / L, sz / L) * 180 / Math.PI; }
-        }
-      }
+      if (follow) { var f = focusFor(y); G.tLat = f.lat; G.tLon = f.lon; G.tZoom = Math.min(ZMAX, f.zoom); }
     };
-    G.lookAt = function (lon, lat) { G.targetLon = lon; G.targetLat = lat; };
+    G.zoomBy = zoomBy;
+    G.release = function () { G.manualUntil = 0; G.setYear(G.year, true); };
+    G.lookAt = function (lon, lat, zoom) { G.tLon = lon; G.tLat = lat; G.tZoom = zoom || G.zoom; };
     G.raf = requestAnimationFrame(tick);
     return G;
   }
   function setupGlobes() {
     var hero = $('#globe-hero'), main = $('#globe-main');
-    var gh = hero && Globe(hero, { auto: true, labels: false });
-    var gm = main && Globe(main, { auto: true, labels: true });
+    var gh = hero && Globe(hero, { auto: true, labels: false, zmax: 5.5, ease: 0.05, manualHold: 6000 });
+    var gm = main && Globe(main, { auto: true, labels: true, zmax: 18, ease: 0.09, wheel: true, tapFocus: true });
     if (gh) {
-      /* a cinematic loop: the routes draw themselves across three centuries, hold, and begin again */
-      if (reducedMotion) { gh.setYear(YEAR_MAX, false); gh.lookAt(-45, 30); }
+      if (reducedMotion) { gh.setYear(YEAR_MAX, false); gh.lookAt(-45, 30, 1.2); }
       else {
-        var t0 = null, LEN = 16000, HOLD = 5000;
-        gh.lookAt(-45, 30);
+        var t0 = null, LEN = 13000, HOLD = 4500, lastY = -1;
         (function loop(ts) {
           if (!t0) t0 = ts;
-          var el = (ts - t0) % (LEN + HOLD), yr = el < LEN ? YEAR_MIN + (YEAR_MAX - YEAR_MIN) * easeInOut(el / LEN) : YEAR_MAX;
-          gh.setYear(Math.round(yr), false);
+          var el = (ts - t0) % (LEN + HOLD), yr = Math.round(el < LEN ? YEAR_MIN + (YEAR_MAX - YEAR_MIN) * easeInOut(el / LEN) : YEAR_MAX);
+          if (yr !== lastY) { gh.setYear(yr, true); lastY = yr; }
           requestAnimationFrame(loop);
         })(0);
       }
     }
-    if (gm) TIME.on(function (y, why) { gm.setYear(y, why === 'play' || why === 'scroll' || why === 'slider'); });
+    if (gm) {
+      TIME.on(function (y, why) { gm.setYear(y, true); });
+      var zi = $('#g-in'), zo = $('#g-out'), zf = $('#g-fit');
+      if (zi) zi.addEventListener('click', function () { gm.zoomBy(1.5); });
+      if (zo) zo.addEventListener('click', function () { gm.zoomBy(0.67); });
+      if (zf) zf.addEventListener('click', function () { gm.release(); });
+    }
     function easeInOut(x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
   }
 
