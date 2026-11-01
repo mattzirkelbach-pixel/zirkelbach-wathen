@@ -40,7 +40,7 @@ setTimeout(() => {
     assert(document.querySelectorAll('#findings .finding').length === 16, 'findings: ' + document.querySelectorAll('#findings .finding').length);
     assert(document.querySelectorAll('#disagree-body tr').length === 14, 'disagreements');
     assert(document.querySelectorAll('#leads li').length === 13, 'leads');
-    assert(document.querySelectorAll('#sources-list li').length === 68, 'sources: ' + document.querySelectorAll('#sources-list li').length);
+    assert(document.querySelectorAll('#sources-list li').length === 69, 'sources: ' + document.querySelectorAll('#sources-list li').length);
     assert(document.querySelectorAll('#descendants li').length >= 19, 'descendant nodes: ' + document.querySelectorAll('#descendants li').length);
     assert(document.querySelectorAll('#unplaced li').length === 5, 'unplaced');
     assert(document.querySelectorAll('#changelog li').length >= 1, 'changelog');

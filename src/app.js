@@ -918,6 +918,7 @@
         if (/^died/.test(c.dates || '')) { died = born; born = null; }
         else if (m) died = +m[1];
         if (born) BORN.push({ name: c.name, born: born, died: died, line: 'zirkelbach' });
+        if (c.spouseLife) BORN.push({ name: c.spouse.split(' (')[0], born: c.spouseLife[0], died: c.spouseLife[1] || null, line: 'zirkelbach' });
         walk(c);
       });
     })(DESCENDANTS);

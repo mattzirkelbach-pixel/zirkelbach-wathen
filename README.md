@@ -8,7 +8,7 @@ The site is one self-contained page, built from the files in `src/`. It works on
 
 1. On the site, **Add to the tree** (top right, or from any person's page) opens a form. No account needed.
 2. The note goes to a relay and, within three hours, the **Family inbox** action files it as an issue here, labeled `family-submission`. The repository owner is notified by GitHub.
-3. The family historian (or Claude, on its daily check) reviews each issue, updates `src/data.js`, pushes, comments on the issue with what changed, and closes it. Every push republishes the site.
+3. The family historian (or Claude, on its daily check) reviews each issue and applies it to every part of the site that shows it, following **UPDATING.md**, updates `src/data.js`, pushes, comments on the issue with what changed, and closes it. Every push republishes the site.
 4. Changes are credited in the site's **Updates from the family** list.
 
 People with a GitHub account can also open an issue directly with the *Add to the tree* template.

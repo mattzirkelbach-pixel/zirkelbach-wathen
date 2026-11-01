@@ -772,7 +772,11 @@ const DESCENDANTS = {
     { name: "Thomas Joseph “Tom” Zirkelbach", note: "Living in 2013, per Jeryl's obituary.", s: [62], open: true },
     { name: "John Charles Zirkelbach", note: "Evansville police from 12 March 1973; living in 2013, per Jeryl's obituary.", s: [5, 62], open: true,
       children: [ { name: "Adam Von Zirkelbach", note: "Evansville police from 11 September 1995, the fourth generation; later federal law enforcement.", s: [5] } ] },
-    { name: "James Eric Zirkelbach", note: "Air Force military police; living in 2013, per Jeryl's obituary.", s: [50, 62], open: true },
+    { name: "James Eric Zirkelbach", spouse: "Cheryl Christina Whittington (30 June 1950 – 23 May 2025), 1974", spouseLife: [1950, 2025], note: "Air Force military police. Married Cheryl Whittington in 1974; they marked fifty years in 2024. Cheryl, born in Ohio to Wilbur and Vera M. (Genson) Whittington, earned a BA in Education at Bowling Green State University and an MEd at Indiana State, and taught for her whole career. She died in Evansville on 23 May 2025 and is buried at Oak Hill Cemetery. Her siblings: Tom, John and Andrew Whittington and Elaine Howey.", s: [50, 62, 69],
+      children: [
+        { name: "Matthew von Zirkelbach", spouse: "Danessa", s: [69], children: [ { name: "Madeline von Zirkelbach" }, { name: "Maxwell von Zirkelbach" } ] },
+        { name: "Christina von Zirkelbach", spouse: "John Porter (engaged, 2025)", s: [69], children: [ { name: "Ashden" }, { name: "Austin" } ] }
+      ] },
     { name: "Donna Maria Zirkelbach", spouse: "William H. Woehler, Evansville police", note: "Living in 2013, per Jeryl's obituary.", s: [50, 62], open: true }
   ]
 };
@@ -783,11 +787,12 @@ const UNPLACED = [
   { name: "Elmer Zirkelbach (1913–1999) and his family", t: "Married Lucille Drone (1919–2004). Children Richard “Zeke” (1945–2013; Marine Corps; part owner of The Car Company and once of the St. Joe Tavern; married Billie Jo McBride), Mary Joyce Calhoun (1941–2019), Janet L. Hamilton (1943–2016), Deborah Joan Blake (1950–2021) and Mark Edward (1957–2026). Zeke's children are Trish Ann Smithwick, Megan, Gabe and Bart, with seven grandchildren. Elmer's parents are not linked on his memorial; he may descend from one of Pete's brothers.", s: [63, 64, 58, 59] },
   { name: "George Vincent Zirkelbach, 1879–1959", t: "Born in Vanderburgh County; married Rosa M. Doerr (1883–1949) in 1900. Their son Albert Andrew (1903–1964) was born in Gallatin County; daughters Celia Himes, Anna Marie Zeggling, Margaret Baumgart and Viola Meredith. Very likely a grandson of Andrew through one of the Ridgway sons.", s: [63] },
   { name: "Don R. and Sylvia (Hagan) Zirkelbach, Albany, Georgia", t: "Sylvia, an Evansville native, died in 2008 after 53 years of marriage; Don Raphael Zirkelbach (1936–2012) is buried at Andersonville National Cemetery. Children John and Ellen; a daughter Rebecca died before her.", s: [57] },
-  { name: "Janet Gail “Jan” (Weikel) Zirkelbach (2026), Cheryl Christina Zirkelbach (2025)", t: "Recent Browning Funeral Home obituaries, not yet read.", s: [60] }
+  { name: "Janet Gail “Jan” (Weikel) Zirkelbach, died 2026", t: "A recent Browning Funeral Home obituary, not yet read or placed.", s: [60] }
 ];
 
 /* Updates from the family, newest first */
 const CHANGELOG = [
+  { d: "1 November 2026", t: "Eric's branch from Cheryl Christina (Whittington) Zirkelbach's 2025 obituary, sent in by her son Matthew: Cheryl (1950–2025), their children Matthew and Christina von Zirkelbach, and four grandchildren. The opening globe now plays as a narrated journey." },
   { d: "31 October 2026", t: "Records pass: Katherine Lintzenich's dates and parents (Christian and Mary) from her death record; Andrew's grave and 1880 household; Pete's daughters Eleanor Grimmeissen and Veronica Osha; Jeryl's full branch from his 2013 obituary, including the twins (1962) and Mike (1961–2008); Gallatin County Zirkelbachs sorted for the family to confirm or rule out; Andrew's thirteen children with spouses and dates; the Elmer and Zeke Zirkelbach family. The interactive tree now opens downward from Donald and Cleo." },
   { d: "31 October 2026", t: "Site published. Donald and Cleo's family opened downward; Jeryl's branch added from Jay H. Zirkelbach's 2023 obituary; the form for additions and corrections went live." }
 ];
@@ -856,7 +861,7 @@ const SOURCES = [
   { n: 57, t: "Sylvia Dean Zirkelbach obituary (2008), Courier & Press via Legacy.com", u: "https://www.legacy.com/us/obituaries/courierpress/name/sylvia-zirkelbach-obituary?id=24892145", k: "published" },
   { n: 58, t: "Mark Edward Zirkelbach obituary (1957–2026), Pierre Funeral Home", u: "https://www.pierrefuneralhome.com/obituaries/mark-zirkelbach/", k: "published" },
   { n: 59, t: "Julie A. Zirkelbach obituary (1976–2022), Pierre Funeral Home, via Echovita", u: "https://www.echovita.com/us/obituaries/in/evansville/julie-a-zirkelbach-15230975", k: "published" },
-  { n: 60, t: "Browning Funeral Home obituaries via Legacy.com: Janet Gail Zirkelbach (2026); Cheryl Christina Zirkelbach (2025) (listings only)", u: "https://www.legacy.com/us/obituaries/name/janet-zirkelbach-obituary?id=61336437", k: "unverified" },
+  { n: 60, t: "Browning Funeral Home obituaries via Legacy.com: Janet Gail Zirkelbach (2026) (listing only)", u: "https://www.legacy.com/us/obituaries/name/janet-zirkelbach-obituary?id=61336437", k: "unverified" },
   { n: 61, t: "Find a Grave memorials read 31 October 2026, with the death-record and census transcriptions posted on them: Andrew Zirkelbach 207292650; Mary Catherine Lintzenich Zirkelbach 207292716; Peter F. Zirkelbach 114292310; Carolyn Daily Zirkelbach 119491882; Eleanor Zirkelbach Grimmeissen 114539375; Donald H. Zirkelbach 115787372; Cleo Margaret Wathen Zirkelbach 115787385; Donald Jr. 137716244; Jeryl H. Zirkelbach 243906276; twin daughters 114997129; Michael D. Zirkelbach 115410715", u: "https://www.findagrave.com/memorial/207292716/mary_catherine-zirkelbach", k: "published" },
   { n: 62, t: "Jeryl Henry “Jerry” Zirkelbach obituary, The Arizona Republic, September 2013", u: "https://www.legacy.com/us/obituaries/azcentral/name/jeryl-zirkelbach-obituary?id=19215400", k: "published" },
   { n: 63, t: "Find a Grave, St. Joseph Catholic Cemetery, Evansville: Philip Edward Zirkelbach 114292211; Elmer Zirkelbach 114292094; Albert Andrew Zirkelbach 143288289; Abe W. Zirkelbach 115586159", u: "https://www.findagrave.com/cemetery/86698/memorial-search?lastname=Zirkelbach", k: "published" },
@@ -864,5 +869,6 @@ const SOURCES = [
   { n: 65, t: "Find a Grave memorials of Andrew Zirkelbach's children: Regina Ziegler 118871163; Margaret Ottman 114189366; Barbara Bauer 64748236; George J. 49874773; Frank Joseph 96138007; Mary M. Kohl 47884683; William J. 64748587; Andrew H. 64748577", u: "https://www.findagrave.com/memorial/207292650/andrew-zirkelbach", k: "published" },
   { n: 66, t: "Sir Bernard Burke, The General Armory of England, Scotland, Ireland, and Wales (1884 ed.), entries for O'Daly (Chiefs of Corca Adhamh, co. Westmeath; Finnvara; Killymore; Killeleigh); no entry for Wathen", u: "https://archive.org/details/generalarmoryofe00burk", k: "published" },
   { n: 67, t: "Heraldry of the World: Bischofsheim an der Rhön (town arms; seal from the fourteenth century)", u: "https://heraldry-wiki.com/wiki/Bischofsheim_an_der_Rh%C3%B6n", k: "published" },
-  { n: 68, t: "The Hessian lion: arms of the Landgraves and Grand Dukes of Hesse (Wikipedia, Grand Duchy of Hesse)", u: "https://en.wikipedia.org/wiki/Grand_Duchy_of_Hesse", k: "published" }
+  { n: 68, t: "The Hessian lion: arms of the Landgraves and Grand Dukes of Hesse (Wikipedia, Grand Duchy of Hesse)", u: "https://en.wikipedia.org/wiki/Grand_Duchy_of_Hesse", k: "published" },
+  { n: 69, t: "Obituary of Cheryl Christina (Whittington) Zirkelbach, 30 June 1950 – 23 May 2025, Browning Funeral Home, Evansville, published on Legacy.com 24 May 2025", u: "https://www.legacy.com/us/obituaries/name/cheryl-zirkelbach-obituary?id=58473319", k: "record" }
 ];
