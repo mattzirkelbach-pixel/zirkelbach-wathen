@@ -1048,8 +1048,8 @@
     function proj(x, y, z) { var x1 = x * G.cl - z * G.sl, z1 = x * G.sl + z * G.cl; return [x1, y * G.ca - z1 * G.sa, y * G.sa + z1 * G.ca]; }
     /* where the camera should be for a given year: the recent crossings, and the family's home cluster */
     function focusFor(y) {
-      var pts = [];
-      routes.forEach(function (rt) { if (y >= rt.r.y && y <= rt.r.y + visDur(rt.r) + 5) { pts.push({ v: rt.va, w: 3 }); pts.push({ v: rt.vb, w: 3 }); } });
+      var pts = [], ahead = opts.lookAhead || 0; /* the narrated hero frames a crossing a few years before the line starts to draw */
+      routes.forEach(function (rt) { if (y >= rt.r.y - ahead && y <= rt.r.y + visDur(rt.r) + 5) { pts.push({ v: rt.va, w: 3 }); pts.push({ v: rt.vb, w: 3 }); } });
       var pres = places.map(function (pl) { return { pl: pl, w: presenceAt(pl.p, y) * (pl.p.lon < -30 ? 1.4 : 1) }; }).filter(function (o) { return o.w > 0; }).sort(function (a, b) { return b.w - a.w; });
       if (pres.length) { var top = pres[0]; pres.forEach(function (o) { if (angleBetween(o.pl.v, top.pl.v) < 0.36) pts.push({ v: o.pl.v, w: o.w }); }); }
       if (!pts.length) return { lat: 30, lon: -40, zoom: 1.15 };
@@ -1130,7 +1130,7 @@
       routes.forEach(function (rt) {
         var r = rt.r, prog = (y - r.y) / visDur(r); if (prog <= 0) return; prog = Math.min(1, prog);
         var done = prog >= 1, n = Math.floor(prog * (rt.pts.length - 1)), col = rt.rgb.join(',');
-        c.strokeStyle = 'rgba(' + col + ', ' + (done ? 0.55 : 0.95) + ')'; c.lineWidth = Math.max(1.2, S / (done ? 500 : 360));
+        c.strokeStyle = 'rgba(' + col + ', ' + (done ? 0.55 : 0.95) + ')'; c.lineWidth = Math.max(1.2, S / (done ? 500 : 360)) * (opts.lineScale || 1);
         c.beginPath(); var pen = false;
         for (var i = 0; i <= n; i++) {
           var q = rt.pts[i], p = proj(q[0], q[1], q[2]);
@@ -1139,7 +1139,7 @@
           if (!pen) { c.moveTo(sx, sy); pen = true; } else c.lineTo(sx, sy);
         }
         c.stroke();
-        if (!done && n > 0) { var hq = rt.pts[n], hp = proj(hq[0], hq[1], hq[2]); if (hp[2] > -0.05) { c.fillStyle = 'rgba(' + col + ', 1)'; c.beginPath(); c.arc(cx + hp[0] * R, cy - hp[1] * R, Math.max(2.2, S / 150), 0, 6.2832); c.fill(); } }
+        if (!done && n > 0) { var hq = rt.pts[n], hp = proj(hq[0], hq[1], hq[2]); if (hp[2] > -0.05) { c.fillStyle = 'rgba(' + col + ', 1)'; c.beginPath(); c.arc(cx + hp[0] * R, cy - hp[1] * R, Math.max(2.2, S / 150) * (opts.lineScale || 1), 0, 6.2832); c.fill(); } }
       });
       /* labels */
       if (opts.labels !== false) {
@@ -1224,22 +1224,45 @@
     G.raf = requestAnimationFrame(tick);
     return G;
   }
+  /* The opening: the hero globe plays the journey as a narrated sequence. Each beat is a crossing the viewer
+     should be able to follow: the year runs to `to` over `t` ms, holds for `hold`, and the caption names who moved
+     and where. Beats with a `mark` appear on the clickable line under the globe; the others just carry the years
+     between crossings while the previous caption stays up long enough to read. */
+  var STORY = [
+    { to: YEAR_MIN, t: 0, hold: 2400, line: 'all', cam: { lon: -42, lat: 40, zoom: 1.25 },
+      text: 'Three and a half centuries of moves, played through in under a minute. Each colored line is one family; the glow is where they lived.' },
+    { to: 1674, t: 1900, hold: 1500, mark: '1670', line: 'wathen',
+      text: 'John Wathen, a carpenter under a three-year indenture, sails from Bristol to Charles County, Maryland.' },
+    { to: 1789, t: 1600, hold: 0 },
+    { to: 1797, t: 1600, hold: 1000, mark: '1790s', line: 'wathen',
+      text: 'Four generations later the Wathens join the Maryland Catholic migration to Kentucky: Pottinger’s Creek, then Union County on the Ohio.' },
+    { to: 1816, t: 1500, hold: 0 },
+    { to: 1821, t: 1600, hold: 1500, mark: '1817', line: 'daily',
+      text: 'William Daily, nine weeks under sail from Queen’s County, Ireland, lands with ten dollars and walks to Gallatin County, Illinois.' },
+    { to: 1836, t: 1100, hold: 0 },
+    { to: 1844, t: 1900, hold: 1500, mark: '1837', line: 'zirkelbach',
+      text: 'The Zirkelbachs leave Wegfurt in the Rhön; the Lintzenichs leave the Rhineland. Both settle at St. James, just north of Evansville.' },
+    { to: 1851, t: 900, hold: 0 },
+    { to: 1856, t: 1700, hold: 1300, mark: '1852', line: 'vogt',
+      text: 'John Philip and Hettie Vogt bring two-year-old Charles from Hesse-Darmstadt to Knight Township, east of Evansville. For thirty years, nobody moves far.' },
+    { to: 1883, t: 1600, hold: 0 },
+    { to: 1890, t: 1700, hold: 1600, mark: '1884', line: 'wathen',
+      text: 'Thomas Raphael Wathen brings his sons up the Ohio from Uniontown to Evansville; a year later many Zirkelbachs cross the Wabash to Ridgway, Illinois.' },
+    { to: 1903, t: 900, hold: 0 },
+    { to: 1908, t: 1300, hold: 1300, mark: '1904', line: 'zirkelbach',
+      text: 'Pete Zirkelbach, newly married to Carrie Daily of the Pond Settlement, comes back across the river to Evansville. The lines are converging.' },
+    { to: 1929, t: 1300, hold: 0 },
+    { to: 1931, t: 500, hold: 2600, mark: '1930', line: 'all',
+      text: 'Donald Zirkelbach marries Cleo Wathen in Evansville on 5 April 1930. Four lines, one family.' },
+    { to: 1965, t: 1500, hold: 0 },
+    { to: YEAR_MAX, t: 2600, hold: 3600, mark: 'today', line: 'all',
+      text: 'The family today: Evansville and Newburgh, with branches in Georgia and Arizona. Scroll on to meet them.' }
+  ];
   function setupGlobes() {
     var hero = $('#globe-hero'), main = $('#globe-main');
-    var gh = hero && Globe(hero, { auto: true, labels: false, zmax: 5.5, ease: 0.05, manualHold: 6000 });
+    var gh = hero && Globe(hero, { auto: true, labels: false, zmax: 7, ease: 0.08, manualHold: 6000, lookAhead: 6, lineScale: 1.35 });
     var gm = main && Globe(main, { auto: true, labels: true, zmax: 18, ease: 0.09, wheel: true, tapFocus: true });
-    if (gh) {
-      if (reducedMotion) { gh.setYear(YEAR_MAX, false); gh.lookAt(-45, 30, 1.2); }
-      else {
-        var t0 = null, LEN = 13000, HOLD = 4500, lastY = -1;
-        (function loop(ts) {
-          if (!t0) t0 = ts;
-          var el = (ts - t0) % (LEN + HOLD), yr = Math.round(el < LEN ? YEAR_MIN + (YEAR_MAX - YEAR_MIN) * easeInOut(el / LEN) : YEAR_MAX);
-          if (yr !== lastY) { gh.setYear(yr, true); lastY = yr; }
-          requestAnimationFrame(loop);
-        })(0);
-      }
-    }
+    setupStory(gh || null);
     if (gm) {
       TIME.on(function (y, why) { gm.setYear(y, true); });
       var zi = $('#g-in'), zo = $('#g-out'), zf = $('#g-fit');
@@ -1247,7 +1270,74 @@
       if (zo) zo.addEventListener('click', function () { gm.zoomBy(0.67); });
       if (zf) zf.addEventListener('click', function () { gm.release(); });
     }
-    function easeInOut(x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
+  }
+  function setupStory(gh) {
+    var yearEl = $('#n-year'), textEl = $('#n-text'), beatsEl = $('#beats'), pauseBtn = $('#hero-pause');
+    var segs = [], at = 0;
+    STORY.forEach(function (s, i) {
+      var from = i ? STORY[i - 1].to : YEAR_MIN;
+      segs.push({ s: s, from: from, start: at, end: at + s.t + s.hold });
+      at += s.t + s.hold;
+    });
+    var TOTAL = at, marks = segs.filter(function (sg) { return sg.s.mark; });
+    var clock = 0, prev = null, paused = false, cur = null, lastYear = null, lastSeg = null;
+    var jump = function (sg) { clock = sg.start; prev = null; render(clock); };
+    /* the beat line */
+    var items = [];
+    if (beatsEl) {
+      marks.forEach(function (sg) {
+        var li = h('li', { class: 'line-' + sg.s.line });
+        var b = h('button', { class: 'beat', type: 'button', 'aria-label': 'Jump to ' + sg.s.mark + ': ' + sg.s.text });
+        b.addEventListener('click', function () { jump(sg); });
+        li.appendChild(b); li.appendChild(h('span', { text: sg.s.mark }));
+        beatsEl.appendChild(li); items.push({ li: li, sg: sg });
+      });
+    }
+    function caption(sg) {
+      /* the caption is the latest beat with text at or before this segment */
+      var k = segs.indexOf(sg); while (k > 0 && !segs[k].s.text) k--;
+      var c = segs[k];
+      if (c === cur) return; cur = c;
+      if (textEl) textEl.textContent = c.s.text;
+      items.forEach(function (it) {
+        var past = it.sg.start < c.start, on = it.sg === c;
+        it.li.classList.toggle('is-past', past); it.li.classList.toggle('is-on', on);
+      });
+    }
+    function showYear(y) { if (y !== lastYear) { lastYear = y; if (gh) gh.setYear(y, true); if (yearEl) yearEl.textContent = String(y); } }
+    function render(clk) {
+      var sg = segs[segs.length - 1];
+      for (var i = 0; i < segs.length; i++) if (clk < segs[i].end) { sg = segs[i]; break; }
+      var p = sg.s.t ? Math.min(1, (clk - sg.start) / sg.s.t) : 1;
+      showYear(Math.round(sg.from + (sg.s.to - sg.from) * p));
+      if (sg !== lastSeg) { lastSeg = sg; if (sg.s.cam && gh) gh.lookAt(sg.s.cam.lon, sg.s.cam.lat, sg.s.cam.zoom); }
+      caption(sg);
+    }
+    if (reducedMotion) {
+      /* no animation: the finished map, and the beats as a clickable index */
+      if (gh) { gh.setYear(YEAR_MAX, false); gh.lookAt(-45, 30, 1.2); }
+      var last = marks[marks.length - 1]; render(last.start + last.s.t);
+      if (pauseBtn) pauseBtn.hidden = true;
+      jump = function (sg) { render(sg.start + sg.s.t); };
+      return;
+    }
+    function setPaused(v) {
+      paused = v; prev = null;
+      if (pauseBtn) { pauseBtn.textContent = v ? '\u25B6' : '\u275A\u275A'; pauseBtn.setAttribute('aria-label', v ? 'Play the journey' : 'Pause the journey'); pauseBtn.classList.toggle('is-paused', v); }
+    }
+    if (pauseBtn) pauseBtn.addEventListener('click', function () { setPaused(!paused); });
+    document.addEventListener('visibilitychange', function () { prev = null; });
+    render(0);
+    (function loop(ts) {
+      if (typeof ts !== 'number') ts = performance.now();
+      if (!paused && (!gh || gh.visible !== false)) {
+        if (prev != null) clock += Math.min(100, ts - prev);
+        prev = ts;
+        if (clock >= TOTAL) clock -= TOTAL;
+      } else prev = null;
+      render(clock);
+      requestAnimationFrame(loop);
+    })(performance.now());
   }
 
   function init() {

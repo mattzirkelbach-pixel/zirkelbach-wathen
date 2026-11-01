@@ -17,7 +17,7 @@
 
 const LINES = {
   zirkelbach: { key: "z", name: "Zirkelbach", mark: "mark-zirkelbach", arms: "arms-bischofsheim", armsCap: "Arms of Bischofsheim in der Rhön, the town Wegfurt belongs to: a silver wall and towers on red, a mitred bishop beneath. No arms are recorded for the family.", armsKind: "place",
-    meaning: "From Zirkenbach, a hamlet of Fulda recorded in the twelfth century as Cirkumbach. In German the parts read Zirkel, a compass, and Bach, a brook.",
+    meaning: "From Zirkenbach, a hamlet of Fulda recorded in the twelfth century as Cirkumbach. In modern German the parts read Zirkel, a compass (from the Latin circulus, a small circle), and Bach, a brook; the old form looks like circum, around, so the brook that bends round the settlement is the likelier first meaning.",
     blurb: "German Catholic farmers from the Bavarian Rhön. Andrew Zirkelbach came as a boy about 1837 with his parents, a baker turned farmer, and worked 160 acres near St. James church for thirty-five years. His wife Katherine Lintzenich came from the Prussian Rhineland.",
     from: "Wegfurt, in the Rhön", to: "St. James, Indiana", when: "about 1837–40" },
   daily:      { key: "d", name: "Daily", mark: "mark-daily", arms: "arms-daly", armsCap: "Arms of the O'Daly sept, as Burke's General Armory records them: per fess argent and or, a lion rampant per fess sable and gules, two red hands in chief. Crest, a greyhound before an oak; motto Deo fidelis et regi.", armsKind: "sept",

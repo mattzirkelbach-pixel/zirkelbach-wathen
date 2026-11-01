@@ -45,6 +45,17 @@ setTimeout(() => {
     assert(document.querySelectorAll('#unplaced li').length === 5, 'unplaced');
     assert(document.querySelectorAll('#changelog li').length >= 1, 'changelog');
     assert(document.querySelectorAll('#c-about option').length > 40, 'about options: ' + document.querySelectorAll('#c-about option').length);
+    // the narrated opening: nine beats, a click jumps the caption and the year, pause toggles
+    const beats = document.querySelectorAll('#beats li');
+    assert(beats.length === 9, 'story beats: ' + beats.length);
+    assert(/Three and a half centuries/.test(document.getElementById('n-text').textContent), 'intro caption');
+    const b1817 = Array.from(beats).find((li) => li.querySelector('span').textContent === '1817');
+    b1817.querySelector('button').click();
+    assert(/William Daily/.test(document.getElementById('n-text').textContent), 'beat caption: ' + document.getElementById('n-text').textContent.slice(0, 40));
+    assert(document.getElementById('n-year').textContent === '1816', 'beat year: ' + document.getElementById('n-year').textContent);
+    assert(b1817.classList.contains('is-on') && beats[0].classList.contains('is-past') && !beats[8].classList.contains('is-past'), 'beat states');
+    const hp = document.getElementById('hero-pause'); hp.click();
+    assert(hp.getAttribute('aria-label') === 'Play the journey', 'pause toggles');
     // menu opens and closes
     const mb = document.getElementById('menu-btn'), ml = document.getElementById('menu-list');
     mb.click(); assert(ml.hidden === false && mb.getAttribute('aria-expanded') === 'true', 'menu opens');

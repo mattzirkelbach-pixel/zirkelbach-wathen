@@ -101,12 +101,20 @@
       <div class="hero-text">
         <h1>Four families,<br>one marriage.</h1>
         <p class="lede">A Bavarian baker's son, an Irish farmhand who landed with ten dollars, a Maryland carpenter under indenture, a Hessian family fleeing the hungry forties. Their lines crossed in Evansville, Indiana, when Donald Zirkelbach married Cleo Wathen on 5 April 1930.</p>
-        <p class="hero-sub">Three centuries, four countries, fifteen places, and what the records say about each of them.</p>
+        <p class="hero-sub">Three and a half centuries, four countries, fifteen places, and what the records say about each of them.</p>
         <div class="hero-actions"><a class="btn primary" href="#journeys">Follow the journeys</a><a class="btn" href="#tree">Open the tree</a></div>
       </div>
-      <figure class="hero-globe" aria-label="A globe showing the four families' routes converging on Evansville, Indiana">
-        <canvas id="globe-hero"></canvas>
-        <figcaption id="globe-hero-cap">Wegfurt, Linzenich, Hesse, Queen's County, Bristol. All roads to Evansville.</figcaption>
+      <figure class="hero-globe" aria-label="A globe that follows the four families' routes to Evansville, Indiana, with a narrated caption">
+        <div class="globe-wrap"><canvas id="globe-hero"></canvas>
+          <button class="globe-pause" id="hero-pause" type="button" aria-label="Pause the journey">❚❚</button>
+        </div>
+        <figcaption class="narrate">
+          <div class="narrate-head"><span class="n-year" id="n-year">1660</span><p class="n-text" id="n-text">Three and a half centuries of moves, played through in under a minute. Each colored line is one family; the glow is where they lived.</p></div>
+          <ol class="beats" id="beats" aria-label="Moments in the journey"></ol>
+          <div class="n-legend">
+            <span class="line-wathen"><i></i>Wathen</span><span class="line-daily"><i></i>Daily</span><span class="line-zirkelbach"><i></i>Zirkelbach</span><span class="line-vogt"><i></i>Vogt</span><span class="glow"><i></i>where the family lived</span>
+          </div>
+        </figcaption>
       </figure>
     </div>
     <div class="wrap">
