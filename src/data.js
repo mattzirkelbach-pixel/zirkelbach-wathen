@@ -769,15 +769,15 @@ const DESCENDANTS = {
         { name: "Chris Zirkelbach", s: [62] },
         { name: "Lucinda Lambros", s: [62] }
       ] },
-    { name: "Thomas Joseph “Tom” Zirkelbach", note: "Living in 2013, per Jeryl's obituary.", s: [62], open: true },
-    { name: "John Charles Zirkelbach", note: "Evansville police from 12 March 1973; living in 2013, per Jeryl's obituary.", s: [5, 62], open: true,
+    { name: "Thomas Joseph “Tom” Zirkelbach", s: [62], open: true },
+    { name: "John Charles Zirkelbach", note: "Evansville police from 12 March 1973.", s: [5, 62], open: true,
       children: [ { name: "Adam Von Zirkelbach", note: "Evansville police from 11 September 1995, the fourth generation; later federal law enforcement.", s: [5] } ] },
     { name: "James Eric Zirkelbach", spouse: "Cheryl Christina Whittington (30 June 1950 – 23 May 2025), 1974", spouseLife: [1950, 2025], note: "Air Force military police. Married Cheryl Whittington in 1974; she is buried at Oak Hill Cemetery, Evansville.", s: [50, 62, 69],
       children: [
         { name: "Matthew von Zirkelbach", spouse: "Danessa", s: [69], children: [ { name: "Madeline von Zirkelbach" }, { name: "Maxwell von Zirkelbach" } ] },
         { name: "Christina von Zirkelbach", spouse: "John Porter (engaged, 2025)", s: [69], children: [ { name: "Ashden" }, { name: "Austin" }, { name: "Romeo" } ] }
       ] },
-    { name: "Donna Maria Zirkelbach", spouse: "William H. Woehler, Evansville police", note: "Living in 2013, per Jeryl's obituary.", s: [50, 62], open: true }
+    { name: "Donna Maria Zirkelbach", spouse: "William H. Woehler, Evansville police", s: [50, 62], open: true }
   ]
 };
 
@@ -792,6 +792,7 @@ const UNPLACED = [
 
 /* Updates from the family, newest first */
 const CHANGELOG = [
+  { d: "1 November 2026", t: "Matthew confirms that all of Donald and Cleo's children except Jerry are living: Tom, John, Eric and Donna." },
   { d: "1 November 2026", t: "Eric's branch from Cheryl Christina (Whittington) Zirkelbach's 2025 obituary, sent in by her son Matthew: Cheryl (1950–2025), their children Matthew and Christina von Zirkelbach, and their grandchildren; Christina's son Romeo added by Matthew. The opening globe now plays as a narrated journey." },
   { d: "31 October 2026", t: "Records pass: Katherine Lintzenich's dates and parents (Christian and Mary) from her death record; Andrew's grave and 1880 household; Pete's daughters Eleanor Grimmeissen and Veronica Osha; Jeryl's full branch from his 2013 obituary, including the twins (1962) and Mike (1961–2008); Gallatin County Zirkelbachs sorted for the family to confirm or rule out; Andrew's thirteen children with spouses and dates; the Elmer and Zeke Zirkelbach family. The interactive tree now opens downward from Donald and Cleo." },
   { d: "31 October 2026", t: "Site published. Donald and Cleo's family opened downward; Jeryl's branch added from Jay H. Zirkelbach's 2023 obituary; the form for additions and corrections went live." }

@@ -232,7 +232,7 @@
     var nm = n.name.replace(/ “[^”]+”/, '').replace(/^(\S+) .* (\S+)$/, function (m, a, b) { return m.length > (kids.length ? 17 : 22) ? a + ' ' + b : m; });
     var lim = kids.length ? 17 : 22, slim = kids.length ? 20 : 25;
     card.appendChild(s('text', { x: 15, y: 18, text: nm.length > lim ? nm.slice(0, lim - 1) + '…' : nm }));
-    var sub = n.dates || (n.spouse ? 'm. ' + n.spouse.split(',')[0] : (n.open ? 'no public record yet' : ''));
+    var sub = n.dates || (n.spouse ? 'm. ' + n.spouse.split(',')[0] : (n.open ? 'living' : ''));
     card.appendChild(s('text', { 'class': 'sub', x: 15, y: 33, text: sub.length > slim ? sub.slice(0, slim - 1) + '…' : sub }));
     if (kids.length) {
       card.appendChild(s('circle', { 'class': 'dtog', cx: DW - 14, cy: DH / 2, r: 9 }));
@@ -765,7 +765,7 @@
     var row = h('div', { class: 'dnode' }, h('span', { class: 'nm', text: n.name }));
     if (n.dates) row.appendChild(h('span', { class: 'dt', text: n.dates }));
     if (n.spouse) row.appendChild(h('span', { class: 'sp', text: 'married ' + n.spouse }));
-    if (n.open) row.appendChild(h('span', { class: 'wait', text: 'no public record yet' }));
+    if (n.open) row.appendChild(h('span', { class: 'wait', text: 'branch open: family can add' }));
     if (depth > 0) row.appendChild(h('button', { class: 'add', type: 'button', text: '+ add to this branch', onclick: function () { openForm({ aboutLabel: n.name, rel: '' }); } }));
     if (n.note) row.appendChild(h('span', { class: 'nt' }, n.note, ' ', srcLinks(n.s, '')));
     else if (n.s && n.s.length) row.appendChild(h('span', { class: 'src' }, srcLinks(n.s, '')));
