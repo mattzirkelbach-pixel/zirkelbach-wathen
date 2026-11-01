@@ -52,7 +52,7 @@ const PEOPLE = [
       { k: "published", t: "His Find a Grave memorial confirms his death in Evansville on 16 November 1997 and burial at Oak Hill beside Cleo; their infant son Donald Jr. is also at Oak Hill.", s: [61] }
     ],
     parents: ["pete", "carrie"], spouse: "cleo", married: "5 April 1930",
-    children: "Donald Jr. (born and died 3 November 1930), Jeryl Henry, Thomas Joseph, John Charles, James Eric and Donna Maria",
+    children: "Donald Jr. (3 November 1930), Jeryl Henry, Thomas Joseph, John Charles, James Eric and Donna Maria",
     siblings: "Dorothy (Dorothy Emilia), Eleanor (1905–1999, Mrs. Harold J. Grimmeissen), Bonita, Bernadine and Veronica (1916–2008, Mrs. Osha)"
   },
   { id: "cleo", line: "wathen", gen: 0, name: "Cleo Margaret Wathen", label: "Cleo M. Wathen", dates: "1911–2007",
@@ -68,7 +68,7 @@ const PEOPLE = [
       { k: "published", t: "The Little Sisters of the Poor ran St. John's Home for the Aged at 1236 Lincoln Avenue in Knight Township from 1882 until the sisters withdrew on 31 October 2013.", s: [28, 29, 44] }
     ],
     parents: ["joseph", "bena"], spouse: "donald", married: "5 April 1930",
-    children: "Donald Jr. (born and died 3 November 1930), Jeryl Henry, Thomas Joseph, John Charles, James Eric and Donna Maria",
+    children: "Donald Jr. (3 November 1930), Jeryl Henry, Thomas Joseph, John Charles, James Eric and Donna Maria",
     siblings: "Nadine (1897–1977), Joseph Lowell (1898–1971), Madison Bray (1902–1986), Elvis James (1906–1978) and Mildred Mae (1908–1955)"
   },
 
@@ -599,7 +599,7 @@ const EVENTS = [
   { y: "1920 or 1924", line: "zirkelbach", t: "Pete Zirkelbach joins the Evansville police. The family says 1920; the department's history says 22 October 1924.", s: [5] },
   { y: "1922", line: "vogt", t: "Elizabeth Pfingston Vogt dies.", s: [50] },
   { y: "1929", line: "wathen", t: "Cleo graduates from Bosse High School, opened only five years before.", s: [32] },
-  { y: "1930", line: "zirkelbach", t: "Donald and Cleo marry on 5 April. Donald Jr. is born and dies on 3 November.", s: [50] },
+  { y: "1930", line: "zirkelbach", t: "Donald and Cleo marry on 5 April. Donald Jr. is born on 3 November and lives only a day.", s: [50] },
   { y: "1934", line: "zirkelbach", t: "Pete dies on 17 February. Donald joins the police on 14 June.", s: [5] },
   { y: "1935", line: "zirkelbach", t: "Donald is one of twelve officers in the April police radio school, as the two-way radio system goes live.", s: [5] },
   { y: "1942–45", line: "wathen", t: "Republic Aviation builds 6,242 P-47s at Evansville; Cleo works in the employment office.", s: [27] },
@@ -756,11 +756,11 @@ const LEADS = [
 const DESCENDANTS = {
   name: "Donald H. and Cleo M. Zirkelbach", dates: "married 5 April 1930",
   children: [
-    { name: "Donald Zirkelbach Jr.", dates: "3 November 1930", note: "Born and died the same day.", s: [51] },
-    { name: "Jeryl Henry “Jerry” Zirkelbach", dates: "1933 – 13 September 2013", spouse: "Betty Gail Forston, 1 November 1952", note: "Air Force veteran; engineering degree from the University of Evansville; retired as vice president of sales and marketing at Cresline Plastics, then moved to Peoria, Arizona, where he died. Married sixty years. In 2013 he left twelve grandchildren and three great-grandchildren.", s: [62, 61],
+    { name: "Donald Zirkelbach Jr.", dates: "3 November 1930", died: 1930, s: [51] },
+    { name: "Jeryl Henry “Jerry” Zirkelbach", dates: "1933 – 13 September 2013", spouse: "Betty Gail Forston, 1 November 1952", note: "Air Force veteran; engineering degree from the University of Evansville; retired as vice president of sales and marketing at Cresline Plastics; retired to Peoria, Arizona. Married sixty years. In 2013 he left twelve grandchildren and three great-grandchildren.", s: [62, 61],
       children: [
-        { name: "Twin daughters", dates: "died 30 January 1962", note: "Buried at St. Joseph Catholic Cemetery, Evansville.", s: [61] },
-        { name: "Michael D. “Mike” Zirkelbach", dates: "22 March 1961 – 26 August 2008", note: "Born in Evansville, died in Newburgh; buried at St. Joseph Catholic Cemetery.", s: [61, 62] },
+        { name: "Twin daughters", dates: "30 January 1962", died: 1962, note: "Buried at St. Joseph Catholic Cemetery, Evansville.", s: [61] },
+        { name: "Michael D. “Mike” Zirkelbach", dates: "22 March 1961 – 26 August 2008", note: "Born in Evansville; buried at St. Joseph Catholic Cemetery.", s: [61, 62] },
         { name: "Jay H. Zirkelbach", dates: "9 February 1963 – 22 August 2023", spouse: "Linda (Wingert)", note: "Buried at St. Joseph Catholic Cemetery, Evansville, after services at Ziemer Funeral Home.", s: [52],
           children: [
             { name: "Chadwick Zirkelbach", spouse: "Brooke", children: [ { name: "Sadie Zirkelbach" } ] },
@@ -772,7 +772,7 @@ const DESCENDANTS = {
     { name: "Thomas Joseph “Tom” Zirkelbach", note: "Living in 2013, per Jeryl's obituary.", s: [62], open: true },
     { name: "John Charles Zirkelbach", note: "Evansville police from 12 March 1973; living in 2013, per Jeryl's obituary.", s: [5, 62], open: true,
       children: [ { name: "Adam Von Zirkelbach", note: "Evansville police from 11 September 1995, the fourth generation; later federal law enforcement.", s: [5] } ] },
-    { name: "James Eric Zirkelbach", spouse: "Cheryl Christina Whittington (30 June 1950 – 23 May 2025), 1974", spouseLife: [1950, 2025], note: "Air Force military police. Married Cheryl Whittington in 1974; she died in 2025.", s: [50, 62, 69],
+    { name: "James Eric Zirkelbach", spouse: "Cheryl Christina Whittington (30 June 1950 – 23 May 2025), 1974", spouseLife: [1950, 2025], note: "Air Force military police. Married Cheryl Whittington in 1974; she is buried at Oak Hill Cemetery, Evansville.", s: [50, 62, 69],
       children: [
         { name: "Matthew von Zirkelbach", spouse: "Danessa", s: [69], children: [ { name: "Madeline von Zirkelbach" }, { name: "Maxwell von Zirkelbach" } ] },
         { name: "Christina von Zirkelbach", spouse: "John Porter (engaged, 2025)", s: [69], children: [ { name: "Ashden" }, { name: "Austin" }, { name: "Romeo" } ] }
@@ -783,11 +783,11 @@ const DESCENDANTS = {
 
 /* Zirkelbachs in Evansville public records who are not yet placed on this tree */
 const UNPLACED = [
-  { name: "Philip Edward Zirkelbach, 1915–2010", t: "Born 7 March 1915 in Gallatin County, Illinois; died in Evansville. Army veteran; 21 years at Hoosier Cardinal and 25 at Sterling Brewery; St. Anthony's parish. Married Margaret M. Anslinger (1921–2016). His Gallatin birth points to Andrew's Ridgway grandchildren rather than Pete's family.", s: [63, 55] },
+  { name: "Philip Edward Zirkelbach, 1915–2010", t: "Born 7 March 1915 in Gallatin County, Illinois; lived in Evansville. Army veteran; 21 years at Hoosier Cardinal and 25 at Sterling Brewery; St. Anthony's parish. Married Margaret M. Anslinger (1921–2016). His Gallatin birth points to Andrew's Ridgway grandchildren rather than Pete's family.", s: [63, 55] },
   { name: "Elmer Zirkelbach (1913–1999) and his family", t: "Married Lucille Drone (1919–2004). Children Richard “Zeke” (1945–2013; Marine Corps; part owner of The Car Company and once of the St. Joe Tavern; married Billie Jo McBride), Mary Joyce Calhoun (1941–2019), Janet L. Hamilton (1943–2016), Deborah Joan Blake (1950–2021) and Mark Edward (1957–2026). Zeke's children are Trish Ann Smithwick, Megan, Gabe and Bart, with seven grandchildren. Elmer's parents are not linked on his memorial; he may descend from one of Pete's brothers.", s: [63, 64, 58, 59] },
   { name: "George Vincent Zirkelbach, 1879–1959", t: "Born in Vanderburgh County; married Rosa M. Doerr (1883–1949) in 1900. Their son Albert Andrew (1903–1964) was born in Gallatin County; daughters Celia Himes, Anna Marie Zeggling, Margaret Baumgart and Viola Meredith. Very likely a grandson of Andrew through one of the Ridgway sons.", s: [63] },
-  { name: "Don R. and Sylvia (Hagan) Zirkelbach, Albany, Georgia", t: "Sylvia, an Evansville native, died in 2008 after 53 years of marriage; Don Raphael Zirkelbach (1936–2012) is buried at Andersonville National Cemetery. Children John and Ellen; a daughter Rebecca died before her.", s: [57] },
-  { name: "Janet Gail “Jan” (Weikel) Zirkelbach, died 2026", t: "A recent Browning Funeral Home obituary, not yet read or placed.", s: [60] }
+  { name: "Don R. and Sylvia (Hagan) Zirkelbach, Albany, Georgia", t: "Sylvia (Hagan), an Evansville native, was married to Don for 53 years, to 2008; Don Raphael Zirkelbach (1936–2012) is buried at Andersonville National Cemetery. Children John, Ellen and Rebecca.", s: [57] },
+  { name: "Janet Gail “Jan” (Weikel) Zirkelbach, to 2026", t: "A recent Browning Funeral Home obituary, not yet read or placed.", s: [60] }
 ];
 
 /* Updates from the family, newest first */

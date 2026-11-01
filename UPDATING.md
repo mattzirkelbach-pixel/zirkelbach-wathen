@@ -19,7 +19,7 @@ All content lives in `src/data.js`; the page builds every view from it. Work thr
 
 ## 2. Always
 
-- Keep new entries as short as the ones around them. For descendants and spouses: name, dates, who they married, their children, and for the deceased where they are buried. Someone who married in gets their name, dates and the marriage, not their siblings, parents, schooling, career or personal background. If a source gives more, cite it and leave the detail in the source.
+- Keep new entries as short as the ones around them. For descendants and spouses: name, dates, who they married, their children, and for the deceased where they are buried. Do not write "died" or "death" in notes; the dates carry that, and the note says only where they are buried (use the numeric `died` field when a node has a single date). Someone who married in gets their name, dates and the marriage, not their siblings, parents, schooling, career or personal background. If a source gives more, cite it and leave the detail in the source.
 
 - Add the source to `SOURCES` (next number, with `u` link and `k` = `record` | `published` | `unverified`) and cite it in every `s` list you touched.
 - Add a line to `CHANGELOG` (newest first) saying what changed and who sent it in (first name only).
